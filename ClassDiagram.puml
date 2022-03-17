@@ -1,0 +1,102 @@
+@startuml
+interface PersistentDAO{
+    + void save();
+    + int search();
+    + void delete();
+    + void modify();
+}
+
+class DAOImplement{
+    + void save();
+    + int search();
+    + void delete();
+    + void modify();
+}
+
+PersistentDAO <|- DaoImplement
+@enduml
+
+@startuml
+
+class CommandFactory{
+    + getCommand();
+}
+
+abstract Command{
+    - CommandOption commandOption;
+    + (abstract) void execute();
+}
+
+class SearchOption{
+    String column; // CL, employeeNumber
+    String condition; // CL3, 21050301
+}
+
+class CommandOption{
+    SearchOption searchOption;
+    String code; // p, f, l
+}
+
+class AddCommand{
+    + void execute();
+}
+Command <|- AddCommand
+
+class SearchCommand{
+    + void execute();
+    + //searchByEmployeeNumber();
+    + //searchBy~~();
+}
+Command <|- SearchCommand
+
+class DeleteCommand{
+    + void execute();
+}
+SearchCommand <|- DeleteCommand
+
+class ModifyCommand{
+    + void execute();
+}
+SearchCommand <|- ModifyCommand
+@enduml
+
+
+
+@startuml;
+abstract IOManager {
+    + readInput();
+    + writeOutput();
+}
+
+class FileIOManager{
+
+}
+
+class EmployeeManager {
+    - IOManager fileIOManager = new FileIOManager();
+    - PersistentDAO persistentDAO;
+    - Employee employee;
+}
+IOManager <- FileIOManager
+
+@enduml
+
+@startuml
+class Employee {
+  - String employeeNumber; //8글자 넣기
+  - Date yearOfEntry; //입사년도 19 or 20도 prefix로 넣기
+  - String name;
+  - CARRERLEVEL careerLevel;
+  - String phoneNumber;
+  - String birthday;
+  - CERTI certi;
+}
+
+ENUM CARRERLEVEL{
+    CL1, CL2, CL3, CL4
+}
+
+ENUM CERTI{
+    PRO, EX, ADV
+}
+@enduml
