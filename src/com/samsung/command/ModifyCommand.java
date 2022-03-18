@@ -2,11 +2,9 @@ package com.samsung.command;
 
 import com.samsung.employee.Employee;
 
-import java.util.List;
-
-public class ModifyCommand extends Command<List<Employee>> {
+public class ModifyCommand<E> extends SearchCommand {
     @Override
-    public List<Employee> execute() {
+    public Employee execute() {
         return null;
     }
 }
