@@ -8,6 +8,6 @@ public abstract class Command<T> {
     private CommandOption commandOption;
     public abstract T execute();
 
-    EmployeeDAO EmployeeDAO;
+    EmployeeDAO employeeDAO;
 
 }
