@@ -1,0 +1,116 @@
+@startuml
+class Employee {
+  - String employeeNumber; //8글자 넣기
+  - Date yearOfEntry; //입사년도 19 or 20도 prefix로 넣기
+  - String name;
+  - CareerLevel careerLevel;
+  - String phoneNumber;
+  - String birthday;
+  - Certi certi;
+}
+
+class EmployeeManager {
+    - IOManager fileIOManager;
+    - List<Command> commandList;
+}
+
+class CommandFactory{
+    + Command getCommand(String commandName);
+}
+
+class Database<T>{
+    - Map map
+}
+
+abstract Command<T>{
+    - CommandOption commandOption;
+    - PersistentDAO employeeDAO
+    + T execute();
+}
+
+class AddCommand<Employee>{
+    + List<Employee> execute();
+}
+
+class SearchCommand{
+    + List<Employee> execute();
+}
+
+class DeleteCommand{
+    + List<Employee> execute();
+}
+
+class ModifyCommand{
+    + List<Employee> execute();
+}
+
+ENUM CareerLevel{
+    CL1, CL2, CL3, CL4
+}
+
+ENUM Certi{
+    PRO, EX, ADV
+}
+
+abstract PersistentDAO<T>{
+    - Database database;
+    + int add(T);
+    + List<T> search(T);
+    + List<T> delete(T);
+    + List<T> modify(T, T);
+}
+
+class EmployeeDAO<Employee>{
+    + int add(Employee);
+    + List<Employee> search(Employee);
+    + List<Employee> delete(Employee);
+    + List<Employee> modify(Employee, Employee);
+}
+
+
+interface IOManager<T> {
+    + List<T> readInput(String fileName);
+    + void writeOutput(String fileName, List<T> fileLines);
+}
+
+class FileIOManager{
+    + List<String> readInput(String fileName);
+    + void writeOutput(String fileName, List<String> fileLines);
+}
+
+
+class CommandOption{
+    SearchOption searchOption;
+    String code; // p, f, l
+}
+
+class SearchOption{
+    String column; // CL, employeeNumber
+    String condition; // CL3, 21050301
+}
+
+Employee-->Certi
+Employee-->CareerLevel
+
+EmployeeManager-->FileIOManager
+EmployeeManager---->Command
+
+CommandFactory-->Command
+
+Command-->EmployeeDAO
+Command-->CommandOption
+Command <|-- AddCommand
+Command <|-- SearchCommand
+
+CommandOption-->SearchOption
+
+SearchCommand <|-- DeleteCommand
+SearchCommand <|-- ModifyCommand
+
+PersistentDAO <|-- EmployeeDAO
+PersistentDAO --> Database
+
+IOManager <|-- FileIOManager
+
+
+@enduml

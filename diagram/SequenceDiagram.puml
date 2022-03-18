@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+EmployeeManager -> FileIOManager : readInput (파일 읽기 요청)
+FileIOManager -> EmployeeManager : readInput
+EmployeeManager -> CommandFactory : 파일 라인당 Command 객체 생성 요청
+CommandFactory -> EmployeeManager : Command 생성
+EmployeeManager -> DeleteCommand : while(){\n    Command.execute()\n}
+
+DeleteCommand -> EmployeeDAO : EmployeeDAO.search
+EmployeeDAO -> Database : database 검색
+Database -> EmployeeDAO : search 결과
+EmployeeDAO -> DeleteCommand : search 결과
+DeleteCommand -> EmployeeDAO : EmployeeDAO.delete
+EmployeeDAO -> Database : database 반영
+Database -> EmployeeDAO : void
+EmployeeDAO -> DeleteCommand : void
+DeleteCommand -> EmployeeManager : search 결과 return
+
+EmployeeManager -> FileIOManager : search 결과 write
+@enduml
