@@ -1,11 +1,12 @@
 package com.samsung.employee;
 
-import com.samsung.database.DAOImplement;
-import com.samsung.database.PersistentDao;
-import com.samsung.manager.FileIOManager;
-import com.samsung.manager.IOManager;
+import com.samsung.command.Command;
+import com.samsung.database.PersistentDAO;
+import com.samsung.iomanager.IOManager;
+
+import java.util.List;
 
 public class EmployeeManager {
-    private PersistentDao persistentDao;
-    private IOManager fileIOManager;
+    private IOManager<String> fileIOManager;
+    private List<Command> commandList;
 }
