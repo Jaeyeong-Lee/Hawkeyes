@@ -1,7 +1,13 @@
 package com.samsung.command;
 
-public class AddCommand extends Command{
+import com.samsung.employee.Employee;
+
+import java.util.Map;
+import java.util.Set;
+
+public class AddCommand extends Command<Employee>{
     @Override
-    public void execute() {
+    public Employee execute() {
+        return null;
     }
 }

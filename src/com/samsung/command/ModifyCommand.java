@@ -1,8 +1,12 @@
 package com.samsung.command;
 
-public class ModifyCommand extends Command{
-    @Override
-    public void execute() {
+import com.samsung.employee.Employee;
 
+import java.util.List;
+
+public class ModifyCommand extends Command<List<Employee>> {
+    @Override
+    public List<Employee> execute() {
+        return null;
     }
 }
