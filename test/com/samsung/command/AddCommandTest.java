@@ -4,11 +4,13 @@ import com.samsung.employee.Employee;
 import org.junit.jupiter.api.*;
 
 
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AddCommandTest {
 
-    Command<Employee> addCommand;
+    AddCommand<Employee> addCommand;
     CommandFactory<Employee> factory;
 
     @BeforeEach
@@ -26,7 +28,7 @@ class AddCommandTest {
 
         System.out.println("AddCommand.execute()의 결과는 null이 아니고 Employee Class이다.");
 
-        Employee addResult = addCommand.execute();
+        Set<Employee> addResult = addCommand.execute();
 
         assertNotNull(addResult);
         assertEquals(Employee.class, addResult.getClass());

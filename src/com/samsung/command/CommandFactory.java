@@ -4,17 +4,20 @@ import com.samsung.employee.Employee;
 
 public class CommandFactory<T> {
 
-    public Command<Employee> getCommand(String commandName) throws Exception {
+    public Command<T> getCommand(String commandName) throws Exception {
 
         switch (commandName) {
+            /*
             case "ADD" :
-                return new AddCommand<Employee>();
+                return new AddCommand<T>();
             case "SCH" :
-                return new SearchCommand<Employee>();
+                return new SearchCommand<T>();
             case "MOD" :
-                return new ModifyCommand<Employee>();
+                return new ModifyCommand<T>();
             case "DEL" :
-                return new DeleteCommand<Employee>();
+                return new DeleteCommand<T>();
+
+             */
         }
 
         throw new Exception("ERROR::Invalid commandName");

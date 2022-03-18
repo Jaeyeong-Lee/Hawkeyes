@@ -2,9 +2,11 @@ package com.samsung.command;
 
 import com.samsung.employee.Employee;
 
-public class SearchCommand<E> extends Command<Employee> {
+import java.util.Set;
+
+public class SearchCommand<E> extends Command<Set<Employee>> {
     @Override
-    public Employee execute() {
+    public Set<Employee> execute() {
         return null;
     }
 }

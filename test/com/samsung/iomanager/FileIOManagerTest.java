@@ -33,7 +33,12 @@ class FileIOManagerTest {
         // assertion
         Assertions.assertNotNull(actualReturn);
         Assertions.assertEquals(actualReturn.size(), 40);
-        actualReturn.forEach(string -> Assertions.assertEquals(10, string.split(",").length));
+
+        actualReturn.stream().filter("ADD"::startsWith).forEach(string -> Assertions.assertEquals(10, string.split(",").length));
+        actualReturn.stream().filter("SCH"::startsWith).forEach(string -> Assertions.assertEquals(6, string.split(",").length));
+        actualReturn.stream().filter("DEL"::startsWith).forEach(string -> Assertions.assertEquals(6, string.split(",").length));
+        actualReturn.stream().filter("MOD"::startsWith).forEach(string -> Assertions.assertEquals(8, string.split(",").length));
+
     }
 
     @Test
