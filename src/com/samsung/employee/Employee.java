@@ -170,6 +170,7 @@ public class Employee {
                 ", carrierLevel=" + careerLevel +
                 ", certi=" + certi +
                 '}';
+    }
 
     private Date getYearFromEmployeeNumber() {
         Date ret;
