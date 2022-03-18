@@ -7,10 +7,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class MainTest {
 
     @Test
-    void isValidTest() {
+    void isValidFileTest() {
 
         assertFalse(Main.isValidFile(null));
         assertFalse(Main.isValidFile(""));
+
+        assertFalse(Main.isValidFile("file.shh"));
 
     }
 

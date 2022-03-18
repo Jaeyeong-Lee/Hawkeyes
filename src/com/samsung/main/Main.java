@@ -1,5 +1,7 @@
 package com.samsung.main;
 
+import java.util.Arrays;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -12,14 +14,22 @@ public class Main {
 
     static boolean isValidFile(String arg) {
         if (arg == null) {
-            System.out.println("Input file is null.");
+            System.out.println("Input file name is null.");
             return false;
         }
 
-        if (arg.length() == 0) {
-            System.out.println("Input file length is zero.");
+        if (arg.length() <= 3) {
+            System.out.println("Input file name length is under 3.");
             return false;
         }
+
+        if (!Arrays.asList("txt", "TXT").contains(arg.substring(arg.length()-3))) {
+            System.out.println("Input file name is not in white list.");
+            return false;
+        }
+
+        // TODO: Secure Coding 기반 directory check 계속
+
 
         return true;
     }
