@@ -5,7 +5,7 @@ import com.samsung.option.CommandOption;
 
 public abstract class Command<T> {
 
-    private CommandOption commandOption;
+    protected CommandOption commandOption;
     public abstract T execute();
 
     EmployeeDAO employeeDAO;
