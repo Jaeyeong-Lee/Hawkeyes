@@ -3,6 +3,11 @@ package com.samsung.employee;
 import com.samsung.constants.CareerLevel;
 import com.samsung.constants.Certi;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+
 public class Employee {
     private String employeeNumber;
     private String name;
@@ -43,20 +48,6 @@ public class Employee {
         }
         this.certi = certi;
     }
-
-//    private Date getYearFromEmployeeNumber() {
-//        Date ret;
-//
-//        int yearFromEmployeeNumber = Integer.parseInt(employeeNumber.substring(0,2));
-//        if (yearFromEmployeeNumber >= 69 && yearFromEmployeeNumber <= 99)
-//            yearFromEmployeeNumber += 1900;
-//        else if (yearFromEmployeeNumber >= 0 && yearFromEmployeeNumber <= 21)
-//            yearFromEmployeeNumber += 2000;
-//
-//        ret = new GregorianCalendar(yearFromEmployeeNumber, Calendar.JANUARY, 1).getTime();
-//
-//        return ret;
-//    }
 
     public String getEmployeeNumber() {
         return employeeNumber;
@@ -179,5 +170,18 @@ public class Employee {
                 ", carrierLevel=" + careerLevel +
                 ", certi=" + certi +
                 '}';
+
+    private Date getYearFromEmployeeNumber() {
+        Date ret;
+
+        int yearFromEmployeeNumber = Integer.parseInt(employeeNumber.substring(0,2));
+        if (yearFromEmployeeNumber >= 69 && yearFromEmployeeNumber <= 99)
+            yearFromEmployeeNumber += 1900;
+        else if (yearFromEmployeeNumber >= 0 && yearFromEmployeeNumber <= 21)
+            yearFromEmployeeNumber += 2000;
+
+        ret = new GregorianCalendar(yearFromEmployeeNumber, Calendar.JANUARY, 1).getTime();
+
+        return ret;
     }
 }
