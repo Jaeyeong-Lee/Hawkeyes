@@ -1,9 +1,10 @@
 package com.samsung.database;
 
+import com.samsung.database.table.EmployeeTable;
+
 import java.util.List;
 
 public abstract class PersistentDAO<T> {
-    private Database database;
 
     abstract int add(T t);
     abstract List<T> search(T t);
