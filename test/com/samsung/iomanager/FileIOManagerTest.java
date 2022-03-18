@@ -12,12 +12,12 @@ class FileIOManagerTest {
     FileIOManager fileIOManager;
 
     @BeforeEach
-    void setup(){
+    void setUp(){
         fileIOManager = new FileIOManager();
     }
 
     @AfterEach
-    void teardown(){
+    void tearDown(){
         fileIOManager = null;
     }
 
