@@ -7,9 +7,10 @@ public class CommandFactory<T> {
     public Command<T> getCommand(String commandName) throws Exception {
 
         switch (commandName) {
+
             /*
             case "ADD" :
-                return new AddCommand<T>();
+                return new AddCommand<Employee>();
             case "SCH" :
                 return new SearchCommand<T>();
             case "MOD" :
@@ -18,6 +19,8 @@ public class CommandFactory<T> {
                 return new DeleteCommand<T>();
 
              */
+
+
         }
 
         throw new Exception("ERROR::Invalid commandName");
