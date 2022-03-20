@@ -8,8 +8,9 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        if (isValidFile(args[0]) || isValidFile(args[1])) {
+        if (!isValidFile(args[0]) || !isValidFile(args[1])) {
             System.out.println("Invalid file");
+            return ;
         }
 
         EmployeeManager manager = new EmployeeManager();

@@ -20,6 +20,8 @@ public class EmployeeManager {
 
     public void process(String inputFileName, String outputFileName) throws Exception {
 
+        FileIOManager fileIOManager = new FileIOManager();
+
         List<String> inputLines = fileIOManager.readInput(inputFileName);
         List<String> outputLines = new ArrayList<>();
         commandList = new ArrayList<>();
