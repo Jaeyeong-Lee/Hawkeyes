@@ -1,5 +1,7 @@
 package com.samsung.command;
 
+import com.samsung.constants.CareerLevel;
+import com.samsung.constants.Certi;
 import com.samsung.employee.Employee;
 import com.samsung.option.CommandOption;
 import com.samsung.option.SearchOption;
@@ -22,9 +24,9 @@ class SearchCommandTest {
 
         //employeeTable 세팅
         fakeEmployeeSet = new HashSet<Employee>();
-        fakeEmployeeSet.add(new Employee("15123099", "VXIHXOTH JHOP", "CL3", "010-3112-2609", "19771211", "ADV"));
-        fakeEmployeeSet.add(new Employee("17112609", "FB NTAWR", "CL4", "010-5645-6122", "19861203", "PRO"));
-        fakeEmployeeSet.add(new Employee("18115040", "TTETHU HBO", "CL3", "010-4581-2050", "20080718", "ADV"));
+        fakeEmployeeSet.add(new Employee("15123099", "VXIHXOTH JHOP", CareerLevel.CL2, "010-3112-2609", "19771211", Certi.ADV));
+        fakeEmployeeSet.add(new Employee("17112609", "FB NTAWR", CareerLevel.CL4, "010-5645-6122", "19861203", Certi.PRO));
+        fakeEmployeeSet.add(new Employee("18115040", "TTETHU HBO", CareerLevel.CL3, "010-4581-2050", "20080718", Certi.ADV));
 
         fakeDatabase = new HashMap<String, Set<Employee>>();
         for (Employee e: fakeEmployeeSet) fakeDatabase.put(e.getEmployeeNumber(), new HashSet<Employee>(Arrays.asList(e)));
