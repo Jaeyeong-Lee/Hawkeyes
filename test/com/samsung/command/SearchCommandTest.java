@@ -11,12 +11,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 class SearchCommandTest {
 
     Command<Set<Employee>> searchCommand;
     Set<Employee> fakeEmployeeSet;
-    Map<String, Set<Employee>> fakeDatabase;
 
     @BeforeEach
     void setUp() {
@@ -27,10 +27,6 @@ class SearchCommandTest {
         fakeEmployeeSet.add(new Employee("15123099", "VXIHXOTH JHOP", CareerLevel.CL2, "010-3112-2609", "19771211", Certi.ADV));
         fakeEmployeeSet.add(new Employee("17112609", "FB NTAWR", CareerLevel.CL4, "010-5645-6122", "19861203", Certi.PRO));
         fakeEmployeeSet.add(new Employee("18115040", "TTETHU HBO", CareerLevel.CL3, "010-4581-2050", "20080718", Certi.ADV));
-
-        fakeDatabase = new HashMap<String, Set<Employee>>();
-        for (Employee e: fakeEmployeeSet) fakeDatabase.put(e.getEmployeeNumber(), new HashSet<Employee>(Arrays.asList(e)));
-
     }
 
     @AfterEach
@@ -49,7 +45,7 @@ class SearchCommandTest {
 
         // assertion
         Assertions.assertTrue(actualReturn.size() == 1);        // 사번은 고유함
-        Assertions.assertEquals(fakeDatabase.get(testSearchOption.getCondition()), actualReturn);       // 올바른 내용을 가지고 왔는지?
+        Assertions.assertIterableEquals(actualReturn, fakeEmployeeSet);
     }
 
     @Test
@@ -72,10 +68,11 @@ class SearchCommandTest {
         CommandOption testCommandOption = new CommandOption(testSearchOption, "m");
         searchCommand.commandOption = testCommandOption;
 
-        Set<Employee> actualReturn = searchCommand.execute();
+        ArrayList<Employee> actualReturn = new ArrayList<>(searchCommand.execute());
+        List<Employee> fakeEmployeeListFiltered = fakeEmployeeSet.stream().filter(e-> e.getEmployeeNumber().equals("17112609")).collect(Collectors.toList());
 
         // assertion
         Assertions.assertTrue(actualReturn.size() == 1);        // 사번은 고유함
-        Assertions.assertEquals(fakeDatabase.get("17112609"), actualReturn);       // 올바른 내용을 가지고 왔는지?
+        Assertions.assertEquals(fakeEmployeeListFiltered.get(0), actualReturn);     // 올바른 내용을 가지고 왔는지?
     }
 }
