@@ -1,15 +1,19 @@
 package com.samsung.main;
 
+import com.samsung.employee.EmployeeManager;
+
 import java.util.Arrays;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         if (isValidFile(args[0]) || isValidFile(args[1])) {
             System.out.println("Invalid file");
         }
 
+        EmployeeManager manager = new EmployeeManager();
+        manager.process(args[0], args[1]);
     }
 
     static boolean isValidFile(String arg) {

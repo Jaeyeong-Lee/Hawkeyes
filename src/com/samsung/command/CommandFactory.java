@@ -4,22 +4,18 @@ import com.samsung.employee.Employee;
 
 public class CommandFactory<T> {
 
-    public Command<T> getCommand(String commandName) throws Exception {
+    public Command getCommand(String commandName) throws Exception {
 
         switch (commandName) {
 
-            /*
             case "ADD" :
-                return new AddCommand<Employee>();
+                return new AddCommand<T>();
             case "SCH" :
                 return new SearchCommand<T>();
             case "MOD" :
                 return new ModifyCommand<T>();
             case "DEL" :
                 return new DeleteCommand<T>();
-
-             */
-
 
         }
 

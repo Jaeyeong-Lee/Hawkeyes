@@ -18,7 +18,7 @@ public class EmployeeManager {
 
 
 
-    void process(String inputFileName, String outputFileName) throws Exception {
+    public void process(String inputFileName, String outputFileName) throws Exception {
 
         List<String> inputLines = fileIOManager.readInput(inputFileName);
         List<String> outputLines = new ArrayList<>();
@@ -31,7 +31,7 @@ public class EmployeeManager {
         }
 
         for (Command command : commandList) {
-            // outputLines.add(command.execute());
+            command.execute();
         }
 
     }
