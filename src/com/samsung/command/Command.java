@@ -22,7 +22,8 @@ public abstract class Command<T> {
 
     public abstract T execute();
 
-    EmployeeDAO employeeDAO;
+    protected EmployeeDAO employeeDAO;
+    protected String commandString;
 
     public Employee convertCommandOptionToEmployeeParam(){
         Employee retEmployee = new Employee();
@@ -86,5 +87,14 @@ public abstract class Command<T> {
     @Override
     public String toString() {
         return "COM";
+    }
+  
+    public CommandOption getCommandOption() {
+        return this.commandOption;
+    }
+
+    public String getCommandString() {
+        return this.commandString;
+
     }
 }

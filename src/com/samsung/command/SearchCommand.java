@@ -13,6 +13,7 @@ public class SearchCommand<E> extends Command<Set<Employee>>{
 
     public SearchCommand(CommandOption option) {
         super(option);
+        commandString = "SCH";
     }
 
     @Override

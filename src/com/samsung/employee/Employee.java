@@ -147,6 +147,16 @@ public class Employee {
         return  String.join(", ", this.employeeNumber, this.name, this.getCareerLevel().toString(), this.getPhoneNumber(), this.getBirthDay(), this.getCerti().toString());
     }
 
+    public String toStringForPrint() {
+        return new StringBuilder().append(employeeNumber).append(",")
+                .append(name).append(",")
+                .append(careerLevel).append(",")
+                .append(phoneNumber).append(",")
+                .append(birthDay).append(",")
+                .append(certi)
+                .toString();
+    }
+
     private Date getYearFromEmployeeNumber() {
         Date ret;
 

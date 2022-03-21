@@ -6,8 +6,10 @@ import com.samsung.iomanager.FileIOManager;
 import com.samsung.iomanager.IOManager;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class EmployeeManager {
 
@@ -34,7 +36,7 @@ public class EmployeeManager {
         return employee;
     }
 
-    public void process(String inputFileName, String outputFileName) throws Exception {
+    public void process(String inputFileName, String outputFileName) {
         FileIOManager fileIOManager = new FileIOManager();
 
         List<String> inputLines = fileIOManager.readInput(inputFileName);
@@ -49,13 +51,59 @@ public class EmployeeManager {
 
         for (Command<Set<Employee>> command : commandList) {
             Set<Employee> employees = command.execute();
-            if (employees!=null){
-                for (Employee employee : employees){
-                    outputLines.add(command.toString() + "," + employee.toString());
+
+            if (employees != null) {
+                if (!command.getCommandOption().getIsPrint()) {
+                    outputLines.add(command.getCommandString() + "," + ((employees.size()==0)? "NONE" : employees.size()));
+                } else {
+
+                    employees.stream()
+                            .sorted(Comparator.comparing(Employee::getEmployeeNumber))
+                            .limit(5)
+                            .collect(Collectors.toList());
+
+                    for (Employee employee : employees) {
+                        outputLines.add(command.getCommandString() + "," + employee.toStringForPrint());
+                    }
+
                 }
+
             }
+
         }
 
-        outputLines.forEach(System.out::println);
+        outputLines.forEach(System.out::println); // TODO 디버그용으로 추후 삭제 필요
+        fileIOManager.writeOutput(outputFileName, outputLines);
+    }
+
+    // TODO: 아래 코드는 TC없이 Refactoring 시도하다 구현하지 못한 코드 입니다. 추후 Refactoring시 참고 위해 남겨둡니다.
+    private ArrayList<String> getOutputLine(Command<Set<Employee>> command, Set<Employee> employees) {
+
+        // TODO: 특수한 사례
+        if (employees == null) {
+            return new ArrayList<>();
+        }
+
+        if (!command.getCommandOption().getIsPrint()) {
+            // return new ArrayList<>().add(command.getCommandString() + "," + ((employees.size()==0)? "NONE" : employees.size()));
+        }
+
+        // return getPrintLines(command.getCommandString(), employees);
+        return null;
+    }
+
+    private String getPrintLines(String commandString, Set<Employee> employees) {
+
+        employees.stream()
+                .sorted(Comparator.comparing(Employee::getEmployeeNumber))
+                .limit(5)
+                .collect(Collectors.toList());
+
+        StringBuilder printLines = new StringBuilder();
+
+        for (Employee employee : employees) {
+            printLines.append(commandString + "," + employee.toStringForPrint() + "\n");
+        }
+        return printLines.toString();
     }
 }

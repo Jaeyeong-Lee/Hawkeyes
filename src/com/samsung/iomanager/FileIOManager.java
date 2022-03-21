@@ -17,8 +17,7 @@ public class FileIOManager implements IOManager<String> {
                 fileContents.add(str);
 
         } catch (IOException e) {
-            // TODO: Exception Throw할지 고민
-            fileContents = null;
+            fileContents = new ArrayList<>();
         }
 
         return fileContents;

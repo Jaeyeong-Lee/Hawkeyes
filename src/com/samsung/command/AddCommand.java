@@ -17,6 +17,7 @@ public class AddCommand<E> extends Command<Set<Employee>>{
 
     public AddCommand(String line){
         commandLine = line;
+        commandString = "ADD";
     }
 
     @Override
