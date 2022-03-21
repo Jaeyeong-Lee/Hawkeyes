@@ -18,4 +18,8 @@ public abstract class Command<T> {
 
     EmployeeDAO employeeDAO;
 
+    @Override
+    public String toString() {
+        return "COM";
+    }
 }

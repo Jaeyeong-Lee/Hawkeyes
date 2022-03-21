@@ -23,4 +23,8 @@ public class AddCommand<E> extends Command<Set<Employee>>{
         return null;
     }
 
+    @Override
+    public String toString() {
+        return "ADD";
+    }
 }

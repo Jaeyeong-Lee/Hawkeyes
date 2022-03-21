@@ -7,6 +7,7 @@ import com.samsung.iomanager.IOManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class EmployeeManager {
 
@@ -46,8 +47,15 @@ public class EmployeeManager {
             commandList.add(factory.getCommand(line));
         }
 
-        for (Command command : commandList) {
-            command.execute();
+        for (Command<Set<Employee>> command : commandList) {
+            Set<Employee> employees = command.execute();
+            if (employees!=null){
+                for (Employee employee : employees){
+                    outputLines.add(command.toString() + "," + employee.toString());
+                }
+            }
         }
+
+        outputLines.forEach(System.out::println);
     }
 }
