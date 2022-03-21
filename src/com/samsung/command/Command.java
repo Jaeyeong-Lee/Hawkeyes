@@ -12,6 +12,8 @@ public abstract class Command<T> {
 
     public Command(CommandOption commandOption) {
         this.commandOption = commandOption;
+        employeeDAO = new EmployeeDAO();
+
     }
 
     public abstract T execute();

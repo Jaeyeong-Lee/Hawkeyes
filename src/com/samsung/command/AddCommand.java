@@ -1,5 +1,7 @@
 package com.samsung.command;
 
+import com.samsung.constants.CareerLevel;
+import com.samsung.constants.Certi;
 import com.samsung.database.PersistentDAO;
 import com.samsung.employee.Employee;
 import com.samsung.option.CommandOption;
@@ -19,7 +21,8 @@ public class AddCommand<E> extends Command<Set<Employee>>{
     @Override
     public Set<Employee> execute() {
 
-        System.out.println("excuted");
+        employeeDAO.add(new Employee(commandLine.split(",")));
+
         return null;
     }
 
