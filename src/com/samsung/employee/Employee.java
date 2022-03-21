@@ -23,6 +23,10 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(String[] addCommandToken) {
+        this(addCommandToken[4], addCommandToken[5], CareerLevel.valueOf(addCommandToken[6]), addCommandToken[7], addCommandToken[8], Certi.valueOf(addCommandToken[9]));
+    }
+
     public Employee(String employeeNumber, String name, CareerLevel careerLevel, String phoneNumber, String birthDay, Certi certi) {
         //TODO prefix 구현해야함
         this.employeeNumber = employeeNumber;

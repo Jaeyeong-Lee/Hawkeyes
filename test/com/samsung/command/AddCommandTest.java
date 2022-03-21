@@ -1,21 +1,41 @@
 package com.samsung.command;
 
+import com.samsung.constants.CareerLevel;
+import com.samsung.constants.Certi;
+import com.samsung.database.table.EmployeeTable;
 import com.samsung.employee.Employee;
+import com.samsung.option.CommandOption;
+import com.samsung.option.SearchOption;
 import org.junit.jupiter.api.*;
+import org.mockito.Mock;
+import org.mockito.internal.util.reflection.Whitebox;
 
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AddCommandTest {
 
-    AddCommand<Employee> addCommand;
-    CommandFactory<Employee> factory;
+    Command<Set<Employee>> addCommand;
+    Set<Employee> fakeEmployeeSet;
+
+    @Mock
+    private EmployeeTable testEmployeeTable;
 
     @BeforeEach
     void setup(){
-        addCommand = new AddCommand<Employee>();
+        addCommand = new AddCommand("ADD, , , ,11125777,TKOQKIS HC,CL1,010-6734-2289,19991001,PRO");
+
+        //employeeTable 세팅
+        fakeEmployeeSet = new HashSet<Employee>();
+        fakeEmployeeSet.add(new Employee("15123099", "VXIHXOTH JHOP", CareerLevel.CL2, "010-3112-2609", "19771211", Certi.ADV));
+        fakeEmployeeSet.add(new Employee("17112609", "FB NTAWR", CareerLevel.CL4, "010-5645-6122", "19861203", Certi.PRO));
+        fakeEmployeeSet.add(new Employee("18115040", "TTETHU HBO", CareerLevel.CL3, "010-4581-2050", "20080718", Certi.ADV));
+
+        testEmployeeTable = EmployeeTable.getInstance();
     }
 
     @AfterEach
@@ -24,33 +44,26 @@ class AddCommandTest {
     }
 
     @Test
-    void 반환_테스트() {
+    void returnNullTest() {
 
-        System.out.println("AddCommand.execute()의 결과는 null이 아니고 Employee Class이다.");
+        System.out.println("AddCommand.execute()의 결과는 null 이다.");
 
         Set<Employee> addResult = addCommand.execute();
 
-        assertNotNull(addResult);
-        assertEquals(Employee.class, addResult.getClass());
+        assertNull(addCommand.execute());
 
     }
 
     @Test
-    void 삽입_테스트() {
+    void lineAddCommandExecuteTest() {
 
-        // TODO: Mock방법 객체 수준으로 TDD되도록 개선 해보기
-        // TODO: -p Option으로도 TC개발 필요할지 팀원들과 논의 해보기
-
-        System.out.println("샘플 데이터 ADD 후 Search결과의 Return이 동일한지 확인한다.");
+        Assertions.assertTrue(testEmployeeTable.getEmployeeNumberIndex().size() == 0);
 
         addCommand.execute();
 
-        // TODO: factory.getCommand() 사용하지 않고, AddCommand()관련 TC만 수행할 수 있도록 변경 필요
-        // assertEquals(factory.getCommand("SCH, , , ,certi,PRO").execute(), addCommand.execute());
-        // assertEquals(factory.getCommand("SCH, , , ,employeeNum,01122329").execute(), addCommand.execute());
+        Assertions.assertTrue(testEmployeeTable.getEmployeeNumberIndex().size() == 1);
 
     }
-
 
 
 }
