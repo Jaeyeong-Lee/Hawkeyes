@@ -1,10 +1,25 @@
 package com.samsung.command;
 
-import java.util.Arrays;
-import java.util.List;
+import com.samsung.employee.Employee;
 
 public class CommandFactory<T> {
-    public Command<T> getCommand(String commandName){
-        return null;
+
+    public Command getCommand(String commandName) throws Exception {
+
+        switch (commandName) {
+
+            case "ADD" :
+                return new AddCommand<T>();
+            case "SCH" :
+                return new SearchCommand<T>();
+            case "MOD" :
+                return new ModifyCommand<T>();
+            case "DEL" :
+                return new DeleteCommand<T>();
+
+        }
+
+        throw new Exception("ERROR::Invalid commandName");
     }
+
 }
