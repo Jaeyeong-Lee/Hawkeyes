@@ -81,4 +81,20 @@ public class EmployeeTable {
     public Map<String, Set<Employee>> getCertiIndex() {
         return certiIndex;
     }
+
+    public void initialize(){
+        employeeNumberIndex = new HashMap<>();
+        nameIndex = new HashMap<>();
+        firstNameIndex = new HashMap<>();
+        lastNameIndex = new HashMap<>();
+        phoneNumberIndex = new HashMap<>();
+        middleDigitOfPhoneNumberIndex = new HashMap<>();
+        last4DigitOfPhoneNumberIndex = new HashMap<>();
+        birthIndex = new HashMap<>();
+        yearOfBirthIndex = new HashMap<>();
+        monthOfBirthIndex = new HashMap<>();
+        dayOfBirthIndex = new HashMap<>();
+        careerLevelIndex = new HashMap<>();
+        certiIndex = new HashMap<>();
+    }
 }
