@@ -43,7 +43,7 @@ public class EmployeeManager {
         CommandFactory factory = new CommandFactory();
 
         for (String line : inputLines) {
-            commandList.add(factory.getCommand(line.substring(0,3)));
+            commandList.add(factory.getCommand(line));
         }
 
         for (Command command : commandList) {
