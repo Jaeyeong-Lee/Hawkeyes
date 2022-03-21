@@ -23,4 +23,9 @@ public class DeleteCommand<E> extends Command<Set<Employee>> {
 
         return returnEmp;
     }
+
+    @Override
+    public String toString() {
+        return "DEL";
+    }
 }

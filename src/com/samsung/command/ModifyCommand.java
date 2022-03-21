@@ -20,4 +20,9 @@ public class ModifyCommand<E> extends Command<Set<Employee>> {
     public Set<Employee> execute() {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "MOD";
+    }
 }
