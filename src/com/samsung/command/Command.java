@@ -8,8 +8,6 @@ public abstract class Command<T> {
 
     protected CommandOption commandOption;
 
-    public Command() {}
-
     public Command(CommandOption commandOption) {
         this.commandOption = commandOption;
     }
