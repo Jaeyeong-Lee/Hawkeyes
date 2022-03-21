@@ -34,7 +34,6 @@ public class EmployeeManager {
     }
 
     public void process(String inputFileName, String outputFileName) throws Exception {
-
         FileIOManager fileIOManager = new FileIOManager();
 
         List<String> inputLines = fileIOManager.readInput(inputFileName);
@@ -50,6 +49,5 @@ public class EmployeeManager {
         for (Command command : commandList) {
             command.execute();
         }
-
     }
 }
