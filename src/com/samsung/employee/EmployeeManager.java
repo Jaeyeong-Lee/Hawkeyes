@@ -53,16 +53,23 @@ public class EmployeeManager {
             Set<Employee> employees = command.execute();
 
             if (employees != null) {
+
+
                 if (!command.getCommandOption().getIsPrint()) {
                     outputLines.add(command.getCommandString() + "," + ((employees.size()==0)? "NONE" : employees.size()));
                 } else {
 
-                    employees.stream()
-                            .sorted(Comparator.comparing(Employee::getEmployeeNumber))
+                    List<Employee> a = employees.stream()
+                            .sorted((o1, o2) -> {
+                                if (o1.getYearFromEmployeeNumber() == o2.getYearFromEmployeeNumber()) {
+                                    return o1.getEmployeeNumber().compareTo(o2.getEmployeeNumber());
+                                }
+                                return o1.getYearFromEmployeeNumber().compareTo(o2.getYearFromEmployeeNumber());
+                            })
                             .limit(5)
                             .collect(Collectors.toList());
 
-                    for (Employee employee : employees) {
+                    for (Employee employee : a) {
                         outputLines.add(command.getCommandString() + "," + employee.toStringForPrint());
                     }
 

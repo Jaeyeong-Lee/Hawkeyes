@@ -23,7 +23,7 @@ public class CommandFactory<T> {
         if (commandToken.length >= 2)
             isPrint = ("-p".equals(commandToken[1])? true : false);
         if (commandToken.length >= 3)
-            optionCode = commandToken[2].replace("-","");
+            optionCode = commandToken[2].replace("-","").trim();
         if (commandToken.length >= 5)
             searchOption = new SearchOption(commandToken[4], commandToken[5]);
         if (commandToken.length >= 7)

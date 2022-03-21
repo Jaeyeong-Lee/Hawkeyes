@@ -42,6 +42,10 @@ public class Employee {
         return employeeNumber;
     }
 
+    public String getYearOfEmployeeNumber() {
+        return employeeNumber.substring(0,2);
+    }
+
     public String getName() {
         return name;
     }
@@ -171,7 +175,7 @@ public class Employee {
                 .toString();
     }
 
-    private Date getYearFromEmployeeNumber() {
+    public Date getYearFromEmployeeNumber() {
         Date ret;
 
         int yearFromEmployeeNumber = Integer.parseInt(employeeNumber.substring(0, 2));
