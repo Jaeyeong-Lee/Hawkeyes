@@ -182,4 +182,17 @@ public class Employee {
         }
         return this;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(employeeNumber, employee.employeeNumber) && Objects.equals(name, employee.name) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(phoneNumber, employee.phoneNumber) && Objects.equals(middleDigitOfPhoneNumber, employee.middleDigitOfPhoneNumber) && Objects.equals(last4DigitOfPhoneNumber, employee.last4DigitOfPhoneNumber) && Objects.equals(birthDay, employee.birthDay) && Objects.equals(yearOfBirth, employee.yearOfBirth) && Objects.equals(monthOfBirth, employee.monthOfBirth) && Objects.equals(dayOfBirth, employee.dayOfBirth) && careerLevel == employee.careerLevel && certi == employee.certi;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(employeeNumber, name, firstName, lastName, phoneNumber, middleDigitOfPhoneNumber, last4DigitOfPhoneNumber, birthDay, yearOfBirth, monthOfBirth, dayOfBirth, careerLevel, certi);
+    }
 }
