@@ -4,7 +4,6 @@ import com.samsung.constants.CareerLevel;
 import com.samsung.constants.Certi;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeTest {

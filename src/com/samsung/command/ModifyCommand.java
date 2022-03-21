@@ -1,10 +1,8 @@
 package com.samsung.command;
 
-import com.samsung.database.EmployeeDAO;
 import com.samsung.employee.Employee;
 import com.samsung.option.CommandOption;
 
-import java.util.List;
 import java.util.Set;
 
 public class ModifyCommand<E> extends Command<Set<Employee>> {
@@ -17,6 +15,13 @@ public class ModifyCommand<E> extends Command<Set<Employee>> {
 
     @Override
     public Set<Employee> execute() {
-        return null;
+        // 1. CommandOption -> Employee 객체로 convert
+        Employee asIsEmployee = commandOption.convertSearchOptionToEmployee();
+        Employee toBeEmployee = commandOption.convertModifyOptionToEmployee();
+
+        // 2. EmployeeDAO.delete() 수행
+        Set<Employee> returnEmp = employeeDAO.modify(asIsEmployee, toBeEmployee);
+
+        return returnEmp;
     }
 }
