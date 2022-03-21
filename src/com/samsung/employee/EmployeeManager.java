@@ -58,20 +58,11 @@ public class EmployeeManager {
                     outputLines.add(command.toString() + "," + ((employees.size()==0)? "NONE" : employees.size()));
                 } else {
 
-                    List<Employee> a = employees.stream()
-                            .sorted((o1, o2) -> {
-                                if (o1.getYearFromEmployeeNumber() == o2.getYearFromEmployeeNumber()) {
-                                    return o1.getEmployeeNumber().compareTo(o2.getEmployeeNumber());
-                                }
-                                return o1.getYearFromEmployeeNumber().compareTo(o2.getYearFromEmployeeNumber());
-                            })
+                    outputLines.add(employees.stream()
+                            .sorted(Comparator.comparing(Employee::getYearFromEmployeeNumber).thenComparing(Employee::getEmployeeNumber))
                             .limit(5)
-                            .collect(Collectors.toList());
-
-
-                    for (Employee employee : a) {
-                        outputLines.add(command.toString() + "," + employee.toString());
-                    }
+                            .map(employee -> command.toString() + "," + employee.toString())    // 이 부분 수정 필요
+                            .collect(Collectors.joining("\n")));
 
                 }
 
