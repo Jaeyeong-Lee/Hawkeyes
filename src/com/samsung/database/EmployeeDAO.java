@@ -48,9 +48,7 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
             Optional.ofNullable(employee.getMonthOfBirth()).ifPresent(useless -> result.addAll(searchByMonthOfBirth(employee)));
             Optional.ofNullable(employee.getDayOfBirth()).ifPresent(useless -> result.addAll(searchByDayOfBirth(employee)));
             Optional.ofNullable(employee.getCareerLevel()).ifPresent(useless -> result.addAll(searchByCareerLevel(employee)));
-            Optional.ofNullable(employee.getCerti())
-                    .ifPresent(useless -> result
-                            .addAll(searchByCerti(employee)));
+            Optional.ofNullable(employee.getCerti()).ifPresent(useless -> result.addAll(searchByCerti(employee)));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,20 +112,65 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
         Set<Employee> employees = null;
         try {
             employees = search(employee);
+
+            // value 삭제
             for (Employee employeeToDelete : employees) {
-                employeeTable.getEmployeeNumberIndex().remove(employeeToDelete.getEmployeeNumber());
-                employeeTable.getNameIndex().remove(employeeToDelete.getName());
-                employeeTable.getFirstNameIndex().remove(employeeToDelete.getFirstName());
-                employeeTable.getLastNameIndex().remove(employeeToDelete.getLastName());
-                employeeTable.getPhoneNumberIndex().remove(employeeToDelete.getPhoneNumber());
-                employeeTable.getMiddleDigitOfPhoneNumberIndex().remove(employeeToDelete.getMiddleDigitOfPhoneNumber());
-                employeeTable.getLast4DigitOfPhoneNumberIndex().remove(employeeToDelete.getLast4DigitOfPhoneNumber());
-                employeeTable.getBirthIndex().remove(employeeToDelete.getBirthDay());
-                employeeTable.getYearOfBirthIndex().remove(employeeToDelete.getYearOfBirth());
-                employeeTable.getMonthOfBirthIndex().remove(employeeToDelete.getMonthOfBirth());
-                employeeTable.getDayOfBirthIndex().remove(employeeToDelete.getDayOfBirth());
-                employeeTable.getCareerLevelIndex().remove(employeeToDelete.getCareerLevel().toString());
-                employeeTable.getCertiIndex().remove(employeeToDelete.getCerti().toString());
+                employeeTable.getEmployeeNumberIndex().get(employeeToDelete.getEmployeeNumber()).remove(employeeToDelete);
+                employeeTable.getNameIndex().get(employeeToDelete.getName()).remove(employeeToDelete);
+                employeeTable.getFirstNameIndex().get(employeeToDelete.getFirstName()).remove(employeeToDelete);
+                employeeTable.getLastNameIndex().get(employeeToDelete.getLastName()).remove(employeeToDelete);
+                employeeTable.getPhoneNumberIndex().get(employeeToDelete.getPhoneNumber()).remove(employeeToDelete);
+                employeeTable.getMiddleDigitOfPhoneNumberIndex().get(employeeToDelete.getMiddleDigitOfPhoneNumber()).remove(employeeToDelete);
+                employeeTable.getLast4DigitOfPhoneNumberIndex().get(employeeToDelete.getLast4DigitOfPhoneNumber()).remove(employeeToDelete);
+                employeeTable.getBirthIndex().get(employeeToDelete.getBirthDay()).remove(employeeToDelete);
+                employeeTable.getYearOfBirthIndex().get(employeeToDelete.getYearOfBirth()).remove(employeeToDelete);
+                employeeTable.getMonthOfBirthIndex().get(employeeToDelete.getMonthOfBirth()).remove(employeeToDelete);
+                employeeTable.getDayOfBirthIndex().get(employeeToDelete.getDayOfBirth()).remove(employeeToDelete);
+                employeeTable.getCareerLevelIndex().get(employeeToDelete.getCareerLevel().toString()).remove(employeeToDelete);
+                employeeTable.getCertiIndex().get(employeeToDelete.getCerti().toString()).remove(employeeToDelete);
+            }
+
+            // value가 비어있는 key 삭제
+            for (Employee employeeToDelete : employees) {
+                if (employeeTable.getEmployeeNumberIndex().get(employeeToDelete.getEmployeeNumber()).isEmpty()){
+                    employeeTable.getEmployeeNumberIndex().remove(employeeToDelete.getEmployeeNumber());
+                }
+                if (employeeTable.getNameIndex().get(employeeToDelete.getName()).isEmpty()){
+                    employeeTable.getNameIndex().remove(employeeToDelete.getName());
+                }
+                if (employeeTable.getFirstNameIndex().get(employeeToDelete.getFirstName()).isEmpty()){
+                    employeeTable.getFirstNameIndex().remove(employeeToDelete.getFirstName());
+                }
+                if (employeeTable.getLastNameIndex().get(employeeToDelete.getLastName()).isEmpty()){
+                    employeeTable.getLastNameIndex().remove(employeeToDelete.getLastName());
+                }
+                if (employeeTable.getPhoneNumberIndex().get(employeeToDelete.getPhoneNumber()).isEmpty()){
+                    employeeTable.getPhoneNumberIndex().remove(employeeToDelete.getPhoneNumber());
+                }
+                if (employeeTable.getMiddleDigitOfPhoneNumberIndex().get(employeeToDelete.getMiddleDigitOfPhoneNumber()).isEmpty()){
+                    employeeTable.getMiddleDigitOfPhoneNumberIndex().remove(employeeToDelete.getMiddleDigitOfPhoneNumber());
+                }
+                if (employeeTable.getLast4DigitOfPhoneNumberIndex().get(employeeToDelete.getLast4DigitOfPhoneNumber()).isEmpty()){
+                    employeeTable.getLast4DigitOfPhoneNumberIndex().remove(employeeToDelete.getLast4DigitOfPhoneNumber());
+                }
+                if (employeeTable.getBirthIndex().get(employeeToDelete.getBirthDay()).isEmpty()){
+                    employeeTable.getBirthIndex().remove(employeeToDelete.getBirthDay());
+                }
+                if (employeeTable.getYearOfBirthIndex().get(employeeToDelete.getYearOfBirth()).isEmpty()){
+                    employeeTable.getYearOfBirthIndex().remove(employeeToDelete.getYearOfBirth());
+                }
+                if (employeeTable.getMonthOfBirthIndex().get(employeeToDelete.getMonthOfBirth()).isEmpty()){
+                    employeeTable.getMonthOfBirthIndex().remove(employeeToDelete.getMonthOfBirth());
+                }
+                if (employeeTable.getDayOfBirthIndex().get(employeeToDelete.getDayOfBirth()).isEmpty()){
+                    employeeTable.getDayOfBirthIndex().remove(employeeToDelete.getDayOfBirth());
+                }
+                if (employeeTable.getCareerLevelIndex().get(employeeToDelete.getCareerLevel().toString()).isEmpty()){
+                    employeeTable.getCareerLevelIndex().remove(employeeToDelete.getCareerLevel().toString());
+                }
+                if (employeeTable.getCertiIndex().get(employeeToDelete.getCerti().toString()).isEmpty()){
+                    employeeTable.getCertiIndex().remove(employeeToDelete.getCerti().toString());
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -239,11 +282,11 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
         for (Employee asIs : asIsEmployees) {
             Employee toBe = employeeManager.overWrite(asIs, toBeEmployee);
 
-            Set<Employee> valuesToChange = searchByEmployeeNumber(asIsEmployee);
-            valuesToChange.remove(asIs);
-            valuesToChange.add(toBe);
-
             Set<Employee> index;
+
+            index = employeeTable.getEmployeeNumberIndex().get(asIs.getEmployeeNumber());
+            index.remove(asIs);
+            index.add(toBe);
 
             index = employeeTable.getNameIndex().get(asIs.getName());
             index.remove(asIs);
