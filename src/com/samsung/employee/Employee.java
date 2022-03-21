@@ -3,10 +3,7 @@ package com.samsung.employee;
 import com.samsung.constants.CareerLevel;
 import com.samsung.constants.Certi;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
+import java.util.*;
 
 public class Employee {
     private String employeeNumber;
@@ -31,26 +28,14 @@ public class Employee {
     }
 
     public Employee(String employeeNumber, String name, CareerLevel careerLevel, String phoneNumber, String birthDay, Certi certi) {
+        //TODO prefix 구현해야함
         this.employeeNumber = employeeNumber;
         this.name = name;
-        if (name!=null){
-            this.firstName = name.split(" ")[0];
-            this.lastName = name.split(" ")[1];
-        }
         this.careerLevel = careerLevel;
         this.phoneNumber = phoneNumber;
-        if (phoneNumber!=null){
-            this.middleDigitOfPhoneNumber = phoneNumber.split("-")[1];
-            this.last4DigitOfPhoneNumber = phoneNumber.split("-")[2];
-        }
-        //TODO prefix 구현해야함
         this.birthDay = birthDay;
-        if (birthDay!=null){
-            this.yearOfBirth = birthDay.substring(0,4);
-            this.monthOfBirth = birthDay.substring(4,6);
-            this.dayOfBirth = birthDay.substring(6,8);
-        }
         this.certi = certi;
+        consistencyValidation();
     }
 
     public String getEmployeeNumber() {
@@ -179,7 +164,7 @@ public class Employee {
     private Date getYearFromEmployeeNumber() {
         Date ret;
 
-        int yearFromEmployeeNumber = Integer.parseInt(employeeNumber.substring(0,2));
+        int yearFromEmployeeNumber = Integer.parseInt(employeeNumber.substring(0, 2));
         if (yearFromEmployeeNumber >= 69 && yearFromEmployeeNumber <= 99)
             yearFromEmployeeNumber += 1900;
         else if (yearFromEmployeeNumber >= 0 && yearFromEmployeeNumber <= 21)
@@ -188,5 +173,22 @@ public class Employee {
         ret = new GregorianCalendar(yearFromEmployeeNumber, Calendar.JANUARY, 1).getTime();
 
         return ret;
+    }
+
+    public Employee consistencyValidation(){
+        if (this.name!=null){
+            this.firstName = this.name.split(" ")[0];
+            this.lastName = this.name.split(" ")[1];
+        }
+        if (this.phoneNumber!=null){
+            this.middleDigitOfPhoneNumber = this.phoneNumber.split("-")[1];
+            this.last4DigitOfPhoneNumber = this.phoneNumber.split("-")[2];
+        }
+        if (birthDay!=null){
+            this.yearOfBirth = this.birthDay.substring(0,4);
+            this.monthOfBirth = this.birthDay.substring(4,6);
+            this.dayOfBirth = this.birthDay.substring(6,8);
+        }
+        return this;
     }
 }

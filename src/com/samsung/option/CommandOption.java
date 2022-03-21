@@ -6,11 +6,6 @@ public class CommandOption {
     private String code;
     private boolean isPrint;
 
-    public CommandOption(SearchOption searchOption, String code) {
-        this.searchOption = searchOption;
-        this.code = code;
-    }
-
     public CommandOption(SearchOption searchOption, String code, boolean isPrint){
         this.searchOption = searchOption;
         this.code = code;
@@ -38,5 +33,21 @@ public class CommandOption {
 
     private void setCode(String code) {
         this.code = code;
+    }
+
+    public SearchOption getModifyOption() {
+        return modifyOption;
+    }
+
+    private void setModifyOption(SearchOption modifyOption) {
+        this.modifyOption = modifyOption;
+    }
+
+    public boolean getIsPrint() {
+        return isPrint;
+    }
+
+    private void setIsPrint(boolean isPrint) {
+        this.isPrint = isPrint;
     }
 }
