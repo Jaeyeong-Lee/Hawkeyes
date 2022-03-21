@@ -14,6 +14,12 @@ public class DeleteCommand<E> extends Command<Set<Employee>> {
 
     @Override
     public Set<Employee> execute() {
-        return null;
+        // 1. CommandOption -> Employee 객체로 convert
+        Employee deleteCondition = convertCommandOptionToEmployeeParam();
+
+        // 2. EmployeeDAO.delete() 수행
+        Set<Employee> returnEmp = employeeDAO.delete(deleteCondition);
+
+        return returnEmp;
     }
 }
