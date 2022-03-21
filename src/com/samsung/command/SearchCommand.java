@@ -20,7 +20,7 @@ public class SearchCommand<E> extends Command<Set<Employee>>{
     public Set<Employee> execute() {
 
         // 1. CommandOption -> Employee 객체로 convert
-        Employee searchCondition = convertCommandOptionToEmployeeParam();
+        Employee searchCondition = commandOption.convertSearchOptionToEmployee();
 
         // 2. EmployeeDAO.search() 수행
         Set<Employee> returnEmp = employeeDAO.search(searchCondition);
