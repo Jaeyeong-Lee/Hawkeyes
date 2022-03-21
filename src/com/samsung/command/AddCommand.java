@@ -6,6 +6,7 @@ import com.samsung.database.PersistentDAO;
 import com.samsung.employee.Employee;
 import com.samsung.option.CommandOption;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class AddCommand<E> extends Command<Set<Employee>>{
@@ -21,7 +22,11 @@ public class AddCommand<E> extends Command<Set<Employee>>{
     @Override
     public Set<Employee> execute() {
 
-        employeeDAO.add(new Employee(commandLine.split(",")));
+        // TODO: Exception 추가 추후 고민
+        if (employeeDAO.add(new Employee(commandLine.split(","))) != 0) {
+            return null;
+            // throw new Exception("ERROR:::Error ouucred while DAO.add()");
+        }
 
         return null;
     }
