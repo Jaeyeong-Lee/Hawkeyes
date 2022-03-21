@@ -219,7 +219,7 @@ class EmployeeDAOTest {
     }
 
     @Test
-    void modifyEmployeeNumber() {
+    void modifyEmployeeNumberSearchByEmployeNumber() {
         Employee searchCondition = new Employee();
         searchCondition.setEmployeeNumber("23423434");
 
@@ -236,6 +236,28 @@ class EmployeeDAOTest {
         for (Employee employee : employeeDAO.search(searchCondition)) {
             System.out.println(employee.toString());
             fail();
+        }
+    }
+
+    @Test
+    void modifyEmployeeNumberSearchByName() {
+        Employee searchCondition = new Employee();
+        searchCondition.setName("WONKYUNG YUN");
+
+        Employee modifyCondition = new Employee();
+        modifyCondition.setEmployeeNumber("00003434");
+
+        for (Employee employee : employeeDAO.search(searchCondition)) {
+            System.out.println(employee.toString());
+            assertEquals(employee.getName(), "WONKYUNG YUN");
+            assertEquals(employee.getEmployeeNumber(), "20384845");
+        }
+
+        employeeDAO.modify(searchCondition, modifyCondition);
+
+        for (Employee employee : employeeDAO.search(searchCondition)) {
+            System.out.println(employee.toString());
+            assertEquals(employee.getEmployeeNumber(), "00003434");
         }
     }
 

@@ -137,6 +137,165 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
 
     @Override
     public Set<Employee> modify(Employee asIsEmployee, Employee toBeEmployee) {
-        return null;
+        Set<Employee> asIsEmployees = null;
+        try {
+            asIsEmployees = search(asIsEmployee);
+            modifyValueInTable(asIsEmployee, toBeEmployee, asIsEmployees);
+            modifyKeyInTable(toBeEmployee, asIsEmployees);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return asIsEmployees;
+    }
+
+    private void modifyKeyInTable(Employee toBeEmployee, Set<Employee> asIsEmployees) {
+        EmployeeManager employeeManager = new EmployeeManager();
+
+        for (Employee asIs : asIsEmployees) {
+            Employee toBe = employeeManager.overWrite(asIs, toBeEmployee);
+            if (toBe.getEmployeeNumber()!=null){
+                Set<Employee> index = employeeTable.getEmployeeNumberIndex().get(asIs.getEmployeeNumber());
+                employeeTable.getEmployeeNumberIndex().remove(asIs.getEmployeeNumber());
+                employeeTable.getEmployeeNumberIndex().put(toBe.getEmployeeNumber(), index);
+            }
+
+            if (toBe.getName()!=null){
+                Set<Employee> index = employeeTable.getNameIndex().get(asIs.getName());
+                employeeTable.getNameIndex().remove(asIs.getName());
+                employeeTable.getNameIndex().put(toBe.getName(), index);
+            }
+
+            if (toBe.getFirstName()!=null){
+                Set<Employee> index = employeeTable.getFirstNameIndex().get(asIs.getFirstName());
+                employeeTable.getFirstNameIndex().remove(asIs.getFirstName());
+                employeeTable.getFirstNameIndex().put(toBe.getFirstName(), index);
+            }
+
+            if (toBe.getLastName()!=null){
+                Set<Employee> index = employeeTable.getLastNameIndex().get(asIs.getLastName());
+                employeeTable.getLastNameIndex().remove(asIs.getLastName());
+                employeeTable.getLastNameIndex().put(toBe.getLastName(), index);
+            }
+
+            if (toBe.getPhoneNumber()!=null){
+                Set<Employee> index = employeeTable.getPhoneNumberIndex().get(asIs.getPhoneNumber());
+                employeeTable.getPhoneNumberIndex().remove(asIs.getPhoneNumber());
+                employeeTable.getPhoneNumberIndex().put(toBe.getPhoneNumber(), index);
+            }
+
+            if (toBe.getMiddleDigitOfPhoneNumber()!=null){
+                Set<Employee> index = employeeTable.getMiddleDigitOfPhoneNumberIndex().get(asIs.getMiddleDigitOfPhoneNumber());
+                employeeTable.getMiddleDigitOfPhoneNumberIndex().remove(asIs.getMiddleDigitOfPhoneNumber());
+                employeeTable.getMiddleDigitOfPhoneNumberIndex().put(toBe.getMiddleDigitOfPhoneNumber(), index);
+            }
+
+            if (toBe.getLast4DigitOfPhoneNumber()!=null){
+                Set<Employee> index = employeeTable.getLast4DigitOfPhoneNumberIndex().get(asIs.getLast4DigitOfPhoneNumber());
+                employeeTable.getLast4DigitOfPhoneNumberIndex().remove(asIs.getLast4DigitOfPhoneNumber());
+                employeeTable.getLast4DigitOfPhoneNumberIndex().put(toBe.getLast4DigitOfPhoneNumber(), index);
+            }
+
+            if (toBe.getBirthDay()!=null){
+                Set<Employee> index = employeeTable.getBirthIndex().get(asIs.getBirthDay());
+                employeeTable.getBirthIndex().remove(asIs.getBirthDay());
+                employeeTable.getBirthIndex().put(toBe.getBirthDay(), index);
+            }
+
+            if (toBe.getYearOfBirth()!=null){
+                Set<Employee> index = employeeTable.getYearOfBirthIndex().get(asIs.getYearOfBirth());
+                employeeTable.getYearOfBirthIndex().remove(asIs.getYearOfBirth());
+                employeeTable.getYearOfBirthIndex().put(toBe.getYearOfBirth(), index);
+            }
+
+            if (toBe.getMonthOfBirth()!=null){
+                Set<Employee> index = employeeTable.getMonthOfBirthIndex().get(asIs.getMonthOfBirth());
+                employeeTable.getMonthOfBirthIndex().remove(asIs.getMonthOfBirth());
+                employeeTable.getMonthOfBirthIndex().put(toBe.getMonthOfBirth(), index);
+            }
+
+            if (toBe.getDayOfBirth()!=null){
+                Set<Employee> index = employeeTable.getDayOfBirthIndex().get(asIs.getDayOfBirth());
+                employeeTable.getDayOfBirthIndex().remove(asIs.getDayOfBirth());
+                employeeTable.getDayOfBirthIndex().put(toBe.getDayOfBirth(), index);
+            }
+
+            if (toBe.getCareerLevel()!=null){
+                Set<Employee> index = employeeTable.getCareerLevelIndex().get(asIs.getCareerLevel().toString());
+                employeeTable.getCareerLevelIndex().remove(asIs.getCareerLevel().toString());
+                employeeTable.getCareerLevelIndex().put(toBe.getCareerLevel().toString(), index);
+            }
+
+            if (toBe.getCerti()!=null){
+                Set<Employee> index = employeeTable.getCertiIndex().get(asIs.getCerti().toString());
+                employeeTable.getCertiIndex().remove(asIs.getCerti().toString());
+                employeeTable.getCertiIndex().put(toBe.getCerti().toString(), index);
+            }
+        }
+    }
+
+    private void modifyValueInTable(Employee asIsEmployee, Employee toBeEmployee, Set<Employee> asIsEmployees) {
+        EmployeeManager employeeManager = new EmployeeManager();
+
+        for (Employee asIs : asIsEmployees) {
+            Employee toBe = employeeManager.overWrite(asIs, toBeEmployee);
+
+            Set<Employee> valuesToChange = searchByEmployeeNumber(asIsEmployee);
+            valuesToChange.remove(asIs);
+            valuesToChange.add(toBe);
+
+            Set<Employee> index;
+
+            index = employeeTable.getNameIndex().get(asIs.getName());
+            index.remove(asIs);
+            index.add(toBe);
+
+            index = employeeTable.getFirstNameIndex().get(asIs.getFirstName());
+            index.remove(asIs);
+            index.add(toBe);
+
+            index = employeeTable.getLastNameIndex().get(asIs.getLastName());
+            index.remove(asIs);
+            index.add(toBe);
+
+            index = employeeTable.getPhoneNumberIndex().get(asIs.getPhoneNumber());
+            index.remove(asIs);
+            index.add(toBe);
+
+            index = employeeTable.getMiddleDigitOfPhoneNumberIndex().get(asIs.getMiddleDigitOfPhoneNumber());
+            index.remove(asIs);
+            index.add(toBe);
+
+            index = employeeTable.getLast4DigitOfPhoneNumberIndex().get(asIs.getLast4DigitOfPhoneNumber());
+            index.remove(asIs);
+            index.add(toBe);
+
+            index = employeeTable.getBirthIndex().get(asIs.getBirthDay());
+            index.remove(asIs);
+            index.add(toBe);
+
+            index = employeeTable.getYearOfBirthIndex().get(asIs.getYearOfBirth());
+            index.remove(asIs);
+            index.add(toBe);
+
+            index = employeeTable.getMonthOfBirthIndex().get(asIs.getMonthOfBirth());
+            index.remove(asIs);
+            index.add(toBe);
+
+            index = employeeTable.getDayOfBirthIndex().get(asIs.getDayOfBirth());
+            index.remove(asIs);
+            index.add(toBe);
+
+            index = employeeTable.getCareerLevelIndex().get(asIs.getCareerLevel().toString());
+            index.remove(asIs);
+            index.add(toBe);
+
+            index = employeeTable.getCertiIndex().get(asIs.getCerti().toString());
+            index.remove(asIs);
+            index.add(toBe);
+        }
+    }
+
+    public void deleteAll(){
+        employeeTable.initialize();
     }
 }
