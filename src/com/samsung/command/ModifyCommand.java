@@ -9,8 +9,8 @@ public class ModifyCommand<E> extends Command<Set<Employee>> {
 
     public ModifyCommand() {};
 
-    public ModifyCommand(String line, CommandOption commandOption) {
-        super(line, commandOption);
+    public ModifyCommand(CommandOption commandOption) {
+        super(commandOption);
     }
 
     @Override

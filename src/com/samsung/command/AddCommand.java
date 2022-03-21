@@ -8,10 +8,12 @@ import java.util.Set;
 
 public class AddCommand<E> extends Command<Set<Employee>>{
 
+    private String commandLine;
+
     public AddCommand() {};
 
-    public AddCommand(String line, CommandOption commandOption){
-        super(line, commandOption);
+    public AddCommand(String line){
+        commandLine = line;
     }
 
     @Override

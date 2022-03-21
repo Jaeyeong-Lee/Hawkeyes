@@ -11,8 +11,8 @@ public class SearchCommand<E> extends Command<Set<Employee>>{
 
     public SearchCommand() {};
 
-    public SearchCommand(String line, CommandOption option) {
-        super(line, option);
+    public SearchCommand(CommandOption option) {
+        super(option);
     }
 
     @Override

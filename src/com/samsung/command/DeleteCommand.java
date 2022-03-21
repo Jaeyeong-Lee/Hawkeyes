@@ -9,8 +9,8 @@ public class DeleteCommand<E> extends Command<Set<Employee>> {
 
     public DeleteCommand() {};
 
-    public DeleteCommand(String line, CommandOption commandOption) {
-        super(line, commandOption);
+    public DeleteCommand(CommandOption commandOption) {
+        super(commandOption);
     }
 
     @Override

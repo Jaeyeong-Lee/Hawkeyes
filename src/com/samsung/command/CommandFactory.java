@@ -29,13 +29,13 @@ public class CommandFactory<T> {
         switch (commandToken[0]) {
 
             case "ADD" :
-                return new AddCommand<T>(line,null);
+                return new AddCommand<T>(line);
             case "SCH" :
-                return new SearchCommand<T>(line, new CommandOption(searchOption, optionCode, isPrint));
+                return new SearchCommand<T>(new CommandOption(searchOption, optionCode, isPrint));
             case "MOD" :
-                return new ModifyCommand<T>(line, new CommandOption(searchOption, modifyOption, optionCode, isPrint));
+                return new ModifyCommand<T>(new CommandOption(searchOption, modifyOption, optionCode, isPrint));
             case "DEL" :
-                return new DeleteCommand<T>(line, new CommandOption(searchOption, optionCode, isPrint));
+                return new DeleteCommand<T>(new CommandOption(searchOption, optionCode, isPrint));
 
         }
 

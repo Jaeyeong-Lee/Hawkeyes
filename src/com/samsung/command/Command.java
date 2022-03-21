@@ -7,15 +7,11 @@ import com.samsung.option.CommandOption;
 public abstract class Command<T> {
 
     protected CommandOption commandOption;
-    protected String line;
 
-    public Command() {
+    public Command() {}
 
-    }
-
-    public Command(String line, CommandOption commandOption) {
+    public Command(CommandOption commandOption) {
         this.commandOption = commandOption;
-        this.line = line;
     }
 
     public abstract T execute();
