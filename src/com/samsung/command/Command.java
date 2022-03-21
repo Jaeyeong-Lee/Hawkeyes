@@ -20,6 +20,6 @@ public abstract class Command<T> {
 
     public abstract T execute();
 
-    PersistentDAO employeeDAO;
+    EmployeeDAO employeeDAO;
 
 }
