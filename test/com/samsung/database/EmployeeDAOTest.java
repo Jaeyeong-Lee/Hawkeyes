@@ -558,4 +558,26 @@ class EmployeeDAOTest {
             fail();
         }
     }
+
+    //employeeDAO.add(new Employee("12343254", "YOUNHO LEE", CareerLevel.CL3, "010-1234-6055", "20210410", Certi.ADV).consistencyValidation());
+    @Test
+    void modifyCertiSearchedByLastPhoneNumber() {
+        Employee searchCondition = new Employee();
+        searchCondition.setLast4DigitOfPhoneNumber("6055");
+
+        Employee modifyCondition = new Employee();
+        modifyCondition.setCerti(Certi.EX);
+
+        for (Employee employee : employeeDAO.search(searchCondition)) {
+            System.out.println(employee.toString());
+            assertEquals(employee.getLast4DigitOfPhoneNumber(), "6055");
+        }
+
+        employeeDAO.modify(searchCondition, modifyCondition);
+
+        for (Employee employee : employeeDAO.search(searchCondition)) {
+            System.out.println(employee.toString());
+            assertEquals(employee.getCerti(), Certi.EX);
+        }
+    }
 }
