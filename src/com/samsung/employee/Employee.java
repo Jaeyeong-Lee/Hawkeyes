@@ -31,6 +31,7 @@ public class Employee {
         this.phoneNumber = phoneNumber;
         this.birthDay = birthDay;
         this.certi = certi;
+        consistencyValidation();
     }
 
     public String getEmployeeNumber() {
@@ -168,5 +169,22 @@ public class Employee {
         ret = new GregorianCalendar(yearFromEmployeeNumber, Calendar.JANUARY, 1).getTime();
 
         return ret;
+    }
+
+    public Employee consistencyValidation(){
+        if (this.name!=null){
+            this.firstName = this.name.split(" ")[0];
+            this.lastName = this.name.split(" ")[1];
+        }
+        if (this.phoneNumber!=null){
+            this.middleDigitOfPhoneNumber = this.phoneNumber.split("-")[1];
+            this.last4DigitOfPhoneNumber = this.phoneNumber.split("-")[2];
+        }
+        if (birthDay!=null){
+            this.yearOfBirth = this.birthDay.substring(0,4);
+            this.monthOfBirth = this.birthDay.substring(4,6);
+            this.dayOfBirth = this.birthDay.substring(6,8);
+        }
+        return this;
     }
 }
