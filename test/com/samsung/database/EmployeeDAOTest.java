@@ -262,6 +262,51 @@ class EmployeeDAOTest {
     }
 
     @Test
+    void modifyEmployeeNumberSearchByLastName() {
+        Employee searchCondition = new Employee();
+        searchCondition.setLastName("YUN");
+
+        Employee modifyCondition = new Employee();
+        modifyCondition.setEmployeeNumber("00003434");
+
+        for (Employee employee : employeeDAO.search(searchCondition)) {
+            System.out.println(employee.toString());
+            assertEquals(employee.getLastName(), "YUN");
+            assertEquals(employee.getEmployeeNumber(), "20384845");
+        }
+
+        employeeDAO.modify(searchCondition, modifyCondition);
+
+        for (Employee employee : employeeDAO.search(searchCondition)) {
+            System.out.println(employee.toString());
+            assertEquals(employee.getEmployeeNumber(), "00003434");
+        }
+    }
+
+    @Test
+    void modifyLastNameSearchByEmployeeNumber() {
+        Employee searchCondition = new Employee();
+        searchCondition.setEmployeeNumber("20384845");
+
+        Employee modifyCondition = new Employee();
+        modifyCondition.setLastName("TEST");
+
+        for (Employee employee : employeeDAO.search(searchCondition)) {
+            System.out.println(employee.toString());
+            assertEquals(employee.getEmployeeNumber(), "20384845");
+        }
+
+        employeeDAO.modify(searchCondition, modifyCondition);
+
+        for (Employee employee : employeeDAO.search(searchCondition)) {
+            System.out.println(employee.toString());
+            assertEquals(employee.getName().split(" ")[1], "TEST");
+            assertEquals(employee.getLastName(), "TEST");
+            assertEquals(employee.getEmployeeNumber(), "20384845");
+        }
+    }
+
+    @Test
     void modifyName() {
         Employee searchCondition = new Employee();
         searchCondition.setName("WONKYUNG YUN");

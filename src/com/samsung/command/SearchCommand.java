@@ -1,7 +1,6 @@
 package com.samsung.command;
 
-import com.samsung.constants.CareerLevel;
-import com.samsung.constants.Certi;
+import com.samsung.database.PersistentDAO;
 import com.samsung.employee.Employee;
 import com.samsung.option.CommandOption;
 
@@ -27,5 +26,10 @@ public class SearchCommand<E> extends Command<Set<Employee>>{
         Set<Employee> returnEmp = employeeDAO.search(searchCondition);
 
         return returnEmp;
+    }
+
+    @Override
+    public String toString() {
+        return "SCH";
     }
 }
