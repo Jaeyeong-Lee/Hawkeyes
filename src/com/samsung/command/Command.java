@@ -18,4 +18,7 @@ public abstract class Command<T> {
 
     EmployeeDAO employeeDAO;
 
+    public Command(){
+        employeeDAO = new EmployeeDAO();
+    }
 }
