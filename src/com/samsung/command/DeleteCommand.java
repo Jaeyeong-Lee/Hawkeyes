@@ -10,6 +10,7 @@ public class DeleteCommand<E> extends Command<Set<Employee>> {
 
     public DeleteCommand(CommandOption commandOption) {
         super(commandOption);
+        commandString = "DEL";
     }
 
     @Override
@@ -21,5 +22,10 @@ public class DeleteCommand<E> extends Command<Set<Employee>> {
         Set<Employee> returnEmp = employeeDAO.delete(deleteCondition);
 
         return returnEmp;
+    }
+
+    @Override
+    public String toString() {
+        return "DEL";
     }
 }

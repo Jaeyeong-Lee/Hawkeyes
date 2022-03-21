@@ -11,6 +11,7 @@ public class ModifyCommand<E> extends Command<Set<Employee>> {
 
     public ModifyCommand(CommandOption commandOption) {
         super(commandOption);
+        commandString = "MOD";
     }
 
     @Override
@@ -23,5 +24,10 @@ public class ModifyCommand<E> extends Command<Set<Employee>> {
         Set<Employee> returnEmp = employeeDAO.modify(asIsEmployee, toBeEmployee);
 
         return returnEmp;
+    }
+
+    @Override
+    public String toString() {
+        return "MOD";
     }
 }
