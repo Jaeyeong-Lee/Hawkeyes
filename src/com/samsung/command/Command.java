@@ -18,7 +18,8 @@ public abstract class Command<T> {
 
     public abstract T execute();
 
-    EmployeeDAO employeeDAO;
+    protected EmployeeDAO employeeDAO;
+    protected String commandString;
 
     public Command(){
         employeeDAO = new EmployeeDAO();
@@ -81,5 +82,13 @@ public abstract class Command<T> {
         }
 
         return retEmployee;
+    }
+
+    public CommandOption getCommandOption() {
+        return this.commandOption;
+    }
+
+    public String getCommandString() {
+        return this.commandString;
     }
 }

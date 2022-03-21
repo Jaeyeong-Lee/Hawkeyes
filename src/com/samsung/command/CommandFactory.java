@@ -6,9 +6,12 @@ import com.samsung.employee.Employee;
 import com.samsung.option.CommandOption;
 import com.samsung.option.SearchOption;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class CommandFactory<T> {
 
-    public Command getCommand(String line) throws Exception {
+    public Command getCommand(String line) {
 
         String[] commandToken = line.split(",");
 
@@ -20,8 +23,8 @@ public class CommandFactory<T> {
         if (commandToken.length >= 2)
             isPrint = ("-p".equals(commandToken[1])? true : false);
         if (commandToken.length >= 3)
-            optionCode = commandToken[2];
-        if (commandToken.length >= 4)
+            optionCode = commandToken[2].replace("-","");
+        if (commandToken.length >= 5)
             searchOption = new SearchOption(commandToken[4], commandToken[5]);
         if (commandToken.length >= 7)
             modifyOption = new SearchOption(commandToken[6], commandToken[7]);
@@ -39,7 +42,19 @@ public class CommandFactory<T> {
 
         }
 
-        throw new Exception("ERROR::Invalid commandName");
+        return null;
+        // TODO: Blank Set으로 return 필요
+        /*
+        return new Command<T>() {
+
+            @Override
+            public T execute() {
+                return null;
+            }
+        };
+        */
+
+
     }
 
 }
