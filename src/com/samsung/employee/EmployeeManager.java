@@ -54,9 +54,8 @@ public class EmployeeManager {
 
             if (employees != null) {
 
-
                 if (!command.getCommandOption().getIsPrint()) {
-                    outputLines.add(command.getCommandString() + "," + ((employees.size()==0)? "NONE" : employees.size()));
+                    outputLines.add(command.toString() + "," + ((employees.size()==0)? "NONE" : employees.size()));
                 } else {
 
                     List<Employee> a = employees.stream()
@@ -69,8 +68,9 @@ public class EmployeeManager {
                             .limit(5)
                             .collect(Collectors.toList());
 
+
                     for (Employee employee : a) {
-                        outputLines.add(command.getCommandString() + "," + employee.toStringForPrint());
+                        outputLines.add(command.toString() + "," + employee.toString());
                     }
 
                 }
@@ -109,7 +109,7 @@ public class EmployeeManager {
         StringBuilder printLines = new StringBuilder();
 
         for (Employee employee : employees) {
-            printLines.append(commandString + "," + employee.toStringForPrint() + "\n");
+            printLines.append(commandString + "," + employee.toString() + "\n");
         }
         return printLines.toString();
     }

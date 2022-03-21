@@ -148,18 +148,9 @@ public class Employee {
 
     @Override
     public String toString() {
-        return  String.join(", ", this.employeeNumber, this.name, this.getCareerLevel().toString(), this.getPhoneNumber(), this.getBirthDay(), this.getCerti().toString());
+        return  String.join(",", this.employeeNumber, this.name, this.getCareerLevel().toString(), this.getPhoneNumber(), this.getBirthDay(), this.getCerti().toString());
     }
 
-    public String toStringForPrint() {
-        return new StringBuilder().append(employeeNumber).append(",")
-                .append(name).append(",")
-                .append(careerLevel).append(",")
-                .append(phoneNumber).append(",")
-                .append(birthDay).append(",")
-                .append(certi)
-                .toString();
-    }
 
     public Date getYearFromEmployeeNumber() {
         Date ret;

@@ -23,8 +23,10 @@ public abstract class Command<T> {
     public abstract T execute();
 
     protected EmployeeDAO employeeDAO;
-    protected String commandString;
 
+    public CommandOption getCommandOption() {
+        return commandOption;
+    }
 
     @Override
     public String toString() {

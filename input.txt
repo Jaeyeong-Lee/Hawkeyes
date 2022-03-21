@@ -18,4 +18,23 @@ ADD, , , ,12117017,LFIS JJIVL,CL1,010-7914-4067,20120812,PRO
 ADD, , , ,11125777,TKOQKIS HC,CL1,010-6734-2289,19991001,PRO
 ADD, , , ,11109136,QKAHCEX LTODDO,CL4,010-2627-8566,19640130,PRO
 ADD, , , ,05101762,VCUHLE HMU,CL4,010-3988-9289,20030819,PRO
-SCH,-p, , ,certi,ADV
+SCH,-p,-d, ,birthday,04
+MOD,-p, , ,name,FB NTAWR,birthday,20050520
+SCH, , , ,employeeNum,79110836
+DEL, , , ,employeeNum,18115040
+DEL,-p,-l, ,name,MPOSXU
+SCH,-p, , ,certi,PRO
+SCH, , , ,certi,ADV
+SCH,-p, , ,cl,CL4
+SCH, ,-m, ,birthday,09
+MOD,-p, , ,name,FB NTAWR,cl,CL3
+MOD,-p, , ,employeeNum,08123556,birthday,20110706
+SCH,-p,-y, ,birthday,2003
+SCH,-p, , ,employeeNum,05101762
+SCH,-p,-m, ,phoneNum,3112
+SCH,-p,-l, ,phoneNum,4605
+SCH,-p, , ,employeeNum,10127115
+MOD,-p, , ,phoneNum,010-8900-1478,certi,PRO
+SCH, ,-f, ,name,LDEXRI
+MOD, , , ,name,VCUHLE HMU,birthday,19910808
+SCH, , , ,name,FB NTAWR

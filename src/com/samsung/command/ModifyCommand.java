@@ -11,7 +11,6 @@ public class ModifyCommand<E> extends Command<Set<Employee>> {
 
     public ModifyCommand(CommandOption commandOption) {
         super(commandOption);
-        commandString = "MOD";
     }
 
     @Override
