@@ -16,6 +16,7 @@ import org.mockito.internal.util.reflection.Whitebox;
 import java.util.*;
 
 class ModifyCommandTest {
+
     Command<Set<Employee>> modifyCommand;
     List<Employee> fakeEmployeeList;
 
@@ -28,9 +29,16 @@ class ModifyCommandTest {
 
         //employeeTable 세팅
         fakeEmployeeList = new ArrayList<Employee>();
-        fakeEmployeeList.add(new Employee("15123099", "VXIHXOTH JHOP", CareerLevel.CL2, "010-3112-2609", "19771211", Certi.ADV));
-        fakeEmployeeList.add(new Employee("17112609", "FB NTAWR", CareerLevel.CL4, "010-5645-6122", "19861203", Certi.PRO));
-        fakeEmployeeList.add(new Employee("18115040", "TTETHU HBO", CareerLevel.CL3, "010-4581-6122", "20080718", Certi.ADV));
+        fakeEmployeeList.add(
+                new Employee("15123099", "VXIHXOTH JHOP", CareerLevel.CL2, "010-3112-2609",
+                        "19771211",
+                        Certi.ADV));
+        fakeEmployeeList.add(
+                new Employee("17112609", "FB NTAWR", CareerLevel.CL4, "010-5645-6122", "19861203",
+                        Certi.PRO));
+        fakeEmployeeList.add(
+                new Employee("18115040", "TTETHU HBO", CareerLevel.CL3, "010-4581-6122", "20080718",
+                        Certi.ADV));
 
         testEmployeeTable = EmployeeTable.getInstance();
     }
@@ -44,11 +52,12 @@ class ModifyCommandTest {
     }
 
     @Test
-    void testExecuteWithNameChangeArgumentWithNotCode(){
+    void testExecuteWithNameChangeArgumentWithNotCode() {
         // test data 준비
         SearchOption testSearchOption = new SearchOption("name", "FB NTAWR");
         SearchOption testModifyOption = new SearchOption("name", "ABCD EFG");
-        CommandOption testCommandOption = new CommandOption(testSearchOption, testModifyOption, "", false);
+        CommandOption testCommandOption = new CommandOption(testSearchOption, testModifyOption, "",
+                false);
         modifyCommand.commandOption = testCommandOption;
 
         // mock setup
@@ -59,20 +68,24 @@ class ModifyCommandTest {
 
         // assertion
         Assertions.assertTrue(actualReturn.size() == 1);        // 변경된 값은 1개
-        Assertions.assertEquals(actualReturn.get(0).getName(), testSearchOption.getCondition());      // 내용 비교(변경전 record)
+        Assertions.assertEquals(actualReturn.get(0).getName(),
+                testSearchOption.getCondition());      // 내용 비교(변경전 record)
 
         // 내부 state 에 대한 확인(내부에서 올바르게 변경 되었는지)
-        EmployeeTable internalTable = (EmployeeTable)Whitebox.getInternalState(modifyCommand.employeeDAO, "employeeTable");
+        EmployeeTable internalTable = (EmployeeTable) Whitebox.getInternalState(
+                modifyCommand.employeeDAO, "employeeTable");
         Assertions.assertTrue(internalTable.getNameIndex().size() == fakeEmployeeList.size());
-        Assertions.assertTrue(internalTable.getNameIndex().get(testModifyOption.getCondition()).size() == 1);
+        Assertions.assertTrue(
+                internalTable.getNameIndex().get(testModifyOption.getCondition()).size() == 1);
     }
 
     @Test
-    void testExecuteWithCertiChangeArgumentWithCode(){
+    void testExecuteWithCertiChangeArgumentWithCode() {
         // test data 준비
         SearchOption testSearchOption = new SearchOption("phoneNum", "6122");
         SearchOption testModifyOption = new SearchOption("certi", "EX");
-        CommandOption testCommandOption = new CommandOption(testSearchOption, testModifyOption, "l", false);
+        CommandOption testCommandOption = new CommandOption(testSearchOption, testModifyOption, "l",
+                false);
         modifyCommand.commandOption = testCommandOption;
 
         // mock setup
@@ -89,9 +102,11 @@ class ModifyCommandTest {
         );      // 변경되기 전 값은 둘다 EX 가 아님
 
         // 내부 state 에 대한 확인(내부에서 올바르게 변경 되었는지)
-        EmployeeTable internalTable = (EmployeeTable)Whitebox.getInternalState(modifyCommand.employeeDAO, "employeeTable");
+        EmployeeTable internalTable = (EmployeeTable) Whitebox.getInternalState(
+                modifyCommand.employeeDAO, "employeeTable");
         Assertions.assertTrue(internalTable.getNameIndex().size() == fakeEmployeeList.size());
-        Assertions.assertTrue(internalTable.getCertiIndex().get(testModifyOption.getCondition()).size() == 2);
+        Assertions.assertTrue(
+                internalTable.getCertiIndex().get(testModifyOption.getCondition()).size() == 2);
     }
 
 }

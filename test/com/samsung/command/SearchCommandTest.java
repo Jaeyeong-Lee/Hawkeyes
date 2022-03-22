@@ -30,9 +30,16 @@ class SearchCommandTest {
 
         //employeeTable 세팅
         fakeEmployeeList = new ArrayList<Employee>();
-        fakeEmployeeList.add(new Employee("15123099", "VXIHXOTH JHOP", CareerLevel.CL2, "010-3112-2609", "19771211", Certi.ADV));
-        fakeEmployeeList.add(new Employee("17112609", "FB NTAWR", CareerLevel.CL4, "010-5645-6122", "19861203", Certi.PRO));
-        fakeEmployeeList.add(new Employee("18115040", "TTETHU HBO", CareerLevel.CL3, "010-5645-2050", "20080718", Certi.ADV));
+        fakeEmployeeList.add(
+                new Employee("15123099", "VXIHXOTH JHOP", CareerLevel.CL2, "010-3112-2609",
+                        "19771211",
+                        Certi.ADV));
+        fakeEmployeeList.add(
+                new Employee("17112609", "FB NTAWR", CareerLevel.CL4, "010-5645-6122", "19861203",
+                        Certi.PRO));
+        fakeEmployeeList.add(
+                new Employee("18115040", "TTETHU HBO", CareerLevel.CL3, "010-5645-2050", "20080718",
+                        Certi.ADV));
 
         testEmployeeTable = EmployeeTable.getInstance();
     }
@@ -46,7 +53,7 @@ class SearchCommandTest {
     }
 
     @Test
-    void testExecuteWithEmployeeNumber(){
+    void testExecuteWithEmployeeNumber() {
         // test data 준비
         SearchOption testSearchOption = new SearchOption("employeeNum", "15123099");
         CommandOption testCommandOption = new CommandOption(testSearchOption, "", false);
@@ -57,7 +64,9 @@ class SearchCommandTest {
         Whitebox.setInternalState(searchCommand.employeeDAO, "employeeTable", testEmployeeTable);
 
         Set<Employee> actualReturn = searchCommand.execute();
-        Set<Employee> expectedReturn = fakeEmployeeList.stream().filter(e-> e.getEmployeeNumber().equals(testSearchOption.getCondition())).collect(Collectors.toSet());
+        Set<Employee> expectedReturn = fakeEmployeeList.stream()
+                .filter(e -> e.getEmployeeNumber().equals(testSearchOption.getCondition()))
+                .collect(Collectors.toSet());
 
         // assertion
         Assertions.assertTrue(actualReturn.size() == 1);        // 사번은 고유함
@@ -65,7 +74,7 @@ class SearchCommandTest {
     }
 
     @Test
-    void testExecuteWithNotExistData(){
+    void testExecuteWithNotExistData() {
         // test data 준비
         SearchOption testSearchOption = new SearchOption("employeeNum", "12345678");
         CommandOption testCommandOption = new CommandOption(testSearchOption, "", false);
@@ -78,7 +87,7 @@ class SearchCommandTest {
     }
 
     @Test
-    void testExecuteWithCode(){
+    void testExecuteWithCode() {
         // test data 준비
         SearchOption testSearchOption = new SearchOption("phoneNum", "5645");
         CommandOption testCommandOption = new CommandOption(testSearchOption, "m", false);
@@ -89,7 +98,10 @@ class SearchCommandTest {
         Whitebox.setInternalState(searchCommand.employeeDAO, "employeeTable", testEmployeeTable);
 
         Set<Employee> actualReturn = searchCommand.execute();
-        Set<Employee> expectedReturn = fakeEmployeeList.stream().filter(e-> e.getMiddleDigitOfPhoneNumber().equals(testSearchOption.getCondition())).collect(Collectors.toSet());
+        Set<Employee> expectedReturn = fakeEmployeeList.stream()
+                .filter(e -> e.getMiddleDigitOfPhoneNumber()
+                        .equals(testSearchOption.getCondition()))
+                .collect(Collectors.toSet());
 
         // assertion
         Assertions.assertTrue(actualReturn.size() == 2);

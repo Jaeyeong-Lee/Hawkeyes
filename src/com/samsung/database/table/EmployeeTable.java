@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class EmployeeTable {
+
     private static EmployeeTable table = new EmployeeTable();
 
     public static EmployeeTable getInstance() {
@@ -82,7 +83,7 @@ public class EmployeeTable {
         return certiIndex;
     }
 
-    public void initialize(){
+    public void initialize() {
         employeeNumberIndex = new HashMap<>();
         nameIndex = new HashMap<>();
         firstNameIndex = new HashMap<>();

@@ -16,7 +16,8 @@ public class ModifyCommand<T> extends Command<Set<Employee>> {
 
     @Override
     public Set<Employee> execute() {
-        return employeeDAO.modify(commandOption.convertSearchOptionToEmployee(), commandOption.convertModifyOptionToEmployee());
+        return employeeDAO.modify(commandOption.convertSearchOptionToEmployee(),
+                commandOption.convertModifyOptionToEmployee());
     }
 
     @Override

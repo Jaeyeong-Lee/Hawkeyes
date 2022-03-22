@@ -6,6 +6,7 @@ import com.samsung.constants.Certi;
 import java.util.*;
 
 public class Employee {
+
     private String employeeNumber;
     private String name;
     private String firstName;
@@ -24,10 +25,12 @@ public class Employee {
     }
 
     public Employee(String[] addCommandToken) {
-        this(addCommandToken[4], addCommandToken[5], CareerLevel.valueOf(addCommandToken[6]), addCommandToken[7], addCommandToken[8], Certi.valueOf(addCommandToken[9]));
+        this(addCommandToken[4], addCommandToken[5], CareerLevel.valueOf(addCommandToken[6]),
+                addCommandToken[7], addCommandToken[8], Certi.valueOf(addCommandToken[9]));
     }
 
-    public Employee(String employeeNumber, String name, CareerLevel careerLevel, String phoneNumber, String birthDay, Certi certi) {
+    public Employee(String employeeNumber, String name, CareerLevel careerLevel, String phoneNumber,
+            String birthDay, Certi certi) {
         this.employeeNumber = employeeNumber;
         this.name = name;
         this.careerLevel = careerLevel;
@@ -42,7 +45,7 @@ public class Employee {
     }
 
     public String getYearOfEmployeeNumber() {
-        return employeeNumber.substring(0,2);
+        return employeeNumber.substring(0, 2);
     }
 
     public String getName() {
@@ -147,46 +150,62 @@ public class Employee {
 
     @Override
     public String toString() {
-        return  String.join(",", this.employeeNumber, this.name, this.getCareerLevel().toString(), this.getPhoneNumber(), this.getBirthDay(), this.getCerti().toString());
+        return String.join(",", this.employeeNumber, this.name, this.getCareerLevel().toString(),
+                this.getPhoneNumber(), this.getBirthDay(), this.getCerti().toString());
     }
 
     public Date getYearFromEmployeeNumber() {
         int yearFromEmployeeNumber = Integer.parseInt(employeeNumber.substring(0, 2));
-        if (yearFromEmployeeNumber >= 69 && yearFromEmployeeNumber <= 99)
+        if (yearFromEmployeeNumber >= 69 && yearFromEmployeeNumber <= 99) {
             yearFromEmployeeNumber += 1900;
-        else if (yearFromEmployeeNumber >= 0 && yearFromEmployeeNumber <= 21)
+        } else if (yearFromEmployeeNumber >= 0 && yearFromEmployeeNumber <= 21) {
             yearFromEmployeeNumber += 2000;
+        }
 
         return new GregorianCalendar(yearFromEmployeeNumber, Calendar.JANUARY, 1).getTime();
     }
 
-    public Employee consistencyValidation(){
-        if (this.name!=null){
+    public Employee consistencyValidation() {
+        if (this.name != null) {
             this.firstName = this.name.split(" ")[0];
             this.lastName = this.name.split(" ")[1];
         }
-        if (this.phoneNumber!=null){
+        if (this.phoneNumber != null) {
             this.middleDigitOfPhoneNumber = this.phoneNumber.split("-")[1];
             this.last4DigitOfPhoneNumber = this.phoneNumber.split("-")[2];
         }
-        if (birthDay!=null){
-            this.yearOfBirth = this.birthDay.substring(0,4);
-            this.monthOfBirth = this.birthDay.substring(4,6);
-            this.dayOfBirth = this.birthDay.substring(6,8);
+        if (birthDay != null) {
+            this.yearOfBirth = this.birthDay.substring(0, 4);
+            this.monthOfBirth = this.birthDay.substring(4, 6);
+            this.dayOfBirth = this.birthDay.substring(6, 8);
         }
         return this;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Employee employee = (Employee) o;
-        return Objects.equals(employeeNumber, employee.employeeNumber) && Objects.equals(name, employee.name) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(phoneNumber, employee.phoneNumber) && Objects.equals(middleDigitOfPhoneNumber, employee.middleDigitOfPhoneNumber) && Objects.equals(last4DigitOfPhoneNumber, employee.last4DigitOfPhoneNumber) && Objects.equals(birthDay, employee.birthDay) && Objects.equals(yearOfBirth, employee.yearOfBirth) && Objects.equals(monthOfBirth, employee.monthOfBirth) && Objects.equals(dayOfBirth, employee.dayOfBirth) && careerLevel == employee.careerLevel && certi == employee.certi;
+        return Objects.equals(employeeNumber, employee.employeeNumber) && Objects.equals(name,
+                employee.name) && Objects.equals(firstName, employee.firstName) && Objects.equals(
+                lastName, employee.lastName) && Objects.equals(phoneNumber, employee.phoneNumber)
+                && Objects.equals(middleDigitOfPhoneNumber, employee.middleDigitOfPhoneNumber)
+                && Objects.equals(last4DigitOfPhoneNumber, employee.last4DigitOfPhoneNumber)
+                && Objects.equals(birthDay, employee.birthDay) && Objects.equals(yearOfBirth,
+                employee.yearOfBirth) && Objects.equals(monthOfBirth, employee.monthOfBirth)
+                && Objects.equals(dayOfBirth, employee.dayOfBirth)
+                && careerLevel == employee.careerLevel && certi == employee.certi;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(employeeNumber, name, firstName, lastName, phoneNumber, middleDigitOfPhoneNumber, last4DigitOfPhoneNumber, birthDay, yearOfBirth, monthOfBirth, dayOfBirth, careerLevel, certi);
+        return Objects.hash(employeeNumber, name, firstName, lastName, phoneNumber,
+                middleDigitOfPhoneNumber, last4DigitOfPhoneNumber, birthDay, yearOfBirth,
+                monthOfBirth, dayOfBirth, careerLevel, certi);
     }
 }

@@ -5,14 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileIOManager implements IOManager<String> {
+
     @Override
     public List<String> readInput(String fileName) {
         List<String> fileContents = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String str;
-            while((str = br.readLine()) != null)
+            while ((str = br.readLine()) != null) {
                 fileContents.add(str);
+            }
 
         } catch (IOException e) {
             fileContents = new ArrayList<>();
