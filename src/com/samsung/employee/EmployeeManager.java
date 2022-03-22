@@ -79,9 +79,11 @@ public class EmployeeManager {
             Set<Employee> employees = command.execute();
 
             if (employees != null) {
-
-                if (!command.getCommandOption().getIsPrint()) {
-                    outputLines.add(command.toString() + "," + ((employees.size()==0)? "NONE" : employees.size()));
+                
+                if (employees.size() == 0) {
+                    outputLines.add(command.toString() + "," + "NONE");
+                } else if (!command.getCommandOption().getIsPrint()) {
+                    outputLines.add(command.toString() + "," + employees.size());
                 } else {
 
                     outputLines.add(employees.stream()
