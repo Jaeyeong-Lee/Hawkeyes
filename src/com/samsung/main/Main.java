@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         if (!isValidFile(args[0]) || !isValidFile(args[1])) {
             System.out.println("Invalid file");
-            return ;
+            return;
         }
 
         EmployeeManager manager = new EmployeeManager();
@@ -27,7 +27,7 @@ public class Main {
             return false;
         }
 
-        if (!Arrays.asList("txt", "TXT").contains(arg.substring(arg.length()-3))) {
+        if (!Arrays.asList("txt", "TXT").contains(arg.substring(arg.length() - 3))) {
             System.out.println("Input file name is not in white list.");
             return false;
         }
