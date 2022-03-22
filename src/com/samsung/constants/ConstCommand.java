@@ -7,4 +7,6 @@ public class ConstCommand {
     public static final String search = "SCH";
     public static final String command = "COM";
     public static final String none = "NONE";
+
+    public static final String commaDelimiter = ",";
 }

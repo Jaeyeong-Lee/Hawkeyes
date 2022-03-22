@@ -1,6 +1,6 @@
 package com.samsung.command;
 
-import com.samsung.constants.ConstEmployee;
+import com.samsung.constants.ConstCommand;
 import com.samsung.option.CommandOption;
 import com.samsung.option.SearchOption;
 
@@ -19,7 +19,7 @@ class CommandAttr {
     private static String modifyCondition;
 
     public static void setAttrByLine(final String line) {
-        parseLine(line.split(ConstEmployee.hyphenDelimiter));
+        parseLine(line.split(ConstCommand.commaDelimiter));
 
         option = new CommandOption(new SearchOption(searchColumn, searchCondition),
                 new SearchOption(modifyColumn, modifyCondition), option2.replace("-", "").trim(),
