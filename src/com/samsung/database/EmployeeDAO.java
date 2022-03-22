@@ -190,210 +190,213 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
                 // employeeTable.getEmployeeNumberIndex() = HashMap<String, Set<Employee>>
                 // employeeTable.getEmployeeNumberIndex().get() = Set<Employee>
 
-                if (employeeTable.getEmployeeNumberIndex().containsKey(asIs.getEmployeeNumber())){
+                if (employeeTable.getEmployeeNumberIndex().containsKey(asIs.getEmployeeNumber())) {
                     Set<Employee> temp = employeeTable.getEmployeeNumberIndex().get(asIs.getEmployeeNumber());
-                    if (temp.contains(asIs)){
+                    if (temp.contains(asIs)) {
                         temp.remove(asIs);
                     }
 
                     if (asIs.getEmployeeNumber().equals(toBe.getEmployeeNumber())) temp.add(toBe); // key가 변하지 않을 경우
                     else {
-                        employeeTable.getEmployeeNumberIndex().computeIfAbsent(toBeEmployee.getEmployeeNumber(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
+                        employeeTable.getEmployeeNumberIndex().computeIfAbsent(toBe.getEmployeeNumber(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
                     }
 
-                    if (temp.size()==0){
+                    if (temp.size() == 0) {
                         employeeTable.getEmployeeNumberIndex().remove(asIs.getEmployeeNumber());
                     }
                 }
 
-                if (employeeTable.getNameIndex().containsKey(asIs.getName())){
+                if (employeeTable.getNameIndex().containsKey(asIs.getName())) {
                     Set<Employee> temp = employeeTable.getNameIndex().get(asIs.getName());
-                    if (temp.contains(asIs)){
+                    if (temp.contains(asIs)) {
                         temp.remove(asIs);
                     }
 
                     if (asIs.getName().equals(toBe.getName())) temp.add(toBe); // key가 변하지 않을 경우
                     else {
-                        employeeTable.getNameIndex().computeIfAbsent(toBeEmployee.getName(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
+                        employeeTable.getNameIndex().computeIfAbsent(toBe.getName(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
                     }
 
-                    if (temp.size()==0){
+                    if (temp.size() == 0) {
                         employeeTable.getNameIndex().remove(asIs.getName());
                     }
                 }
 
-                if (employeeTable.getFirstNameIndex().containsKey(asIs.getFirstName())){
+                if (employeeTable.getFirstNameIndex().containsKey(asIs.getFirstName())) {
                     Set<Employee> temp = employeeTable.getFirstNameIndex().get(asIs.getFirstName());
-                    if (temp.contains(asIs)){
+                    if (temp.contains(asIs)) {
                         temp.remove(asIs);
                     }
 
                     if (asIs.getFirstName().equals(toBe.getFirstName())) temp.add(toBe); // key가 변하지 않을 경우
                     else {
-                        employeeTable.getFirstNameIndex().computeIfAbsent(toBeEmployee.getFirstName(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
+                        employeeTable.getFirstNameIndex().computeIfAbsent(toBe.getFirstName(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
                     }
 
-                    if (temp.size()==0){
+                    if (temp.size() == 0) {
                         employeeTable.getFirstNameIndex().remove(asIs.getFirstName());
                     }
                 }
 
-                if (employeeTable.getLastNameIndex().containsKey(asIs.getLastName())){
+                if (employeeTable.getLastNameIndex().containsKey(asIs.getLastName())) {
                     Set<Employee> temp = employeeTable.getLastNameIndex().get(asIs.getLastName());
-                    if (temp.contains(asIs)){
+                    if (temp.contains(asIs)) {
                         temp.remove(asIs);
                     }
 
                     if (asIs.getLastName().equals(toBe.getLastName())) temp.add(toBe); // key가 변하지 않을 경우
                     else {
-                        employeeTable.getLastNameIndex().computeIfAbsent(toBeEmployee.getLastName(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
+                        employeeTable.getLastNameIndex().computeIfAbsent(toBe.getLastName(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
                     }
 
-                    if (temp.size()==0){
+                    if (temp.size() == 0) {
                         employeeTable.getLastNameIndex().remove(asIs.getLastName());
                     }
                 }
 
-                if (employeeTable.getPhoneNumberIndex().containsKey(asIs.getPhoneNumber())){
+                if (employeeTable.getPhoneNumberIndex().containsKey(asIs.getPhoneNumber())) {
                     Set<Employee> temp = employeeTable.getPhoneNumberIndex().get(asIs.getPhoneNumber());
-                    if (temp.contains(asIs)){
+                    if (temp.contains(asIs)) {
                         temp.remove(asIs);
                     }
 
                     if (asIs.getPhoneNumber().equals(toBe.getPhoneNumber())) temp.add(toBe); // key가 변하지 않을 경우
                     else {
-                        employeeTable.getPhoneNumberIndex().computeIfAbsent(toBeEmployee.getPhoneNumber(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
+                        employeeTable.getPhoneNumberIndex().computeIfAbsent(toBe.getPhoneNumber(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
                     }
 
-                    if (temp.size()==0){
+                    if (temp.size() == 0) {
                         employeeTable.getPhoneNumberIndex().remove(asIs.getPhoneNumber());
                     }
                 }
 
-                if (employeeTable.getMiddleDigitOfPhoneNumberIndex().containsKey(asIs.getMiddleDigitOfPhoneNumber())){
+                if (employeeTable.getMiddleDigitOfPhoneNumberIndex().containsKey(asIs.getMiddleDigitOfPhoneNumber())) {
                     Set<Employee> temp = employeeTable.getMiddleDigitOfPhoneNumberIndex().get(asIs.getMiddleDigitOfPhoneNumber());
-                    if (temp.contains(asIs)){
+                    if (temp.contains(asIs)) {
                         temp.remove(asIs);
                     }
 
-                    if (asIs.getMiddleDigitOfPhoneNumber().equals(toBe.getMiddleDigitOfPhoneNumber())) temp.add(toBe); // key가 변하지 않을 경우
+                    if (asIs.getMiddleDigitOfPhoneNumber().equals(toBe.getMiddleDigitOfPhoneNumber()))
+                        temp.add(toBe); // key가 변하지 않을 경우
                     else {
-                        employeeTable.getMiddleDigitOfPhoneNumberIndex().computeIfAbsent(toBeEmployee.getMiddleDigitOfPhoneNumber(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
+                        employeeTable.getMiddleDigitOfPhoneNumberIndex().computeIfAbsent(toBe.getMiddleDigitOfPhoneNumber(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
                     }
 
-                    if (temp.size()==0){
+                    if (temp.size() == 0) {
                         employeeTable.getMiddleDigitOfPhoneNumberIndex().remove(asIs.getMiddleDigitOfPhoneNumber());
                     }
                 }
 
-                if (employeeTable.getLast4DigitOfPhoneNumberIndex().containsKey(asIs.getLast4DigitOfPhoneNumber())){
+                if (employeeTable.getLast4DigitOfPhoneNumberIndex().containsKey(asIs.getLast4DigitOfPhoneNumber())) {
                     Set<Employee> temp = employeeTable.getLast4DigitOfPhoneNumberIndex().get(asIs.getLast4DigitOfPhoneNumber());
-                    if (temp.contains(asIs)){
+                    if (temp.contains(asIs)) {
                         temp.remove(asIs);
                     }
 
-                    if (asIs.getLast4DigitOfPhoneNumber().equals(toBe.getLast4DigitOfPhoneNumber())) temp.add(toBe); // key가 변하지 않을 경우
+                    if (asIs.getLast4DigitOfPhoneNumber().equals(toBe.getLast4DigitOfPhoneNumber()))
+                        temp.add(toBe); // key가 변하지 않을 경우
                     else {
-                        employeeTable.getLast4DigitOfPhoneNumberIndex().computeIfAbsent(toBeEmployee.getLast4DigitOfPhoneNumber(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
+                        employeeTable.getLast4DigitOfPhoneNumberIndex().computeIfAbsent(toBe.getLast4DigitOfPhoneNumber(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
                     }
 
-                    if (temp.size()==0){
+                    if (temp.size() == 0) {
                         employeeTable.getLast4DigitOfPhoneNumberIndex().remove(asIs.getLast4DigitOfPhoneNumber());
                     }
                 }
 
-                if (employeeTable.getBirthIndex().containsKey(asIs.getBirthDay())){
+                if (employeeTable.getBirthIndex().containsKey(asIs.getBirthDay())) {
                     Set<Employee> temp = employeeTable.getBirthIndex().get(asIs.getBirthDay());
-                    if (temp.contains(asIs)){
+                    if (temp.contains(asIs)) {
                         temp.remove(asIs);
                     }
 
                     if (asIs.getBirthDay().equals(toBe.getBirthDay())) temp.add(toBe); // key가 변하지 않을 경우
                     else {
-                        employeeTable.getBirthIndex().computeIfAbsent(toBeEmployee.getBirthDay(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
+                        employeeTable.getBirthIndex().computeIfAbsent(toBe.getBirthDay(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
                     }
 
-                    if (temp.size()==0){
+                    if (temp.size() == 0) {
                         employeeTable.getBirthIndex().remove(asIs.getBirthDay());
                     }
                 }
 
-                if (employeeTable.getYearOfBirthIndex().containsKey(asIs.getYearOfBirth())){
+                if (employeeTable.getYearOfBirthIndex().containsKey(asIs.getYearOfBirth())) {
                     Set<Employee> temp = employeeTable.getYearOfBirthIndex().get(asIs.getYearOfBirth());
-                    if (temp.contains(asIs)){
+                    if (temp.contains(asIs)) {
                         temp.remove(asIs);
                     }
 
                     if (asIs.getYearOfBirth().equals(toBe.getYearOfBirth())) temp.add(toBe); // key가 변하지 않을 경우
                     else {
-                        employeeTable.getYearOfBirthIndex().computeIfAbsent(toBeEmployee.getYearOfBirth(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
+                        employeeTable.getYearOfBirthIndex().computeIfAbsent(toBe.getYearOfBirth(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
                     }
 
-                    if (temp.size()==0){
+                    if (temp.size() == 0) {
                         employeeTable.getYearOfBirthIndex().remove(asIs.getYearOfBirth());
                     }
                 }
 
-                if (employeeTable.getMonthOfBirthIndex().containsKey(asIs.getMonthOfBirth())){
+                if (employeeTable.getMonthOfBirthIndex().containsKey(asIs.getMonthOfBirth())) {
                     Set<Employee> temp = employeeTable.getMonthOfBirthIndex().get(asIs.getMonthOfBirth());
-                    if (temp.contains(asIs)){
+                    if (temp.contains(asIs)) {
                         temp.remove(asIs);
                     }
 
                     if (asIs.getMonthOfBirth().equals(toBe.getMonthOfBirth())) temp.add(toBe); // key가 변하지 않을 경우
                     else {
-                        employeeTable.getMonthOfBirthIndex().computeIfAbsent(toBeEmployee.getMonthOfBirth(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
+                        employeeTable.getMonthOfBirthIndex().computeIfAbsent(toBe.getMonthOfBirth(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
                     }
 
-                    if (temp.size()==0){
+                    if (temp.size() == 0) {
                         employeeTable.getMonthOfBirthIndex().remove(asIs.getMonthOfBirth());
                     }
                 }
 
-                if (employeeTable.getDayOfBirthIndex().containsKey(asIs.getDayOfBirth())){
+                if (employeeTable.getDayOfBirthIndex().containsKey(asIs.getDayOfBirth())) {
                     Set<Employee> temp = employeeTable.getDayOfBirthIndex().get(asIs.getDayOfBirth());
-                    if (temp.contains(asIs)){
+                    if (temp.contains(asIs)) {
                         temp.remove(asIs);
                     }
 
                     if (asIs.getDayOfBirth().equals(toBe.getDayOfBirth())) temp.add(toBe); // key가 변하지 않을 경우
                     else {
-                        employeeTable.getDayOfBirthIndex().computeIfAbsent(toBeEmployee.getDayOfBirth(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
+                        employeeTable.getDayOfBirthIndex().computeIfAbsent(toBe.getDayOfBirth(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
                     }
 
-                    if (temp.size()==0){
+                    if (temp.size() == 0) {
                         employeeTable.getDayOfBirthIndex().remove(asIs.getDayOfBirth());
                     }
                 }
 
-                if (employeeTable.getCareerLevelIndex().containsKey(asIs.getCareerLevel().toString())){
+                if (employeeTable.getCareerLevelIndex().containsKey(asIs.getCareerLevel().toString())) {
                     Set<Employee> temp = employeeTable.getCareerLevelIndex().get(asIs.getCareerLevel().toString());
-                    if (temp.contains(asIs)){
+                    if (temp.contains(asIs)) {
                         temp.remove(asIs);
                     }
 
-                    if (asIs.getCareerLevel().toString().equals(toBe.getCareerLevel().toString())) temp.add(toBe); // key가 변하지 않을 경우
+                    if (asIs.getCareerLevel().toString().equals(toBe.getCareerLevel().toString()))
+                        temp.add(toBe); // key가 변하지 않을 경우
                     else {
-                        employeeTable.getCareerLevelIndex().computeIfAbsent(toBeEmployee.getCareerLevel().toString(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
+                        employeeTable.getCareerLevelIndex().computeIfAbsent(toBe.getCareerLevel().toString(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
                     }
 
-                    if (temp.size()==0){
+                    if (temp.size() == 0) {
                         employeeTable.getCareerLevelIndex().remove(asIs.getCareerLevel().toString());
                     }
                 }
 
-                if (employeeTable.getCertiIndex().containsKey(asIs.getCerti().toString())){
+                if (employeeTable.getCertiIndex().containsKey(asIs.getCerti().toString())) {
                     Set<Employee> temp = employeeTable.getCertiIndex().get(asIs.getCerti().toString());
-                    if (temp.contains(asIs)){
+                    if (temp.contains(asIs)) {
                         temp.remove(asIs);
                     }
 
                     if (asIs.getCerti().toString().equals(toBe.getCerti().toString())) temp.add(toBe); // key가 변하지 않을 경우
                     else {
-                        employeeTable.getCertiIndex().computeIfAbsent(toBeEmployee.getCerti().toString(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
+                        employeeTable.getCertiIndex().computeIfAbsent(toBe.getCerti().toString(), useless -> new HashSet<>()).add(toBe);// key가 변할 경우
                     }
 
-                    if (temp.size()==0){
+                    if (temp.size() == 0) {
                         employeeTable.getCertiIndex().remove(asIs.getCerti().toString());
                     }
                 }
