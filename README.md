@@ -18,9 +18,9 @@
 ### 개발 환경
 * JDK Version : JDK 1.8
 * IDE : IntelliJ
-* UML : PUML(*), STAR UML (불편)
+* UML : PUML (IntelliJ 내 플러그인 활용)
 * jUnit: junit 5.8.1 
-* mock : mockito-all-1.10.19 버전 사용
+* mock : mockito 1.10.19
 * 협업 툴: Discord
 
 
@@ -44,7 +44,7 @@ master
 ### 커밋
  - 변경사항에 대해서 코멘트 추가
  - 가능한 한 200 LOC / 1 commit 를 지키기.
- - [Add], [Mod], [Hotfix], [Refactoring], [Setup] 를 PR prefix 로 사용.
+ - [Add], [Mod], [Bugfix], [Refactoring], [Setup] 를 PR prefix 로 사용.
 
 
 
