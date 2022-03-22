@@ -3,7 +3,6 @@ package com.samsung.employee;
 import com.samsung.command.Command;
 import com.samsung.command.CommandFactory;
 import com.samsung.iomanager.FileIOManager;
-import com.samsung.iomanager.IOManager;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,10 +11,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class EmployeeManager {
-
-    private IOManager<String> fileIOManager;
-    private List<Command> commandList;
-
     public Employee overWrite(Employee asIsEmployee, Employee toBeEmployee) {
         Employee employee = new Employee();
 
@@ -67,7 +62,7 @@ public class EmployeeManager {
 
         List<String> inputLines = fileIOManager.readInput(inputFileName);
         List<String> outputLines = new ArrayList<>();
-        commandList = new ArrayList<>();
+        List<Command> commandList = new ArrayList<>();
 
         CommandFactory factory = new CommandFactory();
 
@@ -79,19 +74,18 @@ public class EmployeeManager {
             Set<Employee> employees = command.execute();
             if (employees != null) {
                 if (employees.size() == 0) {
-                    outputLines.add(command.toString() + "," + "NONE");
+                    outputLines.add(command + "," + "NONE");
                 } else if (!command.getCommandOption().getIsPrint()) {
-                    outputLines.add(command.toString() + "," + employees.size());
+                    outputLines.add(command + "," + employees.size());
                 } else {
                     outputLines.add(employees.stream()
                             .sorted(Comparator.comparing(Employee::getYearFromEmployeeNumber).thenComparing(Employee::getEmployeeNumber))
                             .limit(5)
-                            .map(employee -> command.toString() + "," + employee.toString())    // 이 부분 수정 필요
+                            .map(employee -> command + "," + employee.toString())    // 이 부분 수정 필요
                             .collect(Collectors.joining("\n")));
                 }
             }
         }
         fileIOManager.writeOutput(outputFileName, outputLines);
     }
-
 }

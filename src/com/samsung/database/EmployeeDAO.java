@@ -12,19 +12,19 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
     @Override
     public int add(Employee employee) {
         try {
-            employeeTable.getEmployeeNumberIndex().computeIfAbsent(employee.getEmployeeNumber(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getNameIndex().computeIfAbsent(employee.getName(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getFirstNameIndex().computeIfAbsent(employee.getFirstName(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getLastNameIndex().computeIfAbsent(employee.getLastName(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getPhoneNumberIndex().computeIfAbsent(employee.getPhoneNumber(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getMiddleDigitOfPhoneNumberIndex().computeIfAbsent(employee.getMiddleDigitOfPhoneNumber(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getLast4DigitOfPhoneNumberIndex().computeIfAbsent(employee.getLast4DigitOfPhoneNumber(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getBirthIndex().computeIfAbsent(employee.getBirthDay(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getYearOfBirthIndex().computeIfAbsent(employee.getYearOfBirth(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getMonthOfBirthIndex().computeIfAbsent(employee.getMonthOfBirth(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getDayOfBirthIndex().computeIfAbsent(employee.getDayOfBirth(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getCareerLevelIndex().computeIfAbsent(employee.getCareerLevel().toString(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getCertiIndex().computeIfAbsent(employee.getCerti().toString(), useless -> new HashSet<>()).add(employee);
+            searchByEmployeeNumber(employee).add(employee);
+            searchByName(employee).add(employee);
+            searchByFirstName(employee).add(employee);
+            searchByLastName(employee).add(employee);
+            searchByPhoneNumber(employee).add(employee);
+            searchByMiddleDigitOfPhoneNumber(employee).add(employee);
+            searchByLast4DigitOfPhoneNumber(employee).add(employee);
+            searchByBirth(employee).add(employee);
+            searchByYearOfBirth(employee).add(employee);
+            searchByMonthOfBirth(employee).add(employee);
+            searchByDayOfBirth(employee).add(employee);
+            searchByCareerLevel(employee).add(employee);
+            searchByCerti(employee).add(employee);
         } catch (Exception e) {
             e.printStackTrace();
             return -1;

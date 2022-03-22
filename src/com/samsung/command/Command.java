@@ -1,10 +1,6 @@
 package com.samsung.command;
 
-import com.samsung.constants.CareerLevel;
-import com.samsung.constants.Certi;
 import com.samsung.database.EmployeeDAO;
-import com.samsung.database.PersistentDAO;
-import com.samsung.employee.Employee;
 import com.samsung.option.CommandOption;
 
 public abstract class Command<T> {
@@ -24,7 +20,6 @@ public abstract class Command<T> {
 
     protected EmployeeDAO employeeDAO;
 
-
     public CommandOption getCommandOption() {
         return commandOption;
     }
@@ -33,6 +28,4 @@ public abstract class Command<T> {
     public String toString() {
         return "COM";
     }
-
-
 }
