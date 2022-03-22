@@ -7,7 +7,6 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-
         if (!isValidFile(args[0]) || !isValidFile(args[1])) {
             System.out.println("Invalid file");
             return ;
@@ -34,8 +33,6 @@ public class Main {
         }
 
         // TODO: Secure Coding 기반 directory check 계속 /
-
-
         return true;
     }
 }

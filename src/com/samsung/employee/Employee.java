@@ -28,7 +28,6 @@ public class Employee {
     }
 
     public Employee(String employeeNumber, String name, CareerLevel careerLevel, String phoneNumber, String birthDay, Certi certi) {
-        //TODO prefix 구현해야함
         this.employeeNumber = employeeNumber;
         this.name = name;
         this.careerLevel = careerLevel;
@@ -151,19 +150,14 @@ public class Employee {
         return  String.join(",", this.employeeNumber, this.name, this.getCareerLevel().toString(), this.getPhoneNumber(), this.getBirthDay(), this.getCerti().toString());
     }
 
-
     public Date getYearFromEmployeeNumber() {
-        Date ret;
-
         int yearFromEmployeeNumber = Integer.parseInt(employeeNumber.substring(0, 2));
         if (yearFromEmployeeNumber >= 69 && yearFromEmployeeNumber <= 99)
             yearFromEmployeeNumber += 1900;
         else if (yearFromEmployeeNumber >= 0 && yearFromEmployeeNumber <= 21)
             yearFromEmployeeNumber += 2000;
 
-        ret = new GregorianCalendar(yearFromEmployeeNumber, Calendar.JANUARY, 1).getTime();
-
-        return ret;
+        return new GregorianCalendar(yearFromEmployeeNumber, Calendar.JANUARY, 1).getTime();
     }
 
     public Employee consistencyValidation(){
