@@ -22,7 +22,7 @@
 * jUnit: junit 5.8.1 
 * mock : mockito-all-1.10.19 버전 사용
 * 협업 툴: Discord
-* 
+
 
 ### 코딩 스타일
 * Google Style : 기본 제공
