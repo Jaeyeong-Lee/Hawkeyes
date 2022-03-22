@@ -44,10 +44,6 @@ public class Employee {
         return employeeNumber;
     }
 
-    public String getYearOfEmployeeNumber() {
-        return employeeNumber.substring(0, 2);
-    }
-
     public String getName() {
         return name;
     }

@@ -6,7 +6,6 @@ import java.util.Set;
 
 public class Utility {
     public static boolean isSetNotNullAndEmpty(Set<Employee> employees){
-        if (employees!=null && employees.isEmpty()) return true;
-        return false;
+        return employees != null && employees.isEmpty();
     }
 }
