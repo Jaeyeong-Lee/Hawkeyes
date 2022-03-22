@@ -161,57 +161,60 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
 
             // value가 비어있는 key 삭제
             for (Employee employeeToDelete : employees) {
-                if (employeeTable.getEmployeeNumberIndex().get(employeeToDelete.getEmployeeNumber())
-                        .isEmpty()) {
+                if ((employeeTable.getEmployeeNumberIndex().get(employeeToDelete.getEmployeeNumber()) != null)
+                        && employeeTable.getEmployeeNumberIndex().get(employeeToDelete.getEmployeeNumber()).isEmpty()) {
                     employeeTable.getEmployeeNumberIndex()
                             .remove(employeeToDelete.getEmployeeNumber());
                 }
-                if (employeeTable.getNameIndex().get(employeeToDelete.getName()).isEmpty()) {
+                if ((employeeTable.getNameIndex().get(employeeToDelete.getName()) != null) && employeeTable.getNameIndex().get(employeeToDelete.getName()).isEmpty()) {
                     employeeTable.getNameIndex().remove(employeeToDelete.getName());
                 }
-                if (employeeTable.getFirstNameIndex().get(employeeToDelete.getFirstName())
+                if ((employeeTable.getFirstNameIndex().get(employeeToDelete.getFirstName()) != null) && employeeTable.getFirstNameIndex().get(employeeToDelete.getFirstName())
                         .isEmpty()) {
                     employeeTable.getFirstNameIndex().remove(employeeToDelete.getFirstName());
                 }
-                if (employeeTable.getLastNameIndex().get(employeeToDelete.getLastName())
+                if ((employeeTable.getLastNameIndex().get(employeeToDelete.getLastName()) != null) && employeeTable.getLastNameIndex().get(employeeToDelete.getLastName())
                         .isEmpty()) {
                     employeeTable.getLastNameIndex().remove(employeeToDelete.getLastName());
                 }
-                if (employeeTable.getPhoneNumberIndex().get(employeeToDelete.getPhoneNumber())
+                if ((employeeTable.getPhoneNumberIndex().get(employeeToDelete.getPhoneNumber()) != null) && employeeTable.getPhoneNumberIndex().get(employeeToDelete.getPhoneNumber())
                         .isEmpty()) {
                     employeeTable.getPhoneNumberIndex().remove(employeeToDelete.getPhoneNumber());
                 }
-                if (employeeTable.getMiddleDigitOfPhoneNumberIndex()
+                if ((employeeTable.getMiddleDigitOfPhoneNumberIndex()
+                        .get(employeeToDelete.getMiddleDigitOfPhoneNumber()) != null) && employeeTable.getMiddleDigitOfPhoneNumberIndex()
                         .get(employeeToDelete.getMiddleDigitOfPhoneNumber()).isEmpty()) {
                     employeeTable.getMiddleDigitOfPhoneNumberIndex()
                             .remove(employeeToDelete.getMiddleDigitOfPhoneNumber());
                 }
-                if (employeeTable.getLast4DigitOfPhoneNumberIndex()
+                if ((employeeTable.getLast4DigitOfPhoneNumberIndex()
+                        .get(employeeToDelete.getLast4DigitOfPhoneNumber()) != null) && employeeTable.getLast4DigitOfPhoneNumberIndex()
                         .get(employeeToDelete.getLast4DigitOfPhoneNumber()).isEmpty()) {
                     employeeTable.getLast4DigitOfPhoneNumberIndex()
                             .remove(employeeToDelete.getLast4DigitOfPhoneNumber());
                 }
-                if (employeeTable.getBirthIndex().get(employeeToDelete.getBirthDay()).isEmpty()) {
+                if ((employeeTable.getBirthIndex().get(employeeToDelete.getBirthDay()) != null) && employeeTable.getBirthIndex().get(employeeToDelete.getBirthDay()).isEmpty()) {
                     employeeTable.getBirthIndex().remove(employeeToDelete.getBirthDay());
                 }
-                if (employeeTable.getYearOfBirthIndex().get(employeeToDelete.getYearOfBirth())
+                if ((employeeTable.getYearOfBirthIndex().get(employeeToDelete.getYearOfBirth()) != null) && employeeTable.getYearOfBirthIndex().get(employeeToDelete.getYearOfBirth())
                         .isEmpty()) {
                     employeeTable.getYearOfBirthIndex().remove(employeeToDelete.getYearOfBirth());
                 }
-                if (employeeTable.getMonthOfBirthIndex().get(employeeToDelete.getMonthOfBirth())
+                if ((employeeTable.getMonthOfBirthIndex().get(employeeToDelete.getMonthOfBirth()) != null) && employeeTable.getMonthOfBirthIndex().get(employeeToDelete.getMonthOfBirth())
                         .isEmpty()) {
                     employeeTable.getMonthOfBirthIndex().remove(employeeToDelete.getMonthOfBirth());
                 }
-                if (employeeTable.getDayOfBirthIndex().get(employeeToDelete.getDayOfBirth())
+                if ((employeeTable.getDayOfBirthIndex().get(employeeToDelete.getDayOfBirth()) != null) && employeeTable.getDayOfBirthIndex().get(employeeToDelete.getDayOfBirth())
                         .isEmpty()) {
                     employeeTable.getDayOfBirthIndex().remove(employeeToDelete.getDayOfBirth());
                 }
-                if (employeeTable.getCareerLevelIndex()
+                if ((employeeTable.getCareerLevelIndex()
+                        .get(employeeToDelete.getCareerLevel().toString()) != null) && employeeTable.getCareerLevelIndex()
                         .get(employeeToDelete.getCareerLevel().toString()).isEmpty()) {
                     employeeTable.getCareerLevelIndex()
                             .remove(employeeToDelete.getCareerLevel().toString());
                 }
-                if (employeeTable.getCertiIndex().get(employeeToDelete.getCerti().toString())
+                if ((employeeTable.getCertiIndex().get(employeeToDelete.getCerti().toString()) != null) && employeeTable.getCertiIndex().get(employeeToDelete.getCerti().toString())
                         .isEmpty()) {
                     employeeTable.getCertiIndex().remove(employeeToDelete.getCerti().toString());
                 }
