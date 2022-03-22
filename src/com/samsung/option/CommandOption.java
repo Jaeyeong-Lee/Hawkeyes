@@ -2,6 +2,8 @@ package com.samsung.option;
 
 import com.samsung.constants.CareerLevel;
 import com.samsung.constants.Certi;
+import com.samsung.constants.ConstEmployee;
+import com.samsung.constants.ConstOption;
 import com.samsung.employee.Employee;
 
 public class CommandOption {
@@ -29,32 +31,16 @@ public class CommandOption {
         return searchOption;
     }
 
-    private void setSearchOption(SearchOption searchOption) {
-        this.searchOption = searchOption;
-    }
-
     public String getCode() {
         return code;
-    }
-
-    private void setCode(String code) {
-        this.code = code;
     }
 
     public SearchOption getModifyOption() {
         return modifyOption;
     }
 
-    private void setModifyOption(SearchOption modifyOption) {
-        this.modifyOption = modifyOption;
-    }
-
     public boolean getIsPrint() {
         return isPrint;
-    }
-
-    private void setIsPrint(boolean isPrint) {
-        this.isPrint = isPrint;
     }
 
     public Employee convertSearchOptionToEmployee() {
@@ -65,7 +51,6 @@ public class CommandOption {
         } else {
             return setEmployeeColumnAndValueWithCode(getSearchOption().getColumn(), getSearchOption().getCondition(), code);
         }
-
     }
 
     public Employee convertModifyOptionToEmployee() {
@@ -76,22 +61,22 @@ public class CommandOption {
         Employee retEmployee = new Employee();
 
         switch (column) {
-            case "employeeNum":
+            case ConstEmployee.employeeNum:
                 retEmployee.setEmployeeNumber(value);
                 break;
-            case "name":
+            case ConstEmployee.name:
                 retEmployee.setName(value);
                 break;
-            case "cl":
+            case ConstEmployee.cl:
                 retEmployee.setCareerLevel(CareerLevel.valueOf(value));
                 break;
-            case "phoneNum":
+            case ConstEmployee.phoneNum:
                 retEmployee.setPhoneNumber(value);
                 break;
-            case "birthday":
+            case ConstEmployee.birthday:
                 retEmployee.setBirthDay(value);
                 break;
-            case "certi":
+            case ConstEmployee.certi:
                 retEmployee.setCerti(Certi.valueOf(value));
                 break;
         }
@@ -103,26 +88,26 @@ public class CommandOption {
         Employee retEmployee = new Employee();
 
         switch (code) {
-            case "f":       // 성명의 이름으로 검색
+            case ConstOption.firstName:
                 retEmployee.setFirstName(value);
                 break;
-            case "y":       // 생년월일의 연도로 검색
+            case ConstOption.yearOfBirth:
                 retEmployee.setYearOfBirth(value);
                 break;
-            case "d":       // 생년월일의 일로 검색
+            case ConstOption.dayOfBirth:
                 retEmployee.setDayOfBirth(value);
                 break;
-            case "m":       // 생년월일의 월로 검색 or 전화번호 중간 자리로 검색
-                if (column.equals("birthday")) {
+            case ConstOption.monthOfBirth:
+                if (column.equals(ConstEmployee.birthday)) {
                     retEmployee.setMonthOfBirth(value);
-                } else if (column.equals("phoneNum")) {
+                } else if (column.equals(ConstEmployee.phoneNum)) {
                     retEmployee.setMiddleDigitOfPhoneNumber(value);
                 }
                 break;
-            case "l":
-                if (column.equals("name")) {
+            case ConstOption.lastName:
+                if (column.equals(ConstEmployee.name)) {
                     retEmployee.setLastName(value);
-                } else if (column.equals("phoneNum")) {
+                } else if (column.equals(ConstEmployee.phoneNum)) {
                     retEmployee.setLast4DigitOfPhoneNumber(value);
                 }
                 break;
