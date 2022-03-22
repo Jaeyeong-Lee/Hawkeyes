@@ -1,5 +1,6 @@
 package com.samsung.command;
 
+import com.samsung.constants.ConstCommand;
 import com.samsung.database.EmployeeDAO;
 import com.samsung.option.CommandOption;
 
@@ -26,6 +27,6 @@ public abstract class Command<T> {
 
     @Override
     public String toString() {
-        return "COM";
+        return ConstCommand.command;
     }
 }

@@ -2,6 +2,7 @@ package com.samsung.employee;
 
 import com.samsung.constants.CareerLevel;
 import com.samsung.constants.Certi;
+import com.samsung.constants.ConstEmployee;
 
 import java.util.*;
 
@@ -42,10 +43,6 @@ public class Employee {
 
     public String getEmployeeNumber() {
         return employeeNumber;
-    }
-
-    public String getYearOfEmployeeNumber() {
-        return employeeNumber.substring(0, 2);
     }
 
     public String getName() {
@@ -167,12 +164,12 @@ public class Employee {
 
     public Employee consistencyValidation() {
         if (this.name != null) {
-            this.firstName = this.name.split(" ")[0];
-            this.lastName = this.name.split(" ")[1];
+            this.firstName = this.name.split(ConstEmployee.whiteSpaceDelimiter)[0];
+            this.lastName = this.name.split(ConstEmployee.whiteSpaceDelimiter)[1];
         }
         if (this.phoneNumber != null) {
-            this.middleDigitOfPhoneNumber = this.phoneNumber.split("-")[1];
-            this.last4DigitOfPhoneNumber = this.phoneNumber.split("-")[2];
+            this.middleDigitOfPhoneNumber = this.phoneNumber.split(ConstEmployee.hyphenDelimiter)[1];
+            this.last4DigitOfPhoneNumber = this.phoneNumber.split(ConstEmployee.hyphenDelimiter)[2];
         }
         if (birthDay != null) {
             this.yearOfBirth = this.birthDay.substring(0, 4);

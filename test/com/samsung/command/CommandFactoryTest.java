@@ -1,13 +1,8 @@
 package com.samsung.command;
 
-import com.samsung.database.table.EmployeeTable;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.Mock;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,6 +13,11 @@ class CommandFactoryTest {
     @BeforeEach
     void setup() {
         commandFactory = new CommandFactory();
+    }
+
+    @AfterEach
+    void tearDown(){
+        commandFactory = null;
     }
 
     @Test
