@@ -7,4 +7,7 @@ public class ConstEmployee {
     public static final String phoneNum = "phoneNum";
     public static final String birthday = "birthday";
     public static final String certi = "certi";
+
+    public static final String hyphenDelimiter = "-";
+    public static final String whiteSpaceDelimiter = " ";
 }

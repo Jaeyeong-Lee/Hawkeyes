@@ -14,7 +14,7 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
     private EmployeeTable employeeTable = EmployeeTable.getInstance();
 
     @Override
-    public int add(Employee employee) {
+    public void add(Employee employee) {
         try {
             addIndex(employeeTable.getEmployeeNumberIndex(), employee.getEmployeeNumber(), employee);
             addIndex(employeeTable.getNameIndex(), employee.getName(), employee);
@@ -31,9 +31,7 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
             addIndex(employeeTable.getCertiIndex(), Certi.nullSaferToString(employee.getCerti()), employee);
         } catch (Exception e) {
             e.printStackTrace();
-            return -1;
         }
-        return 0;
     }
 
     private void addIndex(Map<String, Set<Employee>> index, String indexCondition, Employee employeeToAdd) {

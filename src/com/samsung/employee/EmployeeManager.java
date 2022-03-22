@@ -2,6 +2,8 @@ package com.samsung.employee;
 
 import com.samsung.command.Command;
 import com.samsung.command.CommandFactory;
+import com.samsung.constants.ConstCommand;
+import com.samsung.constants.ConstEmployee;
 import com.samsung.iomanager.FileIOManager;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,31 +15,17 @@ public class EmployeeManager {
 
     public void process(String inputFileName, String outputFileName) {
         FileIOManager fileIOManager = new FileIOManager();
-
-        List<String> inputLines = fileIOManager.readInput(inputFileName);
-
-        List<Command> commandList = getCommandObjectList(inputLines);
-
-        List<String> outputLines = getOutputLines(commandList);
-
-        fileIOManager.writeOutput(outputFileName, outputLines);
+        fileIOManager.writeOutput(outputFileName, getOutputLines(getCommandObjectList(fileIOManager.readInput(inputFileName))));
     }
 
     private List<Command> getCommandObjectList(List<String> inputLines) {
-
-        // TODO : factory 매번 생성보다 한 번 생성해 두는 게 좋을 것 같아 코드 남겨 둠 (주석 추후 삭제)
-        // 또는 다른 디자인패턴을 활용하여 가능할 수 있지 않을까 검
         CommandFactory factory = new CommandFactory();
-
-        return inputLines.stream().map(line -> factory.getCommand(line)).collect(Collectors.toList());
-
-        // TODO: 아래 처럼 활용하려면 getCommand Method가 static이어야 함
-        // return inputLines.stream().map(CommandFactory::getCommand).collect(Collectors.toList());
+        return inputLines.stream().map(factory::getCommand).collect(Collectors.toList());
     }
 
     private List<String> getOutputLines(List<Command> commandList) {
         List<String> outputLines = new ArrayList<>();
-        commandList.stream().map(this::getOutputLineByCommand).forEach((command) -> outputLines.add(command.toString()));
+        commandList.stream().map(this::getOutputLineByCommand).forEach(command -> outputLines.add(command.toString()));
         return outputLines;
     }
 
@@ -45,12 +33,12 @@ public class EmployeeManager {
 
         Set<Employee> employees = command.execute();
 
-        if (employees == null) {
+        if (employees == null || ConstCommand.add.equals(command.toString())) {
             return "";
         }
 
         if (employees.size() == 0) {
-            return command + "," + "NONE";
+            return command + "," + ConstCommand.none;
         }
 
         if (!command.getCommandOption().getIsPrint()) {
@@ -104,23 +92,23 @@ public class EmployeeManager {
                 : asIsEmployee.getCerti());
 
         if (toBeEmployee.getName() != null) {
-            employee.setFirstName(toBeEmployee.getName().split(" ")[0]);
-            employee.setLastName(toBeEmployee.getName().split(" ")[1]);
+            employee.setFirstName(toBeEmployee.getName().split(ConstEmployee.whiteSpaceDelimiter)[0]);
+            employee.setLastName(toBeEmployee.getName().split(ConstEmployee.whiteSpaceDelimiter)[1]);
         } else if (toBeEmployee.getFirstName() != null) {
-            employee.setName(toBeEmployee.getFirstName() + " " + employee.getName().split(" ")[1]);
+            employee.setName(toBeEmployee.getFirstName() + ConstEmployee.whiteSpaceDelimiter + employee.getName().split(ConstEmployee.whiteSpaceDelimiter)[1]);
         } else if (toBeEmployee.getLastName() != null) {
-            employee.setName(employee.getName().split(" ")[0] + " " + toBeEmployee.getLastName());
+            employee.setName(employee.getName().split(ConstEmployee.whiteSpaceDelimiter)[0] + ConstEmployee.whiteSpaceDelimiter + toBeEmployee.getLastName());
         } else if (toBeEmployee.getPhoneNumber() != null) {
-            employee.setMiddleDigitOfPhoneNumber(toBeEmployee.getPhoneNumber().split("-")[1]);
-            employee.setLast4DigitOfPhoneNumber(toBeEmployee.getPhoneNumber().split("-")[2]);
+            employee.setMiddleDigitOfPhoneNumber(toBeEmployee.getPhoneNumber().split(ConstEmployee.hyphenDelimiter)[1]);
+            employee.setLast4DigitOfPhoneNumber(toBeEmployee.getPhoneNumber().split(ConstEmployee.hyphenDelimiter)[2]);
         } else if (toBeEmployee.getMiddleDigitOfPhoneNumber() != null) {
-            employee.setPhoneNumber(employee.getPhoneNumber().split("-")[0]
+            employee.setPhoneNumber(employee.getPhoneNumber().split(ConstEmployee.hyphenDelimiter)[0]
                     + toBeEmployee.getMiddleDigitOfPhoneNumber() + employee.getPhoneNumber()
-                    .split("-")[2]);
+                    .split(ConstEmployee.hyphenDelimiter)[2]);
         } else if (toBeEmployee.getLast4DigitOfPhoneNumber() != null) {
             employee.setPhoneNumber(
-                    employee.getPhoneNumber().split("-")[0] + employee.getPhoneNumber()
-                            .split("-")[1] + toBeEmployee.getLast4DigitOfPhoneNumber());
+                    employee.getPhoneNumber().split(ConstEmployee.hyphenDelimiter)[0] + employee.getPhoneNumber()
+                            .split(ConstEmployee.hyphenDelimiter)[1] + toBeEmployee.getLast4DigitOfPhoneNumber());
         } else if (toBeEmployee.getBirthDay() != null) {
             employee.setYearOfBirth(toBeEmployee.getBirthDay().substring(0, 4));
             employee.setMonthOfBirth(toBeEmployee.getBirthDay().substring(4, 6));

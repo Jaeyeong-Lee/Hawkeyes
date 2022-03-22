@@ -4,7 +4,7 @@ import java.util.Set;
 
 public abstract class PersistentDAO<T> {
 
-    abstract int add(T t);
+    abstract void add(T t);
 
     abstract Set<T> search(T t);
 

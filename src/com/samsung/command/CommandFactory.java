@@ -1,5 +1,7 @@
 package com.samsung.command;
 
+import com.samsung.constants.ConstCommand;
+import com.samsung.constants.ConstEmployee;
 import com.samsung.option.CommandOption;
 import com.samsung.option.SearchOption;
 
@@ -19,7 +21,7 @@ public class CommandFactory<T> {
                 isPrint = ("-p".equals(commandToken[1]));
             }
             if (commandToken.length >= 3) {
-                optionCode = commandToken[2].replace("-", "").trim();
+                optionCode = commandToken[2].replace(ConstEmployee.hyphenDelimiter, "").trim();
             }
             if (commandToken.length >= 5) {
                 searchOption = new SearchOption(commandToken[4], commandToken[5]);
