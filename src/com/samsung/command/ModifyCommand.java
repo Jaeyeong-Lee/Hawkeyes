@@ -7,7 +7,10 @@ import java.util.Set;
 
 public class ModifyCommand<E> extends Command<Set<Employee>> {
 
-    public ModifyCommand() {};
+    public ModifyCommand() {
+    }
+
+    ;
 
     public ModifyCommand(CommandOption commandOption) {
         super(commandOption);

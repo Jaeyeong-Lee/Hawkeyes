@@ -12,7 +12,7 @@ class CommandFactoryTest {
     CommandFactory commandFactory;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         commandFactory = new CommandFactory();
     }
 
@@ -21,8 +21,8 @@ class CommandFactoryTest {
 
         System.out.println("Null / Empty String 입력 시, 예외 확인");
 
-        assertThrows(Exception.class, ()->commandFactory.getCommand(""));
-        assertThrows(Exception.class, ()->commandFactory.getCommand(null));
+        assertThrows(Exception.class, () -> commandFactory.getCommand(""));
+        assertThrows(Exception.class, () -> commandFactory.getCommand(null));
 
     }
 
@@ -40,16 +40,14 @@ class CommandFactoryTest {
     }
 
 
-
-
     // TODO: 올바른_Class_반환_여부() TC ParameterizedTest 변환 검토, Parameter와 기대 값을 동일하게 넣을 수 있는지 확인
     @ParameterizedTest
-    @ValueSource(strings ={
+    @ValueSource(strings = {
             "ADD, , , ,02117175,SBILHUT LDEXRI,CL4,010-2814-1699,19950704,ADV",
             "SCH,-p,-d, ,birthday,04",
             "MOD,-p, , ,name,FB NTAWR,birthday,20050520",
             "DEL, , , ,employeeNum,18115040",
-            })
+    })
     void 올바른_Class_반환_여부_Param(String inputLine) {
         
         /*

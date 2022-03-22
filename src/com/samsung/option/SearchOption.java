@@ -1,10 +1,11 @@
 package com.samsung.option;
 
 public class SearchOption {
+
     private String column; // CL, employeeNumber
     private String condition; // CL3, 21050301
 
-    public SearchOption(String column, String condition){
+    public SearchOption(String column, String condition) {
         this.column = column;
         this.condition = condition;
     }
