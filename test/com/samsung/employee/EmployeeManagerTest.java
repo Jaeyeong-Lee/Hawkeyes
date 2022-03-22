@@ -12,13 +12,13 @@ class EmployeeManagerTest {
     FileIOManager fileIOManager;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         fileIOManager = new FileIOManager();
         fileIOManager.readInput("input.txt");
     }
 
     @AfterEach
-    void tearDown(){
+    void tearDown() {
         fileIOManager = null;
     }
 

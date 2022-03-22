@@ -12,25 +12,52 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeDAOTest {
+
     private static EmployeeDAO employeeDAO;
 
     @BeforeEach
     public void beforeEach() {
         employeeDAO = new EmployeeDAO();
-        employeeDAO.add(new Employee("18050301", "KYUMOK KIM", CareerLevel.CL2, "010-9777-6055", "19980906", Certi.PRO).consistencyValidation());
-        employeeDAO.add(new Employee("12343254", "YOUNHO LEE", CareerLevel.CL3, "010-1234-6055", "20210410", Certi.ADV).consistencyValidation());
-        employeeDAO.add(new Employee("23423434", "JAEYOUNG KIM", CareerLevel.CL2, "010-4543-5687", "20210805", Certi.ADV).consistencyValidation());
-        employeeDAO.add(new Employee("20384845", "WONKYUNG YUN", CareerLevel.CL1, "010-4543-4561", "19980906", Certi.EX).consistencyValidation());
-        employeeDAO.add(new Employee("56765867", "YOUNGSEUNG JUNG", CareerLevel.CL2, "010-1234-1123", "19800401", Certi.PRO).consistencyValidation());
-        employeeDAO.add(new Employee("67874836", "HYUNGDON JUNG", CareerLevel.CL2, "010-2869-0987", "19811005", Certi.PRO).consistencyValidation());
-        employeeDAO.add(new Employee("78009889", "JAESUCK YU", CareerLevel.CL4, "010-8724-2364", "19920401", Certi.PRO).consistencyValidation());
-        employeeDAO.add(new Employee("34563645", "MYUNGSU PARK", CareerLevel.CL3, "010-8233-5833", "20100815", Certi.PRO).consistencyValidation());
-        employeeDAO.add(new Employee("54687253", "HONGCHUL NO", CareerLevel.CL2, "010-5790-2364", "20080727", Certi.ADV).consistencyValidation());
-        employeeDAO.add(new Employee("86907892", "HA HA", CareerLevel.CL2, "010-0078-5257", "19980906", Certi.ADV).consistencyValidation());
+        employeeDAO.add(
+                new Employee("18050301", "KYUMOK KIM", CareerLevel.CL2, "010-9777-6055", "19980906",
+                        Certi.PRO).consistencyValidation());
+        employeeDAO.add(
+                new Employee("12343254", "YOUNHO LEE", CareerLevel.CL3, "010-1234-6055", "20210410",
+                        Certi.ADV).consistencyValidation());
+        employeeDAO.add(
+                new Employee("23423434", "JAEYOUNG KIM", CareerLevel.CL2, "010-4543-5687",
+                        "20210805",
+                        Certi.ADV).consistencyValidation());
+        employeeDAO.add(
+                new Employee("20384845", "WONKYUNG YUN", CareerLevel.CL1, "010-4543-4561",
+                        "19980906",
+                        Certi.EX).consistencyValidation());
+        employeeDAO.add(
+                new Employee("56765867", "YOUNGSEUNG JUNG", CareerLevel.CL2, "010-1234-1123",
+                        "19800401",
+                        Certi.PRO).consistencyValidation());
+        employeeDAO.add(
+                new Employee("67874836", "HYUNGDON JUNG", CareerLevel.CL2, "010-2869-0987",
+                        "19811005",
+                        Certi.PRO).consistencyValidation());
+        employeeDAO.add(
+                new Employee("78009889", "JAESUCK YU", CareerLevel.CL4, "010-8724-2364", "19920401",
+                        Certi.PRO).consistencyValidation());
+        employeeDAO.add(
+                new Employee("34563645", "MYUNGSU PARK", CareerLevel.CL3, "010-8233-5833",
+                        "20100815",
+                        Certi.PRO).consistencyValidation());
+        employeeDAO.add(
+                new Employee("54687253", "HONGCHUL NO", CareerLevel.CL2, "010-5790-2364",
+                        "20080727",
+                        Certi.ADV).consistencyValidation());
+        employeeDAO.add(
+                new Employee("86907892", "HA HA", CareerLevel.CL2, "010-0078-5257", "19980906",
+                        Certi.ADV).consistencyValidation());
     }
 
     @AfterEach
-    public void afterEach(){
+    public void afterEach() {
         employeeDAO.deleteAll();
     }
 
@@ -104,7 +131,8 @@ class EmployeeDAOTest {
 
         for (Employee employeeResult : employeeDAO.search(condition)) {
             System.out.println(employeeResult.toString());
-            assertEquals(condition.getMiddleDigitOfPhoneNumber(), employeeResult.getMiddleDigitOfPhoneNumber());
+            assertEquals(condition.getMiddleDigitOfPhoneNumber(),
+                    employeeResult.getMiddleDigitOfPhoneNumber());
         }
     }
 
@@ -115,7 +143,8 @@ class EmployeeDAOTest {
 
         for (Employee employeeResult : employeeDAO.search(condition)) {
             System.out.println(employeeResult.toString());
-            assertEquals(condition.getLast4DigitOfPhoneNumber(), employeeResult.getLast4DigitOfPhoneNumber());
+            assertEquals(condition.getLast4DigitOfPhoneNumber(),
+                    employeeResult.getLast4DigitOfPhoneNumber());
         }
     }
 
@@ -187,7 +216,9 @@ class EmployeeDAOTest {
 
     @Test
     void addTest() {
-        Employee addCondition = new Employee("34534436", "BOB TRUNK", CareerLevel.CL3, "010-5676-2364", "19900906", Certi.PRO);
+        Employee addCondition = new Employee("34534436", "BOB TRUNK", CareerLevel.CL3,
+                "010-5676-2364",
+                "19900906", Certi.PRO);
         Set<Employee> queryResult;
 
         queryResult = employeeDAO.search(addCondition);
