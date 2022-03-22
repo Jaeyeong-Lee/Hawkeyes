@@ -30,14 +30,13 @@ public class FileIOManager implements IOManager<String> {
     public void writeOutput(String fileName, List<String> fileLines) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
 
-            fileLines.stream().filter(line -> line.length() != 0).forEach(line -> {
-                try {
-                    bw.write(line);
-                    bw.newLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            for (String line : fileLines) {
+                if (line.length() == 0) {
+                    continue;
                 }
-            });
+                bw.write(line);
+                bw.newLine();
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
