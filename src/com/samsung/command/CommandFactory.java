@@ -1,13 +1,8 @@
 package com.samsung.command;
 
-import com.samsung.database.EmployeeDAO;
-import com.samsung.database.PersistentDAO;
-import com.samsung.employee.Employee;
 import com.samsung.option.CommandOption;
 import com.samsung.option.SearchOption;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class CommandFactory<T> {
 

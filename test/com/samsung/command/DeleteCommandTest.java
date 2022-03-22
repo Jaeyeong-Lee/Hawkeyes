@@ -13,15 +13,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.internal.util.reflection.Whitebox;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 class DeleteCommandTest {
     Command<Set<Employee>> deleteCommand;
-    Set<Employee> fakeEmployeeSet;
+    List<Employee> fakeEmployeeList;
 
     @Mock
     private EmployeeTable testEmployeeTable;
@@ -31,18 +28,19 @@ class DeleteCommandTest {
         deleteCommand = new DeleteCommand();
 
         //employeeTable 세팅
-        fakeEmployeeSet = new HashSet<Employee>();
-        fakeEmployeeSet.add(new Employee("15123099", "VXIHXOTH JHOP", CareerLevel.CL2, "010-3112-2609", "19771211", Certi.ADV));
-        fakeEmployeeSet.add(new Employee("17112609", "FB NTAWR", CareerLevel.CL4, "010-5645-6122", "19861203", Certi.PRO));
-        fakeEmployeeSet.add(new Employee("18115040", "TTETHU HBO", CareerLevel.CL3, "010-1234-6122", "20080718", Certi.ADV));
+        fakeEmployeeList = new ArrayList<Employee>();
+        fakeEmployeeList.add(new Employee("15123099", "VXIHXOTH JHOP", CareerLevel.CL2, "010-3112-2609", "19771211", Certi.ADV));
+        fakeEmployeeList.add(new Employee("17112609", "FB NTAWR", CareerLevel.CL4, "010-5645-6122", "19861203", Certi.PRO));
+        fakeEmployeeList.add(new Employee("18115040", "TTETHU HBO", CareerLevel.CL3, "010-1234-6122", "20080718", Certi.ADV));
 
         testEmployeeTable = EmployeeTable.getInstance();
     }
 
     @AfterEach
     void tearDown() {
+        deleteCommand.employeeDAO.deleteAll();
         deleteCommand = null;
-        fakeEmployeeSet = null;
+        fakeEmployeeList = null;
         testEmployeeTable = null;
     }
 
@@ -54,10 +52,7 @@ class DeleteCommandTest {
         deleteCommand.commandOption = testCommandOption;
 
         // mock setup
-        for(Employee employee: fakeEmployeeSet) {
-            Set<Employee> searchByEmployeeNumber = testEmployeeTable.getEmployeeNumberIndex().computeIfAbsent(employee.getEmployeeNumber(), t -> new HashSet<>());
-            searchByEmployeeNumber.add(employee);
-        }
+        new MockingUtility().mockAllIndexingTables(fakeEmployeeList, testEmployeeTable);
         Whitebox.setInternalState(deleteCommand.employeeDAO, "employeeTable", testEmployeeTable);
 
         List<Employee> actualReturn = new ArrayList<>(deleteCommand.execute());
@@ -80,9 +75,7 @@ class DeleteCommandTest {
         deleteCommand.commandOption = testCommandOption;
 
         // mock setup
-        for(Employee employee: fakeEmployeeSet) {
-            testEmployeeTable.getLast4DigitOfPhoneNumberIndex().computeIfAbsent(employee.getLast4DigitOfPhoneNumber(), useless -> new HashSet<>()).add(employee);
-        }
+        new MockingUtility().mockAllIndexingTables(fakeEmployeeList, testEmployeeTable);
         Whitebox.setInternalState(deleteCommand.employeeDAO, "employeeTable", testEmployeeTable);
 
         List<Employee> actualReturn = new ArrayList<>(deleteCommand.execute());
