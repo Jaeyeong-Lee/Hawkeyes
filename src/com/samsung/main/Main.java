@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         if (!isValidFile(args[0]) || !isValidFile(args[1])) {
             System.out.println("Invalid file");
             return;

@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class EmployeeTable {
 
-    private static EmployeeTable table = new EmployeeTable();
+    private static final EmployeeTable table = new EmployeeTable();
 
     public static EmployeeTable getInstance() {
         return EmployeeTable.table;

@@ -16,7 +16,7 @@ public class CommandFactory<T> {
             SearchOption modifyOption = null;
 
             if (commandToken.length >= 2) {
-                isPrint = ("-p".equals(commandToken[1]) ? true : false);
+                isPrint = ("-p".equals(commandToken[1]));
             }
             if (commandToken.length >= 3) {
                 optionCode = commandToken[2].replace("-", "").trim();
