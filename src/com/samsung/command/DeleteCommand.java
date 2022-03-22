@@ -10,7 +10,6 @@ public class DeleteCommand<E> extends Command<Set<Employee>> {
 
     public DeleteCommand(CommandOption commandOption) {
         super(commandOption);
-        commandString = "DEL";
     }
 
     @Override

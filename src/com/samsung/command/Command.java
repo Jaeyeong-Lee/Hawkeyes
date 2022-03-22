@@ -23,19 +23,16 @@ public abstract class Command<T> {
     public abstract T execute();
 
     protected EmployeeDAO employeeDAO;
-    protected String commandString;
+
+
+    public CommandOption getCommandOption() {
+        return commandOption;
+    }
 
     @Override
     public String toString() {
         return "COM";
     }
-  
-    public CommandOption getCommandOption() {
-        return this.commandOption;
-    }
 
-    public String getCommandString() {
-        return this.commandString;
 
-    }
 }
