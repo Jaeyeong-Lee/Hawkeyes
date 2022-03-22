@@ -13,19 +13,44 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
     @Override
     public int add(Employee employee) {
         try {
-            employeeTable.getEmployeeNumberIndex().computeIfAbsent(employee.getEmployeeNumber(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getNameIndex().computeIfAbsent(employee.getName(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getFirstNameIndex().computeIfAbsent(employee.getFirstName(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getLastNameIndex().computeIfAbsent(employee.getLastName(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getPhoneNumberIndex().computeIfAbsent(employee.getPhoneNumber(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getMiddleDigitOfPhoneNumberIndex().computeIfAbsent(employee.getMiddleDigitOfPhoneNumber(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getLast4DigitOfPhoneNumberIndex().computeIfAbsent(employee.getLast4DigitOfPhoneNumber(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getBirthIndex().computeIfAbsent(employee.getBirthDay(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getYearOfBirthIndex().computeIfAbsent(employee.getYearOfBirth(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getMonthOfBirthIndex().computeIfAbsent(employee.getMonthOfBirth(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getDayOfBirthIndex().computeIfAbsent(employee.getDayOfBirth(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getCareerLevelIndex().computeIfAbsent(employee.getCareerLevel().toString(), useless -> new HashSet<>()).add(employee);
-            employeeTable.getCertiIndex().computeIfAbsent(employee.getCerti().toString(), useless -> new HashSet<>()).add(employee);
+            employeeTable.getEmployeeNumberIndex()
+                    .computeIfAbsent(employee.getEmployeeNumber(), useless -> new HashSet<>())
+                    .add(employee);
+            employeeTable.getNameIndex()
+                    .computeIfAbsent(employee.getName(), useless -> new HashSet<>()).add(employee);
+            employeeTable.getFirstNameIndex()
+                    .computeIfAbsent(employee.getFirstName(), useless -> new HashSet<>())
+                    .add(employee);
+            employeeTable.getLastNameIndex()
+                    .computeIfAbsent(employee.getLastName(), useless -> new HashSet<>())
+                    .add(employee);
+            employeeTable.getPhoneNumberIndex()
+                    .computeIfAbsent(employee.getPhoneNumber(), useless -> new HashSet<>())
+                    .add(employee);
+            employeeTable.getMiddleDigitOfPhoneNumberIndex()
+                    .computeIfAbsent(employee.getMiddleDigitOfPhoneNumber(),
+                            useless -> new HashSet<>()).add(employee);
+            employeeTable.getLast4DigitOfPhoneNumberIndex()
+                    .computeIfAbsent(employee.getLast4DigitOfPhoneNumber(),
+                            useless -> new HashSet<>()).add(employee);
+            employeeTable.getBirthIndex()
+                    .computeIfAbsent(employee.getBirthDay(), useless -> new HashSet<>())
+                    .add(employee);
+            employeeTable.getYearOfBirthIndex()
+                    .computeIfAbsent(employee.getYearOfBirth(), useless -> new HashSet<>())
+                    .add(employee);
+            employeeTable.getMonthOfBirthIndex()
+                    .computeIfAbsent(employee.getMonthOfBirth(), useless -> new HashSet<>())
+                    .add(employee);
+            employeeTable.getDayOfBirthIndex()
+                    .computeIfAbsent(employee.getDayOfBirth(), useless -> new HashSet<>())
+                    .add(employee);
+            employeeTable.getCareerLevelIndex()
+                    .computeIfAbsent(employee.getCareerLevel().toString(),
+                            useless -> new HashSet<>()).add(employee);
+            employeeTable.getCertiIndex()
+                    .computeIfAbsent(employee.getCerti().toString(), useless -> new HashSet<>())
+                    .add(employee);
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
@@ -70,7 +95,8 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
     }
 
     public Set<Employee> searchByEmployeeNumber(Employee employee) {
-        return employeeTable.getEmployeeNumberIndex().getOrDefault(employee.getEmployeeNumber(), new HashSet<>());
+        return employeeTable.getEmployeeNumberIndex()
+                .getOrDefault(employee.getEmployeeNumber(), new HashSet<>());
     }
 
     public Set<Employee> searchByName(Employee employee) {
@@ -78,23 +104,28 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
     }
 
     public Set<Employee> searchByFirstName(Employee employee) {
-        return employeeTable.getFirstNameIndex().getOrDefault(employee.getFirstName(), new HashSet<>());
+        return employeeTable.getFirstNameIndex()
+                .getOrDefault(employee.getFirstName(), new HashSet<>());
     }
 
     public Set<Employee> searchByLastName(Employee employee) {
-        return employeeTable.getLastNameIndex().getOrDefault(employee.getLastName(), new HashSet<>());
+        return employeeTable.getLastNameIndex()
+                .getOrDefault(employee.getLastName(), new HashSet<>());
     }
 
     public Set<Employee> searchByPhoneNumber(Employee employee) {
-        return employeeTable.getPhoneNumberIndex().getOrDefault(employee.getPhoneNumber(), new HashSet<>());
+        return employeeTable.getPhoneNumberIndex()
+                .getOrDefault(employee.getPhoneNumber(), new HashSet<>());
     }
 
     public Set<Employee> searchByMiddleDigitOfPhoneNumber(Employee employee) {
-        return employeeTable.getMiddleDigitOfPhoneNumberIndex().getOrDefault(employee.getMiddleDigitOfPhoneNumber(), new HashSet<>());
+        return employeeTable.getMiddleDigitOfPhoneNumberIndex()
+                .getOrDefault(employee.getMiddleDigitOfPhoneNumber(), new HashSet<>());
     }
 
     public Set<Employee> searchByLast4DigitOfPhoneNumber(Employee employee) {
-        return employeeTable.getLast4DigitOfPhoneNumberIndex().getOrDefault(employee.getLast4DigitOfPhoneNumber(), new HashSet<>());
+        return employeeTable.getLast4DigitOfPhoneNumberIndex()
+                .getOrDefault(employee.getLast4DigitOfPhoneNumber(), new HashSet<>());
     }
 
     public Set<Employee> searchByBirth(Employee employee) {
@@ -102,23 +133,28 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
     }
 
     public Set<Employee> searchByYearOfBirth(Employee employee) {
-        return employeeTable.getYearOfBirthIndex().getOrDefault(employee.getYearOfBirth(), new HashSet<>());
+        return employeeTable.getYearOfBirthIndex()
+                .getOrDefault(employee.getYearOfBirth(), new HashSet<>());
     }
 
     public Set<Employee> searchByMonthOfBirth(Employee employee) {
-        return employeeTable.getMonthOfBirthIndex().getOrDefault(employee.getMonthOfBirth(), new HashSet<>());
+        return employeeTable.getMonthOfBirthIndex()
+                .getOrDefault(employee.getMonthOfBirth(), new HashSet<>());
     }
 
     public Set<Employee> searchByDayOfBirth(Employee employee) {
-        return employeeTable.getDayOfBirthIndex().getOrDefault(employee.getDayOfBirth(), new HashSet<>());
+        return employeeTable.getDayOfBirthIndex()
+                .getOrDefault(employee.getDayOfBirth(), new HashSet<>());
     }
 
     public Set<Employee> searchByCareerLevel(Employee employee) {
-        return employeeTable.getCareerLevelIndex().getOrDefault(employee.getCareerLevel().toString(), new HashSet<>());
+        return employeeTable.getCareerLevelIndex()
+                .getOrDefault(employee.getCareerLevel().toString(), new HashSet<>());
     }
 
     public Set<Employee> searchByCerti(Employee employee) {
-        return employeeTable.getCertiIndex().getOrDefault(employee.getCerti().toString(), new HashSet<>());
+        return employeeTable.getCertiIndex()
+                .getOrDefault(employee.getCerti().toString(), new HashSet<>());
     }
 
     @Override
@@ -161,60 +197,80 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
 
             // value가 비어있는 key 삭제
             for (Employee employeeToDelete : employees) {
-                if ((employeeTable.getEmployeeNumberIndex().get(employeeToDelete.getEmployeeNumber()) != null)
-                        && employeeTable.getEmployeeNumberIndex().get(employeeToDelete.getEmployeeNumber()).isEmpty()) {
+                if ((employeeTable.getEmployeeNumberIndex()
+                        .get(employeeToDelete.getEmployeeNumber()) != null)
+                        && employeeTable.getEmployeeNumberIndex()
+                        .get(employeeToDelete.getEmployeeNumber()).isEmpty()) {
                     employeeTable.getEmployeeNumberIndex()
                             .remove(employeeToDelete.getEmployeeNumber());
                 }
-                if ((employeeTable.getNameIndex().get(employeeToDelete.getName()) != null) && employeeTable.getNameIndex().get(employeeToDelete.getName()).isEmpty()) {
+                if ((employeeTable.getNameIndex().get(employeeToDelete.getName()) != null)
+                        && employeeTable.getNameIndex().get(employeeToDelete.getName()).isEmpty()) {
                     employeeTable.getNameIndex().remove(employeeToDelete.getName());
                 }
-                if ((employeeTable.getFirstNameIndex().get(employeeToDelete.getFirstName()) != null) && employeeTable.getFirstNameIndex().get(employeeToDelete.getFirstName())
+                if ((employeeTable.getFirstNameIndex().get(employeeToDelete.getFirstName()) != null)
+                        && employeeTable.getFirstNameIndex().get(employeeToDelete.getFirstName())
                         .isEmpty()) {
                     employeeTable.getFirstNameIndex().remove(employeeToDelete.getFirstName());
                 }
-                if ((employeeTable.getLastNameIndex().get(employeeToDelete.getLastName()) != null) && employeeTable.getLastNameIndex().get(employeeToDelete.getLastName())
+                if ((employeeTable.getLastNameIndex().get(employeeToDelete.getLastName()) != null)
+                        && employeeTable.getLastNameIndex().get(employeeToDelete.getLastName())
                         .isEmpty()) {
                     employeeTable.getLastNameIndex().remove(employeeToDelete.getLastName());
                 }
-                if ((employeeTable.getPhoneNumberIndex().get(employeeToDelete.getPhoneNumber()) != null) && employeeTable.getPhoneNumberIndex().get(employeeToDelete.getPhoneNumber())
+                if ((employeeTable.getPhoneNumberIndex().get(employeeToDelete.getPhoneNumber())
+                        != null) && employeeTable.getPhoneNumberIndex()
+                        .get(employeeToDelete.getPhoneNumber())
                         .isEmpty()) {
                     employeeTable.getPhoneNumberIndex().remove(employeeToDelete.getPhoneNumber());
                 }
                 if ((employeeTable.getMiddleDigitOfPhoneNumberIndex()
-                        .get(employeeToDelete.getMiddleDigitOfPhoneNumber()) != null) && employeeTable.getMiddleDigitOfPhoneNumberIndex()
+                        .get(employeeToDelete.getMiddleDigitOfPhoneNumber()) != null)
+                        && employeeTable.getMiddleDigitOfPhoneNumberIndex()
                         .get(employeeToDelete.getMiddleDigitOfPhoneNumber()).isEmpty()) {
                     employeeTable.getMiddleDigitOfPhoneNumberIndex()
                             .remove(employeeToDelete.getMiddleDigitOfPhoneNumber());
                 }
                 if ((employeeTable.getLast4DigitOfPhoneNumberIndex()
-                        .get(employeeToDelete.getLast4DigitOfPhoneNumber()) != null) && employeeTable.getLast4DigitOfPhoneNumberIndex()
+                        .get(employeeToDelete.getLast4DigitOfPhoneNumber()) != null)
+                        && employeeTable.getLast4DigitOfPhoneNumberIndex()
                         .get(employeeToDelete.getLast4DigitOfPhoneNumber()).isEmpty()) {
                     employeeTable.getLast4DigitOfPhoneNumberIndex()
                             .remove(employeeToDelete.getLast4DigitOfPhoneNumber());
                 }
-                if ((employeeTable.getBirthIndex().get(employeeToDelete.getBirthDay()) != null) && employeeTable.getBirthIndex().get(employeeToDelete.getBirthDay()).isEmpty()) {
+                if ((employeeTable.getBirthIndex().get(employeeToDelete.getBirthDay()) != null)
+                        && employeeTable.getBirthIndex().get(employeeToDelete.getBirthDay())
+                        .isEmpty()) {
                     employeeTable.getBirthIndex().remove(employeeToDelete.getBirthDay());
                 }
-                if ((employeeTable.getYearOfBirthIndex().get(employeeToDelete.getYearOfBirth()) != null) && employeeTable.getYearOfBirthIndex().get(employeeToDelete.getYearOfBirth())
+                if ((employeeTable.getYearOfBirthIndex().get(employeeToDelete.getYearOfBirth())
+                        != null) && employeeTable.getYearOfBirthIndex()
+                        .get(employeeToDelete.getYearOfBirth())
                         .isEmpty()) {
                     employeeTable.getYearOfBirthIndex().remove(employeeToDelete.getYearOfBirth());
                 }
-                if ((employeeTable.getMonthOfBirthIndex().get(employeeToDelete.getMonthOfBirth()) != null) && employeeTable.getMonthOfBirthIndex().get(employeeToDelete.getMonthOfBirth())
+                if ((employeeTable.getMonthOfBirthIndex().get(employeeToDelete.getMonthOfBirth())
+                        != null) && employeeTable.getMonthOfBirthIndex()
+                        .get(employeeToDelete.getMonthOfBirth())
                         .isEmpty()) {
                     employeeTable.getMonthOfBirthIndex().remove(employeeToDelete.getMonthOfBirth());
                 }
-                if ((employeeTable.getDayOfBirthIndex().get(employeeToDelete.getDayOfBirth()) != null) && employeeTable.getDayOfBirthIndex().get(employeeToDelete.getDayOfBirth())
+                if ((employeeTable.getDayOfBirthIndex().get(employeeToDelete.getDayOfBirth())
+                        != null) && employeeTable.getDayOfBirthIndex()
+                        .get(employeeToDelete.getDayOfBirth())
                         .isEmpty()) {
                     employeeTable.getDayOfBirthIndex().remove(employeeToDelete.getDayOfBirth());
                 }
                 if ((employeeTable.getCareerLevelIndex()
-                        .get(employeeToDelete.getCareerLevel().toString()) != null) && employeeTable.getCareerLevelIndex()
+                        .get(employeeToDelete.getCareerLevel().toString()) != null)
+                        && employeeTable.getCareerLevelIndex()
                         .get(employeeToDelete.getCareerLevel().toString()).isEmpty()) {
                     employeeTable.getCareerLevelIndex()
                             .remove(employeeToDelete.getCareerLevel().toString());
                 }
-                if ((employeeTable.getCertiIndex().get(employeeToDelete.getCerti().toString()) != null) && employeeTable.getCertiIndex().get(employeeToDelete.getCerti().toString())
+                if ((employeeTable.getCertiIndex().get(employeeToDelete.getCerti().toString())
+                        != null) && employeeTable.getCertiIndex()
+                        .get(employeeToDelete.getCerti().toString())
                         .isEmpty()) {
                     employeeTable.getCertiIndex().remove(employeeToDelete.getCerti().toString());
                 }
