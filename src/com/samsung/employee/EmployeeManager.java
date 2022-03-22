@@ -77,28 +77,20 @@ public class EmployeeManager {
 
         for (Command<Set<Employee>> command : commandList) {
             Set<Employee> employees = command.execute();
-
             if (employees != null) {
-                
                 if (employees.size() == 0) {
                     outputLines.add(command.toString() + "," + "NONE");
                 } else if (!command.getCommandOption().getIsPrint()) {
                     outputLines.add(command.toString() + "," + employees.size());
                 } else {
-
                     outputLines.add(employees.stream()
                             .sorted(Comparator.comparing(Employee::getYearFromEmployeeNumber).thenComparing(Employee::getEmployeeNumber))
                             .limit(5)
                             .map(employee -> command.toString() + "," + employee.toString())    // 이 부분 수정 필요
                             .collect(Collectors.joining("\n")));
-
                 }
-
             }
-
         }
-
-        outputLines.forEach(System.out::println); // TODO 디버그용으로 추후 삭제 필요
         fileIOManager.writeOutput(outputFileName, outputLines);
     }
 
