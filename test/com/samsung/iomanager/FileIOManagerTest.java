@@ -12,17 +12,17 @@ class FileIOManagerTest {
     FileIOManager fileIOManager;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         fileIOManager = new FileIOManager();
     }
 
     @AfterEach
-    void tearDown(){
+    void tearDown() {
         fileIOManager = null;
     }
 
     @Test
-    void testReadInput(){
+    void testReadInput() {
 
         // 테스트 데이터 준비: 제공된 sample input file 사용
         String fileName = "input.txt";
@@ -34,10 +34,14 @@ class FileIOManagerTest {
         Assertions.assertNotNull(actualReturn);
         Assertions.assertEquals(actualReturn.size(), 40);
 
-        actualReturn.stream().filter("ADD"::startsWith).forEach(string -> Assertions.assertEquals(10, string.split(",").length));
-        actualReturn.stream().filter("SCH"::startsWith).forEach(string -> Assertions.assertEquals(6, string.split(",").length));
-        actualReturn.stream().filter("DEL"::startsWith).forEach(string -> Assertions.assertEquals(6, string.split(",").length));
-        actualReturn.stream().filter("MOD"::startsWith).forEach(string -> Assertions.assertEquals(8, string.split(",").length));
+        actualReturn.stream().filter("ADD"::startsWith)
+                .forEach(string -> Assertions.assertEquals(10, string.split(",").length));
+        actualReturn.stream().filter("SCH"::startsWith)
+                .forEach(string -> Assertions.assertEquals(6, string.split(",").length));
+        actualReturn.stream().filter("DEL"::startsWith)
+                .forEach(string -> Assertions.assertEquals(6, string.split(",").length));
+        actualReturn.stream().filter("MOD"::startsWith)
+                .forEach(string -> Assertions.assertEquals(8, string.split(",").length));
 
     }
 
@@ -61,8 +65,9 @@ class FileIOManagerTest {
         BufferedReader br = new BufferedReader(new FileReader(fileName));
 
         String str;
-        while((str = br.readLine()) != null)
+        while ((str = br.readLine()) != null) {
             actualReturn.add(str);
+        }
         br.close();
 
         Assertions.assertIterableEquals(testData, actualReturn);

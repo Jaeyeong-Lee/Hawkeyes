@@ -8,10 +8,11 @@ import java.util.concurrent.*;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 class EmployeeTableTest {
+
     private static EmployeeTable originEmployeeTable;
 
     @BeforeAll
-    static void singletonInsertion(){
+    static void singletonInsertion() {
         originEmployeeTable = EmployeeTable.getInstance();
     }
 
@@ -24,7 +25,7 @@ class EmployeeTableTest {
     @RepeatedTest(10)
     void asyncSingleton() throws ExecutionException, InterruptedException {
         ExecutorService executor = Executors.newFixedThreadPool(10);
-        for (int i=0;i<1000;i++){
+        for (int i = 0; i < 1000; i++) {
             Callable<EmployeeTable> callable = new AsyncEmployeeTable();
             Future<EmployeeTable> recallEmployeeTable = executor.submit(callable);
             assertSame(originEmployeeTable, recallEmployeeTable.get());
@@ -33,6 +34,7 @@ class EmployeeTableTest {
     }
 
     public class AsyncEmployeeTable implements Callable<EmployeeTable> {
+
         @Override
         public EmployeeTable call() {
             return EmployeeTable.getInstance();
