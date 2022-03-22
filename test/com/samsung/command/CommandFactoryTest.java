@@ -1,5 +1,6 @@
 package com.samsung.command;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,11 +20,17 @@ class CommandFactoryTest {
     @Test
     void 비정상입력_예외_여부() {
 
-        System.out.println("Null / Empty String 입력 시, 예외 확인");
+        System.out.println("Null / Empty String 입력 시, Command 형식의 클래스를 리턴하며 내부 execute() 수행시 null 이 리턴되어야 함");
 
-        assertThrows(Exception.class, () -> commandFactory.getCommand(""));
-        assertThrows(Exception.class, () -> commandFactory.getCommand(null));
+        assertAll(
+                () -> assertTrue(commandFactory.getCommand("") instanceof Command),
+                () -> assertTrue(commandFactory.getCommand(null) instanceof Command)
+        );
 
+        assertAll(
+                () -> assertNull(commandFactory.getCommand("").execute()),
+                () -> assertNull(commandFactory.getCommand(null).execute())
+        );
     }
 
     @Test
