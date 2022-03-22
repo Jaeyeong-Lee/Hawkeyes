@@ -38,3 +38,7 @@ MOD,-p, , ,phoneNum,010-8900-1478,certi,PRO
 SCH, ,-f, ,name,LDEXRI
 MOD, , , ,name,VCUHLE HMU,birthday,19910808
 SCH, , , ,name,FB NTAWR
+SCH,-p, , ,certi,PRO
+MOD, , , ,certi,PRO,certi,ADV
+SCH,-p, , ,certi,PRO
+SCH,-p, , ,certi,ADV
