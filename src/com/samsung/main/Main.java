@@ -31,7 +31,6 @@ public class Main {
             return false;
         }
 
-        // TODO: Secure Coding 기반 directory check 계속 /
         return true;
     }
 }

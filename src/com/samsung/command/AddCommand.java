@@ -1,7 +1,9 @@
 package com.samsung.command;
 
+import com.samsung.constants.ConstCommand;
 import com.samsung.employee.Employee;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class AddCommand<T> extends Command<Set<Employee>> {
@@ -18,11 +20,11 @@ public class AddCommand<T> extends Command<Set<Employee>> {
     @Override
     public Set<Employee> execute() {
         employeeDAO.add(new Employee(commandLine.split(",")));
-        return null; //TODO Null return 좋은 방법 확인
+        return new HashSet<>();
     }
 
     @Override
     public String toString() {
-        return "ADD";
+        return ConstCommand.add;
     }
 }

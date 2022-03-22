@@ -2,6 +2,8 @@ package com.samsung.database;
 
 import com.samsung.constants.CareerLevel;
 import com.samsung.constants.Certi;
+import com.samsung.constants.ConstCommand;
+import com.samsung.constants.ConstEmployee;
 import com.samsung.employee.Employee;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -331,7 +333,7 @@ class EmployeeDAOTest {
 
         for (Employee employee : employeeDAO.search(searchCondition)) {
             System.out.println(employee.toString());
-            assertEquals(employee.getName().split(" ")[1], "TEST");
+            assertEquals(employee.getName().split(ConstEmployee.whiteSpaceDelimiter)[1], "TEST");
             assertEquals(employee.getLastName(), "TEST");
             assertEquals(employee.getEmployeeNumber(), "20384845");
         }

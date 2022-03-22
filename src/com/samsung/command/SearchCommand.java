@@ -1,5 +1,6 @@
 package com.samsung.command;
 
+import com.samsung.constants.ConstCommand;
 import com.samsung.employee.Employee;
 import com.samsung.option.CommandOption;
 
@@ -21,6 +22,6 @@ public class SearchCommand<T> extends Command<Set<Employee>> {
 
     @Override
     public String toString() {
-        return "SCH";
+        return ConstCommand.search;
     }
 }
