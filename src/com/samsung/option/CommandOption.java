@@ -20,7 +20,7 @@ public class CommandOption {
     }
 
     public CommandOption(SearchOption searchOption, SearchOption modifyOption, String code,
-            boolean isPrint) {
+        boolean isPrint) {
         this.searchOption = searchOption;
         this.modifyOption = modifyOption;
         this.code = code;
@@ -47,17 +47,20 @@ public class CommandOption {
         String code = getCode();
 
         if (code == null || code.isEmpty()) {
-            return setEmployeeColumnAndValueWithoutCode(getSearchOption().getColumn(), getSearchOption().getCondition());
+            return setEmployeeColumnAndValueWithoutCode(getSearchOption().getColumn(),
+                getSearchOption().getCondition());
         } else {
-            return setEmployeeColumnAndValueWithCode(getSearchOption().getColumn(), getSearchOption().getCondition(), code);
+            return setEmployeeColumnAndValueWithCode(getSearchOption().getColumn(),
+                getSearchOption().getCondition(), code);
         }
     }
 
     public Employee convertModifyOptionToEmployee() {
-        return setEmployeeColumnAndValueWithoutCode(getModifyOption().getColumn(), getModifyOption().getCondition());
+        return setEmployeeColumnAndValueWithoutCode(getModifyOption().getColumn(),
+            getModifyOption().getCondition());
     }
 
-    private Employee setEmployeeColumnAndValueWithoutCode(String column, String value){
+    private Employee setEmployeeColumnAndValueWithoutCode(String column, String value) {
         Employee retEmployee = new Employee();
 
         switch (column) {
@@ -84,7 +87,7 @@ public class CommandOption {
         return retEmployee;
     }
 
-    private Employee setEmployeeColumnAndValueWithCode(String column, String value, String code){
+    private Employee setEmployeeColumnAndValueWithCode(String column, String value, String code) {
         Employee retEmployee = new Employee();
 
         switch (code) {

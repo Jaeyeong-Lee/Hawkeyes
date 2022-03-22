@@ -2,11 +2,13 @@ package com.samsung.command;
 
 import com.samsung.constants.ConstCommand;
 import com.samsung.constants.ConstEmployee;
+import com.samsung.employee.Employee;
 import com.samsung.option.CommandOption;
 import com.samsung.option.SearchOption;
+import java.util.Set;
 
 
-public class CommandFactory<T> {
+public class CommandFactory {
 
     public Command getCommand(String line) {
         try {
@@ -32,29 +34,27 @@ public class CommandFactory<T> {
 
             switch (commandToken[0]) {
 
-                case "ADD":
-                    return new AddCommand<T>(line);
-                case "SCH":
-                    return new SearchCommand<T>(
+                case ConstCommand.add:
+                    return new AddCommand(line);
+                case ConstCommand.search:
+                    return new SearchCommand(
                             new CommandOption(searchOption, optionCode, isPrint));
-                case "MOD":
-                    return new ModifyCommand<T>(
+                case ConstCommand.modify:
+                    return new ModifyCommand(
                             new CommandOption(searchOption, modifyOption, optionCode, isPrint));
-                case "DEL":
-                    return new DeleteCommand<T>(
+                case ConstCommand.delete:
+                    return new DeleteCommand(
                             new CommandOption(searchOption, optionCode, isPrint));
-
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-        return new Command<T>() {
+        return new Command<Set<Employee>>() {
             @Override
-            public T execute() {
+            public Set<Employee> execute() {
                 return null;
             }
         };
     }
-
 }

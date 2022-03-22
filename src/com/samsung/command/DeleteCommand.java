@@ -6,7 +6,7 @@ import com.samsung.option.CommandOption;
 
 import java.util.Set;
 
-public class DeleteCommand<T> extends Command<Set<Employee>> {
+public class DeleteCommand extends Command<Set<Employee>> {
 
     public DeleteCommand() {
     }
