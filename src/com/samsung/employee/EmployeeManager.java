@@ -12,6 +12,50 @@ import java.util.stream.Collectors;
 
 public class EmployeeManager {
 
+    public void process(String inputFileName, String outputFileName) {
+        FileIOManager fileIOManager = new FileIOManager();
+
+        List<String> inputLines = fileIOManager.readInput(inputFileName);
+        List<String> outputLines = new ArrayList<>();
+        List<Command> commandList = new ArrayList<>();
+
+        CommandFactory factory = new CommandFactory();
+
+        for (String line : inputLines) {
+            commandList.add(factory.getCommand(line));
+        }
+
+        for (Command<Set<Employee>> command : commandList) {
+            outputLines.add(getOutputLineByCommand(command));
+        }
+        fileIOManager.writeOutput(outputFileName, outputLines);
+    }
+
+    private String getOutputLineByCommand(Command<Set<Employee>> command) {
+
+        Set<Employee> employees = command.execute();
+        
+        if (employees == null) {
+            return "";
+        }
+
+        if (employees.size() == 0) {
+            return command + "," + "NONE";
+        }
+
+        if (!command.getCommandOption().getIsPrint()) {
+            return command + "," + employees.size();
+        }
+
+        return employees.stream()
+                .sorted(Comparator.comparing(Employee::getYearFromEmployeeNumber)
+                        .thenComparing(Employee::getEmployeeNumber))
+                .limit(5)
+                .map(employee -> command + "," + employee.toString())
+                .collect(Collectors.joining("\n"));
+
+    }
+
     public Employee overWrite(Employee asIsEmployee, Employee toBeEmployee) {
         Employee employee = new Employee();
 
@@ -86,36 +130,4 @@ public class EmployeeManager {
         return employee;
     }
 
-    public void process(String inputFileName, String outputFileName) {
-        FileIOManager fileIOManager = new FileIOManager();
-
-        List<String> inputLines = fileIOManager.readInput(inputFileName);
-        List<String> outputLines = new ArrayList<>();
-        List<Command> commandList = new ArrayList<>();
-
-        CommandFactory factory = new CommandFactory();
-
-        for (String line : inputLines) {
-            commandList.add(factory.getCommand(line));
-        }
-
-        for (Command<Set<Employee>> command : commandList) {
-            Set<Employee> employees = command.execute();
-            if (employees != null) {
-                if (employees.size() == 0) {
-                    outputLines.add(command + "," + "NONE");
-                } else if (!command.getCommandOption().getIsPrint()) {
-                    outputLines.add(command + "," + employees.size());
-                } else {
-                    outputLines.add(employees.stream()
-                            .sorted(Comparator.comparing(Employee::getYearFromEmployeeNumber)
-                                    .thenComparing(Employee::getEmployeeNumber))
-                            .limit(5)
-                            .map(employee -> command + "," + employee.toString())    // 이 부분 수정 필요
-                            .collect(Collectors.joining("\n")));
-                }
-            }
-        }
-        fileIOManager.writeOutput(outputFileName, outputLines);
-    }
 }
