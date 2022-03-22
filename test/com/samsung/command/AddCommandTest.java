@@ -4,16 +4,11 @@ import com.samsung.constants.CareerLevel;
 import com.samsung.constants.Certi;
 import com.samsung.database.table.EmployeeTable;
 import com.samsung.employee.Employee;
-import com.samsung.option.CommandOption;
-import com.samsung.option.SearchOption;
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;
-import org.mockito.internal.util.reflection.Whitebox;
-
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,7 +35,10 @@ class AddCommandTest {
 
     @AfterEach
     void teardown(){
+        addCommand.employeeDAO.deleteAll();
         addCommand = null;
+        fakeEmployeeSet = null;
+        testEmployeeTable = null;
     }
 
     @Test
@@ -50,7 +48,7 @@ class AddCommandTest {
 
         Set<Employee> addResult = addCommand.execute();
 
-        assertNull(addCommand.execute());
+        assertNull(addResult);
 
     }
 
