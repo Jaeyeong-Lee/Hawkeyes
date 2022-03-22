@@ -11,34 +11,30 @@ import java.util.stream.Collectors;
 
 public class EmployeeManager {
 
+    List<String> inputLines = new ArrayList<>();
+    List<String> outputLines = new ArrayList<>();
+    List<Command> commandList = new ArrayList<>();
+
     public void process(String inputFileName, String outputFileName) {
         FileIOManager fileIOManager = new FileIOManager();
 
-        List<String> inputLines = fileIOManager.readInput(inputFileName);
+        inputLines = fileIOManager.readInput(inputFileName);
 
-        List<Command> commandList = getCommandObjectList(inputLines);
+        makeCommandObjectList();
 
-        List<String> outputLines = getOutputLines(commandList);
+        makeOutputLines();
 
         fileIOManager.writeOutput(outputFileName, outputLines);
     }
 
-    private List<Command> getCommandObjectList(List<String> inputLines) {
-
-        // TODO : factory 매번 생성보다 한 번 생성해 두는 게 좋을 것 같아 코드 남겨 둠 (주석 추후 삭제)
-        // 또는 다른 디자인패턴을 활용하여 가능할 수 있지 않을까 검
+    private void makeCommandObjectList() {
         CommandFactory factory = new CommandFactory();
-
-        return inputLines.stream().map(line -> factory.getCommand(line)).collect(Collectors.toList());
-
-        // TODO: 아래 처럼 활용하려면 getCommand Method가 static이어야 함
-        // return inputLines.stream().map(CommandFactory::getCommand).collect(Collectors.toList());
+        commandList = inputLines.stream().map(line -> factory.getCommand(line))
+                .collect(Collectors.toList());
     }
 
-    private List<String> getOutputLines(List<Command> commandList) {
-        List<String> outputLines = new ArrayList<>();
+    private void makeOutputLines() {
         commandList.stream().map(this::getOutputLineByCommand).forEach((command) -> outputLines.add(command.toString()));
-        return outputLines;
     }
 
     private String getOutputLineByCommand(Command<Set<Employee>> command) {
