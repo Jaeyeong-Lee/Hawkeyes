@@ -100,34 +100,4 @@ public class EmployeeManager {
         fileIOManager.writeOutput(outputFileName, outputLines);
     }
 
-    // TODO: 아래 코드는 TC없이 Refactoring 시도하다 구현하지 못한 코드 입니다. 추후 Refactoring시 참고 위해 남겨둡니다.
-    private ArrayList<String> getOutputLine(Command<Set<Employee>> command, Set<Employee> employees) {
-
-        // TODO: 특수한 사례
-        if (employees == null) {
-            return new ArrayList<>();
-        }
-
-        if (!command.getCommandOption().getIsPrint()) {
-            // return new ArrayList<>().add(command.getCommandString() + "," + ((employees.size()==0)? "NONE" : employees.size()));
-        }
-
-        // return getPrintLines(command.getCommandString(), employees);
-        return null;
-    }
-
-    private String getPrintLines(String commandString, Set<Employee> employees) {
-
-        employees.stream()
-                .sorted(Comparator.comparing(Employee::getEmployeeNumber))
-                .limit(5)
-                .collect(Collectors.toList());
-
-        StringBuilder printLines = new StringBuilder();
-
-        for (Employee employee : employees) {
-            printLines.append(commandString + "," + employee.toString() + "\n");
-        }
-        return printLines.toString();
-    }
 }
