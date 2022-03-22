@@ -1,68 +1,35 @@
 package com.samsung.command;
 
+import com.samsung.constants.CareerLevel;
+import com.samsung.constants.Certi;
 import com.samsung.database.table.EmployeeTable;
 import com.samsung.employee.Employee;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class MockingUtility {
 
     public void mockAllIndexingTables(List<Employee> fakeEmployeeList,
             EmployeeTable testEmployeeTable) {
+
         for (Employee employee : fakeEmployeeList) {
-            Set<Employee> employeeNumberIndexingTable = testEmployeeTable.getEmployeeNumberIndex()
-                    .computeIfAbsent(employee.getEmployeeNumber(), t -> new HashSet<>());
-            employeeNumberIndexingTable.add(employee);
-
-            Set<Employee> employeeNameIndexingTable = testEmployeeTable.getNameIndex()
-                    .computeIfAbsent(employee.getName(), t -> new HashSet<>());
-            employeeNameIndexingTable.add(employee);
-
-            Set<Employee> employeeFirstNameIndexingTable = testEmployeeTable.getFirstNameIndex()
-                    .computeIfAbsent(employee.getFirstName(), t -> new HashSet<>());
-            employeeFirstNameIndexingTable.add(employee);
-
-            Set<Employee> employeeLastNameIndexingTable = testEmployeeTable.getLastNameIndex()
-                    .computeIfAbsent(employee.getLastName(), t -> new HashSet<>());
-            employeeLastNameIndexingTable.add(employee);
-
-            Set<Employee> employeePhoneNumberIndexingTable = testEmployeeTable.getPhoneNumberIndex()
-                    .computeIfAbsent(employee.getPhoneNumber(), t -> new HashSet<>());
-            employeePhoneNumberIndexingTable.add(employee);
-
-            Set<Employee> employeeMiddleDigitOfPhoneNumberIndexingTable = testEmployeeTable.getMiddleDigitOfPhoneNumberIndex()
-                    .computeIfAbsent(employee.getMiddleDigitOfPhoneNumber(), t -> new HashSet<>());
-            employeeMiddleDigitOfPhoneNumberIndexingTable.add(employee);
-
-            Set<Employee> employeeLastDigitOfPhoneNumberIndexingTable = testEmployeeTable.getLast4DigitOfPhoneNumberIndex()
-                    .computeIfAbsent(employee.getLast4DigitOfPhoneNumber(), t -> new HashSet<>());
-            employeeLastDigitOfPhoneNumberIndexingTable.add(employee);
-
-            Set<Employee> employeeBirthIndexingTable = testEmployeeTable.getBirthIndex()
-                    .computeIfAbsent(employee.getBirthDay(), t -> new HashSet<>());
-            employeeBirthIndexingTable.add(employee);
-
-            Set<Employee> employeeYearOfBirthIndexingTable = testEmployeeTable.getYearOfBirthIndex()
-                    .computeIfAbsent(employee.getYearOfBirth(), t -> new HashSet<>());
-            employeeYearOfBirthIndexingTable.add(employee);
-
-            Set<Employee> employeeMonthOfBirthIndexingTable = testEmployeeTable.getMonthOfBirthIndex()
-                    .computeIfAbsent(employee.getMonthOfBirth(), t -> new HashSet<>());
-            employeeMonthOfBirthIndexingTable.add(employee);
-
-            Set<Employee> employeeDayOfBirthIndexingTable = testEmployeeTable.getDayOfBirthIndex()
-                    .computeIfAbsent(employee.getDayOfBirth(), t -> new HashSet<>());
-            employeeDayOfBirthIndexingTable.add(employee);
-
-            Set<Employee> employeeCareerLevelIndexingTable = testEmployeeTable.getCareerLevelIndex()
-                    .computeIfAbsent(employee.getCareerLevel().toString(), t -> new HashSet<>());
-            employeeCareerLevelIndexingTable.add(employee);
-
-            Set<Employee> employeeCertiIndexingTable = testEmployeeTable.getCertiIndex()
-                    .computeIfAbsent(employee.getCerti().toString(), t -> new HashSet<>());
-            employeeCertiIndexingTable.add(employee);
+            addIndex(testEmployeeTable.getEmployeeNumberIndex(), employee.getEmployeeNumber(), employee);
+            addIndex(testEmployeeTable.getNameIndex(), employee.getName(), employee);
+            addIndex(testEmployeeTable.getFirstNameIndex(), employee.getFirstName(), employee);
+            addIndex(testEmployeeTable.getLastNameIndex(), employee.getLastName(), employee);
+            addIndex(testEmployeeTable.getPhoneNumberIndex(), employee.getPhoneNumber(), employee);
+            addIndex(testEmployeeTable.getMiddleDigitOfPhoneNumberIndex(), employee.getMiddleDigitOfPhoneNumber(), employee);
+            addIndex(testEmployeeTable.getLast4DigitOfPhoneNumberIndex(), employee.getLast4DigitOfPhoneNumber(), employee);
+            addIndex(testEmployeeTable.getBirthIndex(), employee.getBirthDay(), employee);
+            addIndex(testEmployeeTable.getYearOfBirthIndex(), employee.getYearOfBirth(), employee);
+            addIndex(testEmployeeTable.getMonthOfBirthIndex(), employee.getMonthOfBirth(), employee);
+            addIndex(testEmployeeTable.getDayOfBirthIndex(), employee.getDayOfBirth(), employee);
+            addIndex(testEmployeeTable.getCareerLevelIndex(), CareerLevel.nullSaferToString(employee.getCareerLevel()), employee);
+            addIndex(testEmployeeTable.getCertiIndex(), Certi.nullSaferToString(employee.getCerti()), employee);
         }
+    }
+
+    private void addIndex(Map<String, Set<Employee>> index, String indexCondition, Employee employeeToAdd) {
+        index.computeIfAbsent(indexCondition, useless -> new HashSet<>()).add(employeeToAdd);
     }
 }
