@@ -27,8 +27,8 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
             addIndex(employeeTable.getYearOfBirthIndex(), employee.getYearOfBirth(), employee);
             addIndex(employeeTable.getMonthOfBirthIndex(), employee.getMonthOfBirth(), employee);
             addIndex(employeeTable.getDayOfBirthIndex(), employee.getDayOfBirth(), employee);
-            addIndex(employeeTable.getCareerLevelIndex(), employee.getCareerLevel().toString(), employee);
-            addIndex(employeeTable.getCertiIndex(), employee.getCerti().toString(), employee);
+            addIndex(employeeTable.getCareerLevelIndex(), CareerLevel.nullSaferToString(employee.getCareerLevel()), employee);
+            addIndex(employeeTable.getCertiIndex(), Certi.nullSaferToString(employee.getCerti()), employee);
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
@@ -149,8 +149,8 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
                 modifyIndex(employeeTable.getYearOfBirthIndex(), asIs.getYearOfBirth(), toBe.getYearOfBirth(), asIs, toBe);
                 modifyIndex(employeeTable.getMonthOfBirthIndex(), asIs.getMonthOfBirth(), toBe.getMonthOfBirth(), asIs, toBe);
                 modifyIndex(employeeTable.getDayOfBirthIndex(), asIs.getDayOfBirth(), toBe.getDayOfBirth(), asIs, toBe);
-                modifyIndex(employeeTable.getCareerLevelIndex(), asIs.getCareerLevel().toString(), toBe.getCareerLevel().toString(), asIs, toBe);
-                modifyIndex(employeeTable.getCertiIndex(), asIs.getCerti().toString(), toBe.getCerti().toString(), asIs, toBe);
+                modifyIndex(employeeTable.getCareerLevelIndex(), CareerLevel.nullSaferToString(asIs.getCareerLevel()), CareerLevel.nullSaferToString(toBe.getCareerLevel()), asIs, toBe);
+                modifyIndex(employeeTable.getCertiIndex(), Certi.nullSaferToString(asIs.getCerti()), Certi.nullSaferToString(toBe.getCerti()), asIs, toBe);
             }
         } catch (Exception e) {
             e.printStackTrace();
