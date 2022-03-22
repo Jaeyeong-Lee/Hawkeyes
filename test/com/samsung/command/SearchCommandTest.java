@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.internal.util.reflection.Whitebox;
 
 import java.util.*;
@@ -20,7 +19,7 @@ import java.util.stream.Collectors;
 class SearchCommandTest {
 
     Command<Set<Employee>> searchCommand;
-    Set<Employee> fakeEmployeeSet;
+    List<Employee> fakeEmployeeList;
 
     @Mock
     private EmployeeTable testEmployeeTable;
@@ -30,18 +29,19 @@ class SearchCommandTest {
         searchCommand = new SearchCommand();
 
         //employeeTable 세팅
-        fakeEmployeeSet = new HashSet<Employee>();
-        fakeEmployeeSet.add(new Employee("15123099", "VXIHXOTH JHOP", CareerLevel.CL2, "010-3112-2609", "19771211", Certi.ADV));
-        fakeEmployeeSet.add(new Employee("17112609", "FB NTAWR", CareerLevel.CL4, "010-5645-6122", "19861203", Certi.PRO));
-        fakeEmployeeSet.add(new Employee("18115040", "TTETHU HBO", CareerLevel.CL3, "010-5645-2050", "20080718", Certi.ADV));
+        fakeEmployeeList = new ArrayList<Employee>();
+        fakeEmployeeList.add(new Employee("15123099", "VXIHXOTH JHOP", CareerLevel.CL2, "010-3112-2609", "19771211", Certi.ADV));
+        fakeEmployeeList.add(new Employee("17112609", "FB NTAWR", CareerLevel.CL4, "010-5645-6122", "19861203", Certi.PRO));
+        fakeEmployeeList.add(new Employee("18115040", "TTETHU HBO", CareerLevel.CL3, "010-5645-2050", "20080718", Certi.ADV));
 
         testEmployeeTable = EmployeeTable.getInstance();
     }
 
     @AfterEach
     void tearDown() {
+        searchCommand.employeeDAO.deleteAll();
         searchCommand = null;
-        fakeEmployeeSet = null;
+        fakeEmployeeList = null;
         testEmployeeTable = null;
     }
 
@@ -53,14 +53,11 @@ class SearchCommandTest {
         searchCommand.commandOption = testCommandOption;
 
         // mock setup
-        for(Employee employee: fakeEmployeeSet) {
-            Set<Employee> searchByEmployeeNumber = testEmployeeTable.getEmployeeNumberIndex().computeIfAbsent(employee.getEmployeeNumber(), t -> new HashSet<>());
-            searchByEmployeeNumber.add(employee);
-        }
+        new MockingUtility().mockAllIndexingTables(fakeEmployeeList, testEmployeeTable);
         Whitebox.setInternalState(searchCommand.employeeDAO, "employeeTable", testEmployeeTable);
 
         Set<Employee> actualReturn = searchCommand.execute();
-        Set<Employee> expectedReturn = fakeEmployeeSet.stream().filter(e-> e.getEmployeeNumber().equals(testSearchOption.getCondition())).collect(Collectors.toSet());
+        Set<Employee> expectedReturn = fakeEmployeeList.stream().filter(e-> e.getEmployeeNumber().equals(testSearchOption.getCondition())).collect(Collectors.toSet());
 
         // assertion
         Assertions.assertTrue(actualReturn.size() == 1);        // 사번은 고유함
@@ -88,14 +85,11 @@ class SearchCommandTest {
         searchCommand.commandOption = testCommandOption;
 
         // mock setup
-        for(Employee employee: fakeEmployeeSet) {
-            Set<Employee> searchByMiddleDigitOfPhoneNumber = testEmployeeTable.getMiddleDigitOfPhoneNumberIndex().computeIfAbsent(employee.getMiddleDigitOfPhoneNumber(), t -> new HashSet<>());
-            searchByMiddleDigitOfPhoneNumber.add(employee);
-        }
+        new MockingUtility().mockAllIndexingTables(fakeEmployeeList, testEmployeeTable);
         Whitebox.setInternalState(searchCommand.employeeDAO, "employeeTable", testEmployeeTable);
 
         Set<Employee> actualReturn = searchCommand.execute();
-        Set<Employee> expectedReturn = fakeEmployeeSet.stream().filter(e-> e.getMiddleDigitOfPhoneNumber().equals(testSearchOption.getCondition())).collect(Collectors.toSet());
+        Set<Employee> expectedReturn = fakeEmployeeList.stream().filter(e-> e.getMiddleDigitOfPhoneNumber().equals(testSearchOption.getCondition())).collect(Collectors.toSet());
 
         // assertion
         Assertions.assertTrue(actualReturn.size() == 2);
