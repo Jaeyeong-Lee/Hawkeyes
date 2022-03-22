@@ -44,88 +44,30 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
     public Set<Employee> search(Employee employee) {
         Set<Employee> result = new HashSet<>();
         try {
-            Optional.ofNullable(employee.getEmployeeNumber())
-                    .ifPresent(useless -> result.addAll(searchByEmployeeNumber(employee)));
-            Optional.ofNullable(employee.getName())
-                    .ifPresent(useless -> result.addAll(searchByName(employee)));
-            Optional.ofNullable(employee.getFirstName())
-                    .ifPresent(useless -> result.addAll(searchByFirstName(employee)));
-            Optional.ofNullable(employee.getLastName())
-                    .ifPresent(useless -> result.addAll(searchByLastName(employee)));
-            Optional.ofNullable(employee.getPhoneNumber())
-                    .ifPresent(useless -> result.addAll(searchByPhoneNumber(employee)));
-            Optional.ofNullable(employee.getMiddleDigitOfPhoneNumber()).ifPresent(
-                    useless -> result.addAll(searchByMiddleDigitOfPhoneNumber(employee)));
-            Optional.ofNullable(employee.getLast4DigitOfPhoneNumber())
-                    .ifPresent(useless -> result.addAll(searchByLast4DigitOfPhoneNumber(employee)));
-            Optional.ofNullable(employee.getBirthDay())
-                    .ifPresent(useless -> result.addAll(searchByBirth(employee)));
-            Optional.ofNullable(employee.getYearOfBirth())
-                    .ifPresent(useless -> result.addAll(searchByYearOfBirth(employee)));
-            Optional.ofNullable(employee.getMonthOfBirth())
-                    .ifPresent(useless -> result.addAll(searchByMonthOfBirth(employee)));
-            Optional.ofNullable(employee.getDayOfBirth())
-                    .ifPresent(useless -> result.addAll(searchByDayOfBirth(employee)));
-            Optional.ofNullable(employee.getCareerLevel())
-                    .ifPresent(useless -> result.addAll(searchByCareerLevel(employee)));
-            Optional.ofNullable(employee.getCerti())
-                    .ifPresent(useless -> result.addAll(searchByCerti(employee)));
+            result.addAll(searchByIndex(employeeTable.getEmployeeNumberIndex(), employee.getEmployeeNumber()));
+            result.addAll(searchByIndex(employeeTable.getNameIndex(), employee.getName()));
+            result.addAll(searchByIndex(employeeTable.getFirstNameIndex(), employee.getFirstName()));
+            result.addAll(searchByIndex(employeeTable.getLastNameIndex(), employee.getLastName()));
+            result.addAll(searchByIndex(employeeTable.getPhoneNumberIndex(), employee.getPhoneNumber()));
+            result.addAll(searchByIndex(employeeTable.getMiddleDigitOfPhoneNumberIndex(), employee.getMiddleDigitOfPhoneNumber()));
+            result.addAll(searchByIndex(employeeTable.getLast4DigitOfPhoneNumberIndex(), employee.getLast4DigitOfPhoneNumber()));
+            result.addAll(searchByIndex(employeeTable.getBirthIndex(), employee.getBirthDay()));
+            result.addAll(searchByIndex(employeeTable.getYearOfBirthIndex(), employee.getYearOfBirth()));
+            result.addAll(searchByIndex(employeeTable.getMonthOfBirthIndex(), employee.getMonthOfBirth()));
+            result.addAll(searchByIndex(employeeTable.getDayOfBirthIndex(), employee.getDayOfBirth()));
+            result.addAll(searchByIndex(employeeTable.getCareerLevelIndex(), CareerLevel.nullSaferToString(employee.getCareerLevel())));
+            result.addAll(searchByIndex(employeeTable.getCertiIndex(), Certi.nullSaferToString(employee.getCerti())));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
     }
 
-    public Set<Employee> searchByEmployeeNumber(Employee employee) {
-        return employeeTable.getEmployeeNumberIndex().getOrDefault(employee.getEmployeeNumber(), new HashSet<>());
-    }
-
-    public Set<Employee> searchByName(Employee employee) {
-        return employeeTable.getNameIndex().getOrDefault(employee.getName(), new HashSet<>());
-    }
-
-    public Set<Employee> searchByFirstName(Employee employee) {
-        return employeeTable.getFirstNameIndex().getOrDefault(employee.getFirstName(), new HashSet<>());
-    }
-
-    public Set<Employee> searchByLastName(Employee employee) {
-        return employeeTable.getLastNameIndex().getOrDefault(employee.getLastName(), new HashSet<>());
-    }
-
-    public Set<Employee> searchByPhoneNumber(Employee employee) {
-        return employeeTable.getPhoneNumberIndex().getOrDefault(employee.getPhoneNumber(), new HashSet<>());
-    }
-
-    public Set<Employee> searchByMiddleDigitOfPhoneNumber(Employee employee) {
-        return employeeTable.getMiddleDigitOfPhoneNumberIndex().getOrDefault(employee.getMiddleDigitOfPhoneNumber(), new HashSet<>());
-    }
-
-    public Set<Employee> searchByLast4DigitOfPhoneNumber(Employee employee) {
-        return employeeTable.getLast4DigitOfPhoneNumberIndex().getOrDefault(employee.getLast4DigitOfPhoneNumber(), new HashSet<>());
-    }
-
-    public Set<Employee> searchByBirth(Employee employee) {
-        return employeeTable.getBirthIndex().getOrDefault(employee.getBirthDay(), new HashSet<>());
-    }
-
-    public Set<Employee> searchByYearOfBirth(Employee employee) {
-        return employeeTable.getYearOfBirthIndex().getOrDefault(employee.getYearOfBirth(), new HashSet<>());
-    }
-
-    public Set<Employee> searchByMonthOfBirth(Employee employee) {
-        return employeeTable.getMonthOfBirthIndex().getOrDefault(employee.getMonthOfBirth(), new HashSet<>());
-    }
-
-    public Set<Employee> searchByDayOfBirth(Employee employee) {
-        return employeeTable.getDayOfBirthIndex().getOrDefault(employee.getDayOfBirth(), new HashSet<>());
-    }
-
-    public Set<Employee> searchByCareerLevel(Employee employee) {
-        return employeeTable.getCareerLevelIndex().getOrDefault(employee.getCareerLevel().toString(), new HashSet<>());
-    }
-
-    public Set<Employee> searchByCerti(Employee employee) {
-        return employeeTable.getCertiIndex().getOrDefault(employee.getCerti().toString(), new HashSet<>());
+    private Set<Employee> searchByIndex(Map<String, Set<Employee>> index, String indexCondition) {
+        if (indexCondition != null) {
+            return index.getOrDefault(indexCondition, new HashSet<>());
+        }
+        return new HashSet<>();
     }
 
     @Override
@@ -219,15 +161,13 @@ public class EmployeeDAO extends PersistentDAO<Employee> {
     private void modifyIndex(Map<String, Set<Employee>> index, String asIsIndexCondition, String toBeIndexCondition, Employee asIs, Employee toBe) {
         if (index.containsKey(asIsIndexCondition)) {
             Set<Employee> modifiedMap = index.get(asIsIndexCondition);
-            if (modifiedMap.contains(asIs)) {
-                modifiedMap.remove(asIs);
-            }
+            modifiedMap.remove(asIs);
 
             if (asIs.getEmployeeNumber().equals(toBeIndexCondition)) {
-                modifiedMap.add(toBe); // key가 변하지 않을 경우
+                modifiedMap.add(toBe); // key 가 변하지 않을 경우
             } else {
                 index.computeIfAbsent(toBeIndexCondition,
-                        useless -> new HashSet<>()).add(toBe);// key가 변할 경우
+                        useless -> new HashSet<>()).add(toBe);// key 가 변할 경우
             }
 
             if (modifiedMap.size() == 0) {
