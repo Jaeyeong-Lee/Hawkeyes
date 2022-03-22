@@ -12,8 +12,7 @@ public class Main {
             return;
         }
 
-        EmployeeManager manager = new EmployeeManager();
-        manager.process(args[0], args[1]);
+        new EmployeeManager().process(args[0], args[1]);
     }
 
     static boolean isValidFile(String arg) {

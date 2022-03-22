@@ -1,6 +1,10 @@
 package com.samsung.iomanager;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +31,15 @@ public class FileIOManager implements IOManager<String> {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
 
             for (String line : fileLines) {
+                if (line.length() == 0) {
+                    continue;
+                }
                 bw.write(line);
                 bw.newLine();
             }
 
         } catch (IOException e) {
-            // TODO: Exception Throw할지 고민
+            e.printStackTrace();
         }
     }
 }
