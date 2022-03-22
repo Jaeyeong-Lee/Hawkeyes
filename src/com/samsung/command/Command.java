@@ -24,6 +24,7 @@ public abstract class Command<T> {
 
     protected EmployeeDAO employeeDAO;
 
+
     public CommandOption getCommandOption() {
         return commandOption;
     }
