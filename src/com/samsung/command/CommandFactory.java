@@ -33,19 +33,21 @@ public class CommandFactory<T> {
                 case "ADD":
                     return new AddCommand<T>(line);
                 case "SCH":
-                    return new SearchCommand<T>(new CommandOption(searchOption, optionCode, isPrint));
+                    return new SearchCommand<T>(
+                            new CommandOption(searchOption, optionCode, isPrint));
                 case "MOD":
                     return new ModifyCommand<T>(
                             new CommandOption(searchOption, modifyOption, optionCode, isPrint));
                 case "DEL":
-                    return new DeleteCommand<T>(new CommandOption(searchOption, optionCode, isPrint));
+                    return new DeleteCommand<T>(
+                            new CommandOption(searchOption, optionCode, isPrint));
 
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-        return new Command<T>(){
+        return new Command<T>() {
             @Override
             public T execute() {
                 return null;
