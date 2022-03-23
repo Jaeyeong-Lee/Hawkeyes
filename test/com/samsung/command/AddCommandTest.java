@@ -51,11 +51,11 @@ class AddCommandTest {
     @Test
     void returnNullTest() {
 
-        System.out.println("AddCommand.execute()의 결과는 null 이다.");
+        System.out.println("AddCommand.execute()의 결과는 빈 Set<> 이다.");
 
         Set<Employee> addResult = addCommand.execute();
 
-        assertNull(addResult);
+        assertTrue(addResult.size() == 0);
 
     }
 
