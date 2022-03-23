@@ -6,7 +6,7 @@ import java.util.Set;
 
 
 public class CommandFactory {
-    
+
     public Command getCommand(String line) {
         try {
             CommandAttr commandAttr = new CommandAttr();
