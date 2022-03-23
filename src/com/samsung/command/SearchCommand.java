@@ -6,7 +6,7 @@ import com.samsung.option.CommandOption;
 
 import java.util.Set;
 
-public class SearchCommand<T> extends Command<Set<Employee>> {
+public class SearchCommand extends Command<Set<Employee>> {
 
     public SearchCommand() {
     }
