@@ -9,7 +9,6 @@ import com.samsung.iomanager.IOManager;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -34,7 +33,6 @@ public class EmployeeManager {
 
     private List<String> getOutputLines(List<Command> commandList) {
         List<String> outputLines = new ArrayList<>();
-
         commandList.stream().map(this::getOutputLineByCommand)
                 .forEach(command -> outputLines.add(command.toString()));
         return outputLines;
