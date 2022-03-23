@@ -4,18 +4,19 @@ public class CommandFactory<T> {
 
     public Command getCommand(String line) {
         try {
-            CommandAttr.setAttrByLine(line);
+            CommandAttr commandAttr = new CommandAttr();
+            commandAttr.setAttrByLine(line);
 
-            switch (CommandAttr.command) {
+            switch (commandAttr.getCommand()) {
 
                 case "ADD":
                     return new AddCommand<T>(line);
                 case "SCH":
-                    return new SearchCommand<T>(CommandAttr.option);
+                    return new SearchCommand<T>(commandAttr.getOption());
                 case "MOD":
-                    return new ModifyCommand<T>(CommandAttr.option);
+                    return new ModifyCommand<T>(commandAttr.getOption());
                 case "DEL":
-                    return new DeleteCommand<T>(CommandAttr.option);
+                    return new DeleteCommand<T>(commandAttr.getOption());
 
             }
         } catch (Exception ex) {

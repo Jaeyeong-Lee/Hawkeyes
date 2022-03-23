@@ -6,18 +6,26 @@ import com.samsung.option.SearchOption;
 
 public class CommandAttr {
 
-    public static String command;
-    public static CommandOption option;
+    private String command;
+    private CommandOption option;
 
-    private static String optionString1;
-    private static String optionString2;
-    private static String optionString3;
-    private static String searchColumn;
-    private static String searchCondition;
-    private static String modifyColumn;
-    private static String modifyCondition;
+    private String optionString1;
+    private String optionString2;
+    private String optionString3;
+    private String searchColumn;
+    private String searchCondition;
+    private String modifyColumn;
+    private String modifyCondition;
 
-    public static void setAttrByLine(final String line) {
+    public String getCommand() {
+        return command;
+    }
+
+    public CommandOption getOption() {
+        return option;
+    }
+
+    public void setAttrByLine(final String line) {
         parseLine(line.split(ConstCommand.commaDelimiter));
 
         option = new CommandOption(new SearchOption(searchColumn, searchCondition),
@@ -26,7 +34,7 @@ public class CommandAttr {
                 "-p".equals(optionString1));
     }
 
-    private static void parseLine(final String[] tokens) {
+    private void parseLine(final String[] tokens) {
         try {
             command = tokens[0];
             optionString1 = tokens[1];

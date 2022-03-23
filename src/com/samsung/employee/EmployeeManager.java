@@ -5,38 +5,39 @@ import com.samsung.command.CommandFactory;
 import com.samsung.constants.ConstCommand;
 import com.samsung.constants.ConstEmployee;
 import com.samsung.iomanager.FileIOManager;
+import com.samsung.iomanager.IOManager;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class EmployeeManager {
 
-    List<String> inputLines = new ArrayList<>();
-    List<String> outputLines = new ArrayList<>();
-    List<Command> commandList = new ArrayList<>();
-
     public void process(String inputFileName, String outputFileName) {
-        FileIOManager fileIOManager = new FileIOManager();
+        IOManager fileIOManager = new FileIOManager();
 
-        inputLines = fileIOManager.readInput(inputFileName);
+        List<String> inputLines = fileIOManager.readInput(inputFileName);
 
-        makeCommandObjectList();
+        List<Command> commandList = getCommandObjectList(inputLines);
 
-        makeOutputLines();
+        List<String> outputLines = getOutputLines(commandList);
 
         fileIOManager.writeOutput(outputFileName, outputLines);
     }
 
-    private void makeCommandObjectList() {
+    private List<Command> getCommandObjectList(List<String> inputLines) {
         CommandFactory factory = new CommandFactory();
-        commandList = inputLines.stream().map(line -> factory.getCommand(line))
-                .collect(Collectors.toList());
+        return inputLines.stream().map(factory::getCommand).collect(Collectors.toList());
     }
 
-    private void makeOutputLines() {
-        commandList.stream().map(this::getOutputLineByCommand).forEach((command) -> outputLines.add(command.toString()));
+    private List<String> getOutputLines(List<Command> commandList) {
+        List<String> outputLines = new ArrayList<>();
+
+        commandList.stream().map(this::getOutputLineByCommand)
+                .forEach(command -> outputLines.add(command.toString()));
+        return outputLines;
     }
 
     private String getOutputLineByCommand(Command<Set<Employee>> command) {
