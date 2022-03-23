@@ -6,7 +6,7 @@ import com.samsung.employee.Employee;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AddCommand<T> extends Command<Set<Employee>> {
+public class AddCommand extends Command<Set<Employee>> {
 
     private String commandLine;
 

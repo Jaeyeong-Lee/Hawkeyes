@@ -1,7 +1,12 @@
 package com.samsung.command;
 
-public class CommandFactory<T> {
+import com.samsung.constants.ConstCommand;
+import com.samsung.employee.Employee;
+import java.util.Set;
 
+
+public class CommandFactory {
+    
     public Command getCommand(String line) {
         try {
             CommandAttr commandAttr = new CommandAttr();
@@ -9,26 +14,25 @@ public class CommandFactory<T> {
 
             switch (commandAttr.getCommand()) {
 
-                case "ADD":
-                    return new AddCommand<T>(line);
-                case "SCH":
-                    return new SearchCommand<T>(commandAttr.getOption());
-                case "MOD":
-                    return new ModifyCommand<T>(commandAttr.getOption());
-                case "DEL":
-                    return new DeleteCommand<T>(commandAttr.getOption());
+                case ConstCommand.add:
+                    return new AddCommand(line);
+                case ConstCommand.search:
+                    return new SearchCommand(commandAttr.getOption());
+                case ConstCommand.modify:
+                    return new ModifyCommand(commandAttr.getOption());
+                case ConstCommand.delete:
+                    return new DeleteCommand(commandAttr.getOption());
 
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-        return new Command<T>() {
+        return new Command<Set<Employee>>() {
             @Override
-            public T execute() {
+            public Set<Employee> execute() {
                 return null;
             }
         };
     }
-
 }
