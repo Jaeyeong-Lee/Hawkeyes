@@ -2,22 +2,60 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
+skinparam responseMessageBelowArrow true
 
-EmployeeManager -> FileIOManager : readInput (파일 읽기 요청)
-FileIOManager -> EmployeeManager : readInput
-EmployeeManager -> CommandFactory : 파일 라인당 Command 객체 생성 요청
-CommandFactory -> EmployeeManager : Command 생성
-EmployeeManager -> DeleteCommand : while(){\n    Command.execute()\n}
+EmployeeManager -> IOManager : readInput()
+IOManager --> EmployeeManager : List<String>
 
-DeleteCommand -> EmployeeDAO : EmployeeDAO.search
-EmployeeDAO -> Database : database 검색
-Database -> EmployeeDAO : search 결과
-EmployeeDAO -> DeleteCommand : search 결과
-DeleteCommand -> EmployeeDAO : EmployeeDAO.delete
-EmployeeDAO -> Database : database 반영
-Database -> EmployeeDAO : void
-EmployeeDAO -> DeleteCommand : void
-DeleteCommand -> EmployeeManager : search 결과 return
+EmployeeManager -> CommandFactory : getCommandObjectList(List<String>)
+CommandFactory --> EmployeeManager : List<Command> (ADD, MOD, SCH, DEL)
 
-EmployeeManager -> FileIOManager : search 결과 write
+EmployeeManager -> Command : execute command (List<Command>)
+activate Command
+
+Command -> PersistentDAO : add/mod/del/sch(Employee)
+PersistentDAO -> EmployeeTable : add/mod/del/sch(Employee)
+EmployeeTable -> EmployeeTable : add/mod/del/sch collection
+EmployeeTable --> PersistentDAO : Set<Employee>
+PersistentDAO --> Command : Set<Employee>
+
+EmployeeManager <-- Command : Set<Employee>
+deactivate Command
+
+EmployeeManager -> EmployeeManager : sort Set<Employee>
+
+EmployeeManager -> IOManager : writeOutput(List<String>)
+IOManager --> EmployeeManager : void
+@enduml
+
+@startuml
+Command -> PersistentDAO : add/mod/del/sch(Employee)
+PersistentDAO -> EmployeeTable : add/mod/del/sch(Employee)
+EmployeeTable -> EmployeeTable : add/mod/del/sch collection
+EmployeeTable --> PersistentDAO : Set<Employee>
+PersistentDAO --> Command : void
+@enduml
+
+@startuml
+DeleteCommand -> PersistentDAO : delete(Employee)
+PersistentDAO -> EmployeeTable : delete(Employee)
+EmployeeTable -> EmployeeTable : delete collection
+EmployeeTable --> PersistentDAO : Set<Employee>
+PersistentDAO --> DeleteCommand : void
+@enduml
+
+@startuml
+ModifyCommand -> PersistentDAO : modify(Employee)
+PersistentDAO -> EmployeeTable : modify(Employee)
+EmployeeTable -> EmployeeTable : modify collection
+EmployeeTable --> PersistentDAO : Set<Employee>
+PersistentDAO --> ModifyCommand : void
+@enduml
+
+@startuml
+SearchCommand -> PersistentDAO : search(Employee)
+PersistentDAO -> EmployeeTable : search(Employee)
+EmployeeTable -> EmployeeTable : search collection
+EmployeeTable --> PersistentDAO : Set<Employee>
+PersistentDAO --> SearchCommand : void
 @enduml

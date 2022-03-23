@@ -1,5 +1,164 @@
 @startuml
 class Employee {
+  - String employeeNumber;
+  - String name;
+  - String firstName;
+  - String lastName;
+  - String phoneNumber;
+  - String middleDigitOfPhoneNumber;
+  - String last4DigitOfPhoneNumber;
+  - String birthDay;
+  - String yearOfBirth;
+  - String monthOfBirth;
+  - String dayOfBirth;
+  - CareerLevel careerLevel;
+  - Certi certi;
+}
+
+class EmployeeManager {
+    + void process();
+}
+
+abstract PersistentDAO<T>{
+    + void add(T);
+    + Set<T> search(T);
+    + Set<T> delete(T);
+    + Set<T> modify(T, T);
+}
+
+class EmployeeDAO<Employee>{
+    - EmployeeTable employeeTable;
+    + void add(Employee);
+    + Set<Employee> search(Employee);
+    + Set<Employee> delete(Employee);
+    + Set<Employee> modify(Employee, Employee);
+}
+
+class EmployeeTable{
+    - EmployeeTable getInstance();
+    - Map<String, Set<Employee>> employeeNumberIndex;
+    - Map<String, Set<Employee>> nameIndex;
+    - Map<String, Set<Employee>> firstNameIndex;
+    - Map<String, Set<Employee>> lastNameIndex;
+    - Map<String, Set<Employee>> phoneNumberIndex;
+    - Map<String, Set<Employee>> middleDigitOfPhoneNumberIndex;
+    - Map<String, Set<Employee>> last4DigitOfPhoneNumberIndex;
+    - Map<String, Set<Employee>> birthIndex;
+    - Map<String, Set<Employee>> yearOfBirthIndex;
+    - Map<String, Set<Employee>> monthOfBirthIndex;
+    - Map<String, Set<Employee>> dayOfBirthIndex;
+    - Map<String, Set<Employee>> careerLevelIndex;
+    - Map<String, Set<Employee>> certiIndex;
+}
+
+class CommandFactory{
+    + Command getCommand(String commandName);
+}
+
+abstract Command<T>{
+    - CommandOption commandOption;
+    - PersistentDAO employeeDAO
+    + T execute();
+}
+
+class AddCommand{
+    + Set<Employee> execute();
+}
+
+class SearchCommand{
+    + Set<Employee> execute();
+}
+
+class DeleteCommand{
+    + Set<Employee> execute();
+}
+
+class ModifyCommand{
+    + Set<Employee> execute();
+}
+
+ENUM CareerLevel{
+    CL1, CL2, CL3, CL4
+}
+
+ENUM Certi{
+    PRO, EX, ADV
+}
+
+interface IOManager<T> {
+    + List<T> readInput(String fileName);
+    + void writeOutput(String fileName, List<T> fileLines);
+}
+
+class FileIOManager{
+    + List<String> readInput(String fileName);
+    + void writeOutput(String fileName, List<String> fileLines);
+}
+
+class CommandOption{
+    - String column;
+    - String modifyOption;
+    - String code;
+    - boolean isPrint;
+}
+
+class SearchOption{
+    - String column;
+    - String condition;
+}
+
+class Utility{
+    + static isSetNotNullAndEmpty();
+}
+
+class CommandAttr{
+    - String command;
+    - CommandOption option;
+    - String optionString1;
+    - String optionString2;
+    - String optionString3;
+    - String searchColumn;
+    - String searchCondition;
+    - String modifyColumn;
+    - String modifyCondition;
+}
+
+
+
+PersistentDAO <|-- EmployeeDAO
+EmployeeDAO -> EmployeeTable
+
+EmployeeTable -> Employee
+
+Employee-->Certi
+Employee-->CareerLevel
+
+
+EmployeeManager--->Command
+EmployeeManager-->FileIOManager
+IOManager <|-- FileIOManager
+
+CommandFactory<--Command
+CommandFactory->CommandAttr
+
+Command->EmployeeDAO
+Command->CommandOption
+Command <|--- AddCommand
+Command <|--- SearchCommand
+Command <|--- DeleteCommand
+Command <|--- ModifyCommand
+
+CommandOption-->SearchOption
+
+
+
+@enduml
+@startuml
+@enduml
+
+
+@startuml
+class Employee {
   - String employeeNumber; //8글자 넣기
   - Date yearOfEntry; //입사년도 19 or 20도 prefix로 넣기
   - String name;
