@@ -5,6 +5,7 @@ import com.samsung.command.CommandFactory;
 import com.samsung.constants.ConstCommand;
 import com.samsung.constants.ConstEmployee;
 import com.samsung.iomanager.FileIOManager;
+import com.samsung.iomanager.IOManager;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -14,8 +15,15 @@ import java.util.stream.Collectors;
 public class EmployeeManager {
 
     public void process(String inputFileName, String outputFileName) {
-        FileIOManager fileIOManager = new FileIOManager();
-        fileIOManager.writeOutput(outputFileName, getOutputLines(getCommandObjectList(fileIOManager.readInput(inputFileName))));
+        IOManager fileIOManager = new FileIOManager();
+
+        List<String> inputLines = fileIOManager.readInput(inputFileName);
+
+        List<Command> commandList = getCommandObjectList(inputLines);
+
+        List<String> outputLines = getOutputLines(commandList);
+
+        fileIOManager.writeOutput(outputFileName, outputLines);
     }
 
     private List<Command> getCommandObjectList(List<String> inputLines) {
@@ -25,7 +33,8 @@ public class EmployeeManager {
 
     private List<String> getOutputLines(List<Command> commandList) {
         List<String> outputLines = new ArrayList<>();
-        commandList.stream().map(this::getOutputLineByCommand).forEach(command -> outputLines.add(command.toString()));
+        commandList.stream().map(this::getOutputLineByCommand)
+                .forEach(command -> outputLines.add(command.toString()));
         return outputLines;
     }
 

@@ -2,6 +2,7 @@ package com.samsung.employee;
 
 import com.samsung.constants.CareerLevel;
 import com.samsung.constants.Certi;
+import com.samsung.constants.ConstCommand;
 import com.samsung.constants.ConstEmployee;
 
 import java.util.*;
@@ -147,7 +148,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return String.join(",", this.employeeNumber, this.name, this.getCareerLevel().toString(),
+        return String.join(ConstCommand.commaDelimiter, this.employeeNumber, this.name, this.getCareerLevel().toString(),
                 this.getPhoneNumber(), this.getBirthDay(), this.getCerti().toString());
     }
 
