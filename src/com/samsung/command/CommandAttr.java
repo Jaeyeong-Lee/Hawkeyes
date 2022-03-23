@@ -28,6 +28,10 @@ public class CommandAttr {
     public void setAttrByLine(final String line) {
         parseLine(line.split(ConstCommand.commaDelimiter));
 
+        if (ConstCommand.add.equals(command)) {
+            return ;
+        }
+
         option = new CommandOption(new SearchOption(searchColumn, searchCondition),
                 new SearchOption(modifyColumn, modifyCondition),
                 optionString2.replace("-", "").trim(),
@@ -35,16 +39,22 @@ public class CommandAttr {
     }
 
     private void parseLine(final String[] tokens) {
-        try {
-            command = tokens[0];
-            optionString1 = tokens[1];
-            optionString2 = tokens[2];
-            optionString3 = tokens[3];
-            searchColumn = tokens[4];
-            searchCondition = tokens[5];
+
+        command = tokens[0];
+
+        if (ConstCommand.add.equals(command)) {
+            return ;
+        }
+
+        optionString1 = tokens[1];
+        optionString2 = tokens[2];
+        optionString3 = tokens[3];
+        searchColumn = tokens[4];
+        searchCondition = tokens[5];
+
+        if (tokens.length > 6) {
             modifyColumn = tokens[6];
             modifyCondition = tokens[7];
-        } catch (ArrayIndexOutOfBoundsException e) {
         }
     }
 }
