@@ -37,20 +37,6 @@ class CommandFactoryTest {
     }
 
     @Test
-    void 올바른_Class_반환_여부() throws Exception {
-
-        assertEquals(AddCommand.class, commandFactory.getCommand("ADD").getClass());
-
-        assertEquals(SearchCommand.class, commandFactory.getCommand("SCH").getClass());
-
-        assertEquals(ModifyCommand.class, commandFactory.getCommand("MOD").getClass());
-
-        assertEquals(DeleteCommand.class, commandFactory.getCommand("DEL").getClass());
-
-    }
-
-
-    @Test
     void testGetCommandWhenAddParamGiven() {
         String testInput = "ADD, , , ,02117175,SBILHUT LDEXRI,CL4,010-2814-1699,19950704,ADV";
 
